@@ -1,8 +1,8 @@
 #pragma once
 
 #include "../ffi_core.hpp"
-#include "length_ffi.hpp"
-#include "time_ffi.hpp"
+#include "length.hpp"
+#include "time.hpp"
 
 namespace qtty {
 

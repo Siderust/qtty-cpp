@@ -4,7 +4,6 @@
 
 namespace qtty {
 
-// Unit tags for SI metric time units (200xx)
 struct AttosecondTag {};
 struct FemtosecondTag {};
 struct PicosecondTag {};
@@ -20,28 +19,21 @@ struct KilosecondTag {};
 struct MegasecondTag {};
 struct GigasecondTag {};
 struct TerasecondTag {};
-
-// Common time units (210xx)
 struct MinuteTag {};
 struct HourTag {};
 struct DayTag {};
 struct WeekTag {};
 struct FortnightTag {};
-
-// Calendar time units (220xx)
 struct YearTag {};
 struct DecadeTag {};
 struct CenturyTag {};
 struct MillenniumTag {};
 struct JulianYearTag {};
 struct JulianCenturyTag {};
-
-// Astronomical time units (230xx)
 struct SiderealDayTag {};
 struct SynodicMonthTag {};
 struct SiderealYearTag {};
 
-// Unit traits specializations for SI metric time units
 template<> struct UnitTraits<AttosecondTag> {
     static constexpr UnitId unit_id() { return UNIT_ID_ATTOSECOND; }
 };
@@ -87,8 +79,6 @@ template<> struct UnitTraits<GigasecondTag> {
 template<> struct UnitTraits<TerasecondTag> {
     static constexpr UnitId unit_id() { return UNIT_ID_TERASECOND; }
 };
-
-// Unit traits specializations for common time units
 template<> struct UnitTraits<MinuteTag> {
     static constexpr UnitId unit_id() { return UNIT_ID_MINUTE; }
 };
@@ -104,8 +94,6 @@ template<> struct UnitTraits<WeekTag> {
 template<> struct UnitTraits<FortnightTag> {
     static constexpr UnitId unit_id() { return UNIT_ID_FORTNIGHT; }
 };
-
-// Unit traits specializations for calendar time units
 template<> struct UnitTraits<YearTag> {
     static constexpr UnitId unit_id() { return UNIT_ID_YEAR; }
 };
@@ -124,8 +112,6 @@ template<> struct UnitTraits<JulianYearTag> {
 template<> struct UnitTraits<JulianCenturyTag> {
     static constexpr UnitId unit_id() { return UNIT_ID_JULIAN_CENTURY; }
 };
-
-// Unit traits specializations for astronomical time units
 template<> struct UnitTraits<SiderealDayTag> {
     static constexpr UnitId unit_id() { return UNIT_ID_SIDEREAL_DAY; }
 };
@@ -136,7 +122,6 @@ template<> struct UnitTraits<SiderealYearTag> {
     static constexpr UnitId unit_id() { return UNIT_ID_SIDEREAL_YEAR; }
 };
 
-// Type aliases for convenient usage - SI metric
 using Attosecond = Quantity<AttosecondTag>;
 using Femtosecond = Quantity<FemtosecondTag>;
 using Picosecond = Quantity<PicosecondTag>;
@@ -152,23 +137,17 @@ using Kilosecond = Quantity<KilosecondTag>;
 using Megasecond = Quantity<MegasecondTag>;
 using Gigasecond = Quantity<GigasecondTag>;
 using Terasecond = Quantity<TerasecondTag>;
-
-// Type aliases for common time units
 using Minute = Quantity<MinuteTag>;
 using Hour = Quantity<HourTag>;
 using Day = Quantity<DayTag>;
 using Week = Quantity<WeekTag>;
 using Fortnight = Quantity<FortnightTag>;
-
-// Type aliases for calendar time units
 using Year = Quantity<YearTag>;
 using Decade = Quantity<DecadeTag>;
 using Century = Quantity<CenturyTag>;
 using Millennium = Quantity<MillenniumTag>;
 using JulianYear = Quantity<JulianYearTag>;
 using JulianCentury = Quantity<JulianCenturyTag>;
-
-// Type aliases for astronomical time units
 using SiderealDay = Quantity<SiderealDayTag>;
 using SynodicMonth = Quantity<SynodicMonthTag>;
 using SiderealYear = Quantity<SiderealYearTag>;

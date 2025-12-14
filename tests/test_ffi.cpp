@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <cmath>
-#include "qtty/qtty_ffi.hpp"
+#include "qtty/qtty.hpp"
 
 using namespace qtty;
 

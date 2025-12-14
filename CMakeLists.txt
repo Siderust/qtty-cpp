@@ -23,12 +23,39 @@ else()
     set(QTTY_LIBRARY_PATH ${QTTY_ARTIFACT_DIR}/libqtty_ffi.so)
 endif()
 
+# Generate C++ unit wrappers from qtty_ffi.h
+find_package(Python3 COMPONENTS Interpreter REQUIRED)
+set(QTTY_FFI_HEADER ${QTTY_FFI_INCLUDE_DIR}/qtty_ffi.h)
+set(GENERATED_HEADERS
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/length.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/time.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/angular.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/mass.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/power.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/literals.hpp
+)
+
+add_custom_command(
+    OUTPUT ${GENERATED_HEADERS}
+    COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/gen_cpp_units.py
+    DEPENDS ${QTTY_FFI_HEADER} ${CMAKE_CURRENT_SOURCE_DIR}/gen_cpp_units.py
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    COMMENT "Generating C++ unit wrappers from qtty_ffi.h"
+    VERBATIM
+)
+
+add_custom_target(
+    gen_cpp_units
+    DEPENDS ${GENERATED_HEADERS}
+)
+
 # Build qtty-ffi via Cargo
 add_custom_target(
     build_qtty_ffi
     COMMAND ${CARGO_BIN} build -p qtty-ffi --release
     WORKING_DIRECTORY ${QTTY_SUBMODULE_DIR}
     BYPRODUCTS ${QTTY_LIBRARY_PATH}
+    DEPENDS gen_cpp_units
     COMMENT "Building qtty-ffi library via Cargo"
     VERBATIM
 )

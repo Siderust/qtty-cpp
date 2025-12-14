@@ -1,6 +1,6 @@
 #include <iostream>
 #include <iomanip>
-#include "qtty/qtty_ffi.hpp"
+#include "qtty/qtty.hpp"
 
 using namespace qtty;
 

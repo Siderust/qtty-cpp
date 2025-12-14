@@ -4,7 +4,6 @@
 
 namespace qtty {
 
-// Unit tags for SI metric length units (100xx)
 struct PlanckLengthTag {};
 struct YoctometerTag {};
 struct ZeptometerTag {};
@@ -27,8 +26,6 @@ struct PetameterTag {};
 struct ExameterTag {};
 struct ZettameterTag {};
 struct YottameterTag {};
-
-// Astronomical length units (110xx)
 struct BohrRadiusTag {};
 struct ClassicalElectronRadiusTag {};
 struct ElectronReducedComptonWavelengthTag {};
@@ -38,21 +35,15 @@ struct ParsecTag {};
 struct KiloparsecTag {};
 struct MegaparsecTag {};
 struct GigaparsecTag {};
-
-// Imperial length units (120xx)
 struct InchTag {};
 struct FootTag {};
 struct YardTag {};
 struct MileTag {};
-
-// Nautical length units (130xx)
 struct LinkTag {};
 struct FathomTag {};
 struct RodTag {};
 struct ChainTag {};
 struct NauticalMileTag {};
-
-// Nominal length units (150xx)
 struct NominalLunarRadiusTag {};
 struct NominalLunarDistanceTag {};
 struct NominalEarthPolarRadiusTag {};
@@ -64,7 +55,6 @@ struct NominalJupiterRadiusTag {};
 struct NominalSolarRadiusTag {};
 struct NominalSolarDiameterTag {};
 
-// Unit traits specializations for SI metric length units
 template<> struct UnitTraits<PlanckLengthTag> {
     static constexpr UnitId unit_id() { return UNIT_ID_PLANCK_LENGTH; }
 };
@@ -131,8 +121,6 @@ template<> struct UnitTraits<ZettameterTag> {
 template<> struct UnitTraits<YottameterTag> {
     static constexpr UnitId unit_id() { return UNIT_ID_YOTTAMETER; }
 };
-
-// Unit traits specializations for astronomical length units
 template<> struct UnitTraits<BohrRadiusTag> {
     static constexpr UnitId unit_id() { return UNIT_ID_BOHR_RADIUS; }
 };
@@ -160,8 +148,6 @@ template<> struct UnitTraits<MegaparsecTag> {
 template<> struct UnitTraits<GigaparsecTag> {
     static constexpr UnitId unit_id() { return UNIT_ID_GIGAPARSEC; }
 };
-
-// Unit traits specializations for imperial length units
 template<> struct UnitTraits<InchTag> {
     static constexpr UnitId unit_id() { return UNIT_ID_INCH; }
 };
@@ -174,8 +160,6 @@ template<> struct UnitTraits<YardTag> {
 template<> struct UnitTraits<MileTag> {
     static constexpr UnitId unit_id() { return UNIT_ID_MILE; }
 };
-
-// Unit traits specializations for nautical length units
 template<> struct UnitTraits<LinkTag> {
     static constexpr UnitId unit_id() { return UNIT_ID_LINK; }
 };
@@ -191,8 +175,6 @@ template<> struct UnitTraits<ChainTag> {
 template<> struct UnitTraits<NauticalMileTag> {
     static constexpr UnitId unit_id() { return UNIT_ID_NAUTICAL_MILE; }
 };
-
-// Unit traits specializations for nominal length units
 template<> struct UnitTraits<NominalLunarRadiusTag> {
     static constexpr UnitId unit_id() { return UNIT_ID_NOMINAL_LUNAR_RADIUS; }
 };
@@ -224,7 +206,6 @@ template<> struct UnitTraits<NominalSolarDiameterTag> {
     static constexpr UnitId unit_id() { return UNIT_ID_NOMINAL_SOLAR_DIAMETER; }
 };
 
-// Type aliases for convenient usage - SI metric
 using PlanckLength = Quantity<PlanckLengthTag>;
 using Yoctometer = Quantity<YoctometerTag>;
 using Zeptometer = Quantity<ZeptometerTag>;
@@ -247,8 +228,6 @@ using Petameter = Quantity<PetameterTag>;
 using Exameter = Quantity<ExameterTag>;
 using Zettameter = Quantity<ZettameterTag>;
 using Yottameter = Quantity<YottameterTag>;
-
-// Type aliases for astronomical units
 using BohrRadius = Quantity<BohrRadiusTag>;
 using ClassicalElectronRadius = Quantity<ClassicalElectronRadiusTag>;
 using ElectronReducedComptonWavelength = Quantity<ElectronReducedComptonWavelengthTag>;
@@ -258,21 +237,15 @@ using Parsec = Quantity<ParsecTag>;
 using Kiloparsec = Quantity<KiloparsecTag>;
 using Megaparsec = Quantity<MegaparsecTag>;
 using Gigaparsec = Quantity<GigaparsecTag>;
-
-// Type aliases for imperial units
 using Inch = Quantity<InchTag>;
 using Foot = Quantity<FootTag>;
 using Yard = Quantity<YardTag>;
 using Mile = Quantity<MileTag>;
-
-// Type aliases for nautical units
 using Link = Quantity<LinkTag>;
 using Fathom = Quantity<FathomTag>;
 using Rod = Quantity<RodTag>;
 using Chain = Quantity<ChainTag>;
 using NauticalMile = Quantity<NauticalMileTag>;
-
-// Type aliases for nominal units
 using NominalLunarRadius = Quantity<NominalLunarRadiusTag>;
 using NominalLunarDistance = Quantity<NominalLunarDistanceTag>;
 using NominalEarthPolarRadius = Quantity<NominalEarthPolarRadiusTag>;

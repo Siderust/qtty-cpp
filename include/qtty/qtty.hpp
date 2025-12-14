@@ -1,7 +1,7 @@
 #pragma once
 
 /**
- * @file qtty_ffi.hpp
+ * @file qtty.hpp
  * @brief Main header for the qtty C++ wrapper library
  * 
  * This header provides a modern, type-safe C++ interface to the qtty-ffi library.
@@ -34,12 +34,12 @@
 #include "ffi_core.hpp"
 
 // Unit-specific headers
-#include "units/length_ffi.hpp"
-#include "units/time_ffi.hpp"
-#include "units/angular_ffi.hpp"
-#include "units/mass_ffi.hpp"
-#include "units/power_ffi.hpp"
-#include "units/velocity_ffi.hpp"
+#include "units/length.hpp"
+#include "units/time.hpp"
+#include "units/angular.hpp"
+#include "units/mass.hpp"
+#include "units/power.hpp"
+#include "units/velocity.hpp"
 
 // User-defined literals
 #include "literals.hpp"

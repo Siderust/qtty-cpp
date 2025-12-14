@@ -4,7 +4,6 @@
 
 namespace qtty {
 
-// Unit tags for mass units (SI metric - 400xx)
 struct YoctogramTag {};
 struct ZeptogramTag {};
 struct AttogramTag {};
@@ -26,22 +25,17 @@ struct PetagramTag {};
 struct ExagramTag {};
 struct ZettagramTag {};
 struct YottagramTag {};
-
-// Imperial mass units (410xx)
 struct GrainTag {};
 struct OunceTag {};
 struct PoundTag {};
 struct StoneTag {};
 struct ShortTonTag {};
 struct LongTonTag {};
-
-// Special mass units (420xx)
 struct CaratTag {};
 struct TonneTag {};
 struct AtomicMassUnitTag {};
 struct SolarMassTag {};
 
-// Unit traits specializations for SI metric mass units
 template<> struct UnitTraits<YoctogramTag> {
     static constexpr UnitId unit_id() { return UNIT_ID_YOCTOGRAM; }
 };
@@ -105,8 +99,6 @@ template<> struct UnitTraits<ZettagramTag> {
 template<> struct UnitTraits<YottagramTag> {
     static constexpr UnitId unit_id() { return UNIT_ID_YOTTAGRAM; }
 };
-
-// Unit traits specializations for Imperial mass units
 template<> struct UnitTraits<GrainTag> {
     static constexpr UnitId unit_id() { return UNIT_ID_GRAIN; }
 };
@@ -125,8 +117,6 @@ template<> struct UnitTraits<ShortTonTag> {
 template<> struct UnitTraits<LongTonTag> {
     static constexpr UnitId unit_id() { return UNIT_ID_LONG_TON; }
 };
-
-// Unit traits specializations for Special mass units
 template<> struct UnitTraits<CaratTag> {
     static constexpr UnitId unit_id() { return UNIT_ID_CARAT; }
 };
@@ -140,7 +130,6 @@ template<> struct UnitTraits<SolarMassTag> {
     static constexpr UnitId unit_id() { return UNIT_ID_SOLAR_MASS; }
 };
 
-// Type aliases for convenient usage - SI metric
 using Yoctogram = Quantity<YoctogramTag>;
 using Zeptogram = Quantity<ZeptogramTag>;
 using Attogram = Quantity<AttogramTag>;
@@ -162,16 +151,12 @@ using Petagram = Quantity<PetagramTag>;
 using Exagram = Quantity<ExagramTag>;
 using Zettagram = Quantity<ZettagramTag>;
 using Yottagram = Quantity<YottagramTag>;
-
-// Type aliases for Imperial units
 using Grain = Quantity<GrainTag>;
 using Ounce = Quantity<OunceTag>;
 using Pound = Quantity<PoundTag>;
 using Stone = Quantity<StoneTag>;
 using ShortTon = Quantity<ShortTonTag>;
 using LongTon = Quantity<LongTonTag>;
-
-// Type aliases for Special units
 using Carat = Quantity<CaratTag>;
 using Tonne = Quantity<TonneTag>;
 using AtomicMassUnit = Quantity<AtomicMassUnitTag>;

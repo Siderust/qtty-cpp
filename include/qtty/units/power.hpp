@@ -4,7 +4,6 @@
 
 namespace qtty {
 
-// Unit tags for power units (SI metric - 500xx)
 struct YoctowattTag {};
 struct ZeptowattTag {};
 struct AttowattTag {};
@@ -25,14 +24,11 @@ struct PetawattTag {};
 struct ExawattTag {};
 struct ZettawattTag {};
 struct YottawattTag {};
-
-// Other power units (510xx)
 struct ErgPerSecondTag {};
 struct HorsepowerMetricTag {};
 struct HorsepowerElectricTag {};
 struct SolarLuminosityTag {};
 
-// Unit traits specializations for SI metric power units
 template<> struct UnitTraits<YoctowattTag> {
     static constexpr UnitId unit_id() { return UNIT_ID_YOCTOWATT; }
 };
@@ -93,8 +89,6 @@ template<> struct UnitTraits<ZettawattTag> {
 template<> struct UnitTraits<YottawattTag> {
     static constexpr UnitId unit_id() { return UNIT_ID_YOTTAWATT; }
 };
-
-// Unit traits specializations for other power units
 template<> struct UnitTraits<ErgPerSecondTag> {
     static constexpr UnitId unit_id() { return UNIT_ID_ERG_PER_SECOND; }
 };
@@ -108,7 +102,6 @@ template<> struct UnitTraits<SolarLuminosityTag> {
     static constexpr UnitId unit_id() { return UNIT_ID_SOLAR_LUMINOSITY; }
 };
 
-// Type aliases for convenient usage - SI metric
 using Yoctowatt = Quantity<YoctowattTag>;
 using Zeptowatt = Quantity<ZeptowattTag>;
 using Attowatt = Quantity<AttowattTag>;
@@ -129,8 +122,6 @@ using Petawatt = Quantity<PetawattTag>;
 using Exawatt = Quantity<ExawattTag>;
 using Zettawatt = Quantity<ZettawattTag>;
 using Yottawatt = Quantity<YottawattTag>;
-
-// Type aliases for other units
 using ErgPerSecond = Quantity<ErgPerSecondTag>;
 using HorsepowerMetric = Quantity<HorsepowerMetricTag>;
 using HorsepowerElectric = Quantity<HorsepowerElectricTag>;

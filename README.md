@@ -42,7 +42,7 @@ ctest --output-on-failure
 ### Basic Usage
 
 ```cpp
-#include "qtty/qtty_ffi.hpp"
+#include "qtty/qtty.hpp"
 using namespace qtty;
 
 int main() {
@@ -196,14 +196,14 @@ using Second = Quantity<SecondTag>;
 
 ```
 include/qtty/
-├── qtty_ffi.hpp           # Main header (include this)
+├── qtty.hpp           # Main header (include this)
 ├── ffi_core.hpp           # Core Quantity template
 ├── literals.hpp           # User-defined literals
 └── units/
-    ├── length_ffi.hpp     # Length units
-    ├── time_ffi.hpp       # Time units
-    ├── angular_ffi.hpp    # Angular units
-    └── velocity_ffi.hpp   # Compound velocity units
+    ├── length.hpp     # Length units
+    ├── time.hpp       # Time units
+    ├── angular.hpp    # Angular units
+    └── velocity.hpp   # Compound velocity units
 ```
 
 ### Exception Handling
@@ -267,7 +267,7 @@ qtty-cpp/
 ├── README.md               # This file
 ├── .gitignore             # Git ignore patterns
 ├── include/qtty/          # C++ wrapper headers (header-only)
-│   ├── qtty_ffi.hpp       # Main header
+│   ├── qtty.hpp       # Main header
 │   ├── ffi_core.hpp       # Core Quantity template
 │   ├── literals.hpp       # User-defined literals
 │   └── units/             # Unit-specific headers
