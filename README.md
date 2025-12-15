@@ -17,6 +17,16 @@ A modern C++17 header-only library providing compile-time type-safe physical qua
 - 📦 **Easy integration**: Single header include with CMake export
 - ✅ **Comprehensively tested**: 37+ Google Test cases covering all operations
 
+#### Docker
+
+```bash
+# Build the docker image
+docker build -t qtty-cpp-dev .
+
+# Run and atach to the container
+docker run -it qtty-cpp-dev
+```
+
 ## Quick Start
 
 ```cpp
