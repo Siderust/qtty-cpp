@@ -1,3 +1,9 @@
+/**
+ * @file demo.cpp
+ * @example demo.cpp
+ * @brief Demonstrates the qtty-cpp quantity API.
+ */
+
 #include <iostream>
 #include <iomanip>
 #include "qtty/qtty.hpp"
