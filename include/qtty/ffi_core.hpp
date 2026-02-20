@@ -1,5 +1,10 @@
 #pragma once
 
+/**
+ * @file ffi_core.hpp
+ * @brief Core quantity template and error translation utilities.
+ */
+
 #include <cmath>
 #include <stdexcept>
 #include <string>
@@ -18,21 +23,33 @@ namespace qtty {
 // error types for different failure modes when interacting with the FFI layer.
 
 // Exception types for error handling
+/**
+ * @brief Base exception for all qtty wrapper failures.
+ */
 class QttyException : public std::runtime_error {
 public:
     explicit QttyException(const std::string& msg) : std::runtime_error(msg) {}
 };
 
+/**
+ * @brief Raised when an unknown or invalid unit identifier is used.
+ */
 class InvalidUnitError : public QttyException {
 public:
     explicit InvalidUnitError(const std::string& msg) : QttyException(msg) {}
 };
 
+/**
+ * @brief Raised when mixing incompatible dimensions in conversion/arithmetic.
+ */
 class IncompatibleDimensionsError : public QttyException {
 public:
     explicit IncompatibleDimensionsError(const std::string& msg) : QttyException(msg) {}
 };
 
+/**
+ * @brief Raised when value conversion fails at the FFI boundary.
+ */
 class ConversionError : public QttyException {
 public:
     explicit ConversionError(const std::string& msg) : QttyException(msg) {}
@@ -46,6 +63,12 @@ public:
 // maintaining compatibility with the C FFI boundary.
 
 // Helper function to check status and throw appropriate exceptions
+/**
+ * @brief Convert qtty FFI status codes into typed C++ exceptions.
+ * @param status Status code returned by a qtty FFI function.
+ * @param operation Human-readable operation label for error context.
+ * @throws QttyException and derived exception types on failure statuses.
+ */
 inline void check_status(int32_t status, const char* operation) {
     if (status == QTTY_OK) {
         return;

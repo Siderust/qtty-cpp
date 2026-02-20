@@ -1,5 +1,10 @@
 #pragma once
 
+/**
+ * @file serialization.hpp
+ * @brief JSON serialization helpers for qtty quantities.
+ */
+
 #include <stdexcept>
 #include <string>
 #include <string_view>
@@ -26,6 +31,11 @@ namespace serialization {
 // Thin wrappers over Rust FFI JSON serialize/deserialize.
 // Requires qtty-ffi to be built with the `serde` Cargo feature.
 
+/**
+ * @brief Convert an owned C string from FFI into std::string and free it.
+ * @param ptr Pointer allocated by qtty-ffi.
+ * @return Copied C++ string (or empty when @p ptr is null).
+ */
 inline std::string from_owned_c(char* ptr) {
     if (!ptr) return {};
     std::string s(ptr);
@@ -37,6 +47,12 @@ inline std::string from_owned_c(char* ptr) {
 // Serialize only the numeric value as a JSON number string.
 // Mirrors Rust's default serde for quantities.
 
+/**
+ * @brief Serialize only the numeric value as JSON for a typed quantity.
+ * @tparam UnitTag Unit tag of the source quantity.
+ * @param q Source quantity.
+ * @return JSON string representing only the value.
+ */
 template<typename UnitTag>
 std::string to_json_value(const Quantity<UnitTag>& q) {
     qtty_quantity_t src{};
@@ -49,6 +65,12 @@ std::string to_json_value(const Quantity<UnitTag>& q) {
     return from_owned_c(out);
 }
 
+/**
+ * @brief Deserialize a JSON numeric value into a typed quantity.
+ * @tparam T Unit tag or Quantity type of the target.
+ * @param json JSON input string view.
+ * @return Deserialized typed quantity.
+ */
 template<typename T>
 Quantity<typename ExtractTag<T>::type> from_json_value(std::string_view json) {
     using UnitTag = typename ExtractTag<T>::type;
@@ -61,6 +83,12 @@ Quantity<typename ExtractTag<T>::type> from_json_value(std::string_view json) {
 
 // Serialize value and unit_id into an object {"value":<f64>, "unit_id":<u32>}.
 
+/**
+ * @brief Serialize a typed quantity as JSON object with value and unit id.
+ * @tparam UnitTag Unit tag of the source quantity.
+ * @param q Source quantity.
+ * @return JSON object string with value/unit_id fields.
+ */
 template<typename UnitTag>
 std::string to_json(const Quantity<UnitTag>& q) {
     qtty_quantity_t src{};
@@ -81,6 +109,12 @@ inline UnitId unit_id_from_u32(uint32_t raw) {
 // Parse {"value":<f64>, "unit_id":<u32>} and construct a typed quantity.
 // Rejects mismatched dimensions and unknown unit_ids at the Rust boundary.
 
+/**
+ * @brief Deserialize a JSON quantity object into a requested target type.
+ * @tparam T Unit tag or Quantity type of the target.
+ * @param json JSON input string view.
+ * @return Quantity converted to requested target unit.
+ */
 template<typename T>
 Quantity<typename ExtractTag<T>::type> from_json(std::string_view json) {
     using UnitTag = typename ExtractTag<T>::type;
