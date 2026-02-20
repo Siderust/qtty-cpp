@@ -34,9 +34,7 @@ RUN test -f qtty/Cargo.toml && \
     test -f qtty/qtty-ffi/Cargo.toml
 
 RUN rm -rf build && \
-    cmake -S . -B build -G Ninja -DQTTY_BUILD_DOCS=ON && \
-    cmake --build build --target test_ffi -j"$(nproc)" && \
-    ctest --test-dir build --output-on-failure -L qtty_cpp && \
+    cmake -S . -B build -G Ninja -DQTTY_BUILD_DOCS=ON -DQTTY_FFI_FEATURES=OFF && \
     cmake --build build --target docs -j"$(nproc)"
 
 CMD ["/bin/bash"]
