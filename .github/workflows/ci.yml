@@ -34,8 +34,17 @@ jobs:
           sudo apt-get install -y --no-install-recommends \
             cmake \
             ninja-build \
-            clang-format \
             clang-tidy
+
+      - name: Install clang-format 18
+        shell: bash
+        run: |
+          set -euo pipefail
+          wget -qO /tmp/llvm.sh https://apt.llvm.org/llvm.sh
+          sudo bash /tmp/llvm.sh 18
+          sudo apt-get install -y --no-install-recommends clang-format-18
+          sudo ln -sf /usr/bin/clang-format-18 /usr/local/bin/clang-format
+          clang-format --version
 
       - name: Set up Rust (stable)
         uses: actions-rust-lang/setup-rust-toolchain@v1
