@@ -39,98 +39,98 @@ struct TonneTag {};
 struct AtomicMassUnitTag {};
 struct SolarMassTag {};
 
-template<> struct UnitTraits<YoctogramTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_YOCTOGRAM; }
+template <> struct UnitTraits<YoctogramTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_YOCTOGRAM; }
 };
-template<> struct UnitTraits<ZeptogramTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_ZEPTOGRAM; }
+template <> struct UnitTraits<ZeptogramTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_ZEPTOGRAM; }
 };
-template<> struct UnitTraits<AttogramTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_ATTOGRAM; }
+template <> struct UnitTraits<AttogramTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_ATTOGRAM; }
 };
-template<> struct UnitTraits<FemtogramTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_FEMTOGRAM; }
+template <> struct UnitTraits<FemtogramTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_FEMTOGRAM; }
 };
-template<> struct UnitTraits<PicogramTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_PICOGRAM; }
+template <> struct UnitTraits<PicogramTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_PICOGRAM; }
 };
-template<> struct UnitTraits<NanogramTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_NANOGRAM; }
+template <> struct UnitTraits<NanogramTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_NANOGRAM; }
 };
-template<> struct UnitTraits<MicrogramTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_MICROGRAM; }
+template <> struct UnitTraits<MicrogramTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_MICROGRAM; }
 };
-template<> struct UnitTraits<MilligramTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_MILLIGRAM; }
+template <> struct UnitTraits<MilligramTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_MILLIGRAM; }
 };
-template<> struct UnitTraits<CentigramTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_CENTIGRAM; }
+template <> struct UnitTraits<CentigramTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_CENTIGRAM; }
 };
-template<> struct UnitTraits<DecigramTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_DECIGRAM; }
+template <> struct UnitTraits<DecigramTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_DECIGRAM; }
 };
-template<> struct UnitTraits<GramTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_GRAM; }
+template <> struct UnitTraits<GramTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_GRAM; }
 };
-template<> struct UnitTraits<DecagramTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_DECAGRAM; }
+template <> struct UnitTraits<DecagramTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_DECAGRAM; }
 };
-template<> struct UnitTraits<HectogramTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_HECTOGRAM; }
+template <> struct UnitTraits<HectogramTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_HECTOGRAM; }
 };
-template<> struct UnitTraits<KilogramTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_KILOGRAM; }
+template <> struct UnitTraits<KilogramTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_KILOGRAM; }
 };
-template<> struct UnitTraits<MegagramTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_MEGAGRAM; }
+template <> struct UnitTraits<MegagramTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_MEGAGRAM; }
 };
-template<> struct UnitTraits<GigagramTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_GIGAGRAM; }
+template <> struct UnitTraits<GigagramTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_GIGAGRAM; }
 };
-template<> struct UnitTraits<TeragramTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_TERAGRAM; }
+template <> struct UnitTraits<TeragramTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_TERAGRAM; }
 };
-template<> struct UnitTraits<PetagramTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_PETAGRAM; }
+template <> struct UnitTraits<PetagramTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_PETAGRAM; }
 };
-template<> struct UnitTraits<ExagramTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_EXAGRAM; }
+template <> struct UnitTraits<ExagramTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_EXAGRAM; }
 };
-template<> struct UnitTraits<ZettagramTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_ZETTAGRAM; }
+template <> struct UnitTraits<ZettagramTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_ZETTAGRAM; }
 };
-template<> struct UnitTraits<YottagramTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_YOTTAGRAM; }
+template <> struct UnitTraits<YottagramTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_YOTTAGRAM; }
 };
-template<> struct UnitTraits<GrainTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_GRAIN; }
+template <> struct UnitTraits<GrainTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_GRAIN; }
 };
-template<> struct UnitTraits<OunceTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_OUNCE; }
+template <> struct UnitTraits<OunceTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_OUNCE; }
 };
-template<> struct UnitTraits<PoundTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_POUND; }
+template <> struct UnitTraits<PoundTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_POUND; }
 };
-template<> struct UnitTraits<StoneTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_STONE; }
+template <> struct UnitTraits<StoneTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_STONE; }
 };
-template<> struct UnitTraits<ShortTonTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_SHORT_TON; }
+template <> struct UnitTraits<ShortTonTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_SHORT_TON; }
 };
-template<> struct UnitTraits<LongTonTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_LONG_TON; }
+template <> struct UnitTraits<LongTonTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_LONG_TON; }
 };
-template<> struct UnitTraits<CaratTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_CARAT; }
+template <> struct UnitTraits<CaratTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_CARAT; }
 };
-template<> struct UnitTraits<TonneTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_TONNE; }
+template <> struct UnitTraits<TonneTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_TONNE; }
 };
-template<> struct UnitTraits<AtomicMassUnitTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_ATOMIC_MASS_UNIT; }
+template <> struct UnitTraits<AtomicMassUnitTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_ATOMIC_MASS_UNIT; }
 };
-template<> struct UnitTraits<SolarMassTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_SOLAR_MASS; }
+template <> struct UnitTraits<SolarMassTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_SOLAR_MASS; }
 };
 
 using Yoctogram = Quantity<YoctogramTag>;

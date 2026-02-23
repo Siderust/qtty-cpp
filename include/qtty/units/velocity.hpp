@@ -26,14 +26,14 @@ namespace qtty {
 // denominator separately, then recombine.
 
 // Template for compound units (e.g., velocity = length/time)
-template<typename NumeratorTag, typename DenominatorTag>
-struct CompoundTag {};
+template <typename NumeratorTag, typename DenominatorTag> struct CompoundTag {};
 
 // Velocity type alias using compound units
 // This is a template alias, not a concrete type. Instantiate with specific
 // length and time units, e.g., Velocity<Meter, Second>.
-template<typename LengthUnit, typename TimeUnit>
-using Velocity = Quantity<CompoundTag<typename LengthUnit::unit_tag, typename TimeUnit::unit_tag>>;
+template <typename LengthUnit, typename TimeUnit>
+using Velocity = Quantity<
+    CompoundTag<typename LengthUnit::unit_tag, typename TimeUnit::unit_tag>>;
 
 // Note: The C API doesn't have explicit velocity unit IDs
 // We create velocity by dividing length by time, operating on raw values
@@ -54,12 +54,11 @@ using Velocity = Quantity<CompoundTag<typename LengthUnit::unit_tag, typename Ti
 //   std::cout << velocity.value();    // Prints: 5.0
 
 // Division operator to create velocity from length and time
-template<typename LengthTag, typename TimeTag>
-Quantity<CompoundTag<LengthTag, TimeTag>> operator/(
-    const Quantity<LengthTag>& length,
-    const Quantity<TimeTag>& time)
-{
-    return Quantity<CompoundTag<LengthTag, TimeTag>>(length.value() / time.value());
+template <typename LengthTag, typename TimeTag>
+Quantity<CompoundTag<LengthTag, TimeTag>>
+operator/(const Quantity<LengthTag> &length, const Quantity<TimeTag> &time) {
+  return Quantity<CompoundTag<LengthTag, TimeTag>>(length.value() /
+                                                   time.value());
 }
 
 // ============================================================================

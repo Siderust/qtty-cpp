@@ -32,77 +32,77 @@ struct HorsepowerMetricTag {};
 struct HorsepowerElectricTag {};
 struct SolarLuminosityTag {};
 
-template<> struct UnitTraits<YoctowattTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_YOCTOWATT; }
+template <> struct UnitTraits<YoctowattTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_YOCTOWATT; }
 };
-template<> struct UnitTraits<ZeptowattTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_ZEPTOWATT; }
+template <> struct UnitTraits<ZeptowattTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_ZEPTOWATT; }
 };
-template<> struct UnitTraits<AttowattTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_ATTOWATT; }
+template <> struct UnitTraits<AttowattTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_ATTOWATT; }
 };
-template<> struct UnitTraits<FemtowattTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_FEMTOWATT; }
+template <> struct UnitTraits<FemtowattTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_FEMTOWATT; }
 };
-template<> struct UnitTraits<PicowattTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_PICOWATT; }
+template <> struct UnitTraits<PicowattTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_PICOWATT; }
 };
-template<> struct UnitTraits<NanowattTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_NANOWATT; }
+template <> struct UnitTraits<NanowattTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_NANOWATT; }
 };
-template<> struct UnitTraits<MicrowattTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_MICROWATT; }
+template <> struct UnitTraits<MicrowattTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_MICROWATT; }
 };
-template<> struct UnitTraits<MilliwattTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_MILLIWATT; }
+template <> struct UnitTraits<MilliwattTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_MILLIWATT; }
 };
-template<> struct UnitTraits<DeciwattTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_DECIWATT; }
+template <> struct UnitTraits<DeciwattTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_DECIWATT; }
 };
-template<> struct UnitTraits<WattTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_WATT; }
+template <> struct UnitTraits<WattTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_WATT; }
 };
-template<> struct UnitTraits<DecawattTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_DECAWATT; }
+template <> struct UnitTraits<DecawattTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_DECAWATT; }
 };
-template<> struct UnitTraits<HectowattTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_HECTOWATT; }
+template <> struct UnitTraits<HectowattTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_HECTOWATT; }
 };
-template<> struct UnitTraits<KilowattTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_KILOWATT; }
+template <> struct UnitTraits<KilowattTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_KILOWATT; }
 };
-template<> struct UnitTraits<MegawattTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_MEGAWATT; }
+template <> struct UnitTraits<MegawattTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_MEGAWATT; }
 };
-template<> struct UnitTraits<GigawattTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_GIGAWATT; }
+template <> struct UnitTraits<GigawattTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_GIGAWATT; }
 };
-template<> struct UnitTraits<TerawattTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_TERAWATT; }
+template <> struct UnitTraits<TerawattTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_TERAWATT; }
 };
-template<> struct UnitTraits<PetawattTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_PETAWATT; }
+template <> struct UnitTraits<PetawattTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_PETAWATT; }
 };
-template<> struct UnitTraits<ExawattTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_EXAWATT; }
+template <> struct UnitTraits<ExawattTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_EXAWATT; }
 };
-template<> struct UnitTraits<ZettawattTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_ZETTAWATT; }
+template <> struct UnitTraits<ZettawattTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_ZETTAWATT; }
 };
-template<> struct UnitTraits<YottawattTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_YOTTAWATT; }
+template <> struct UnitTraits<YottawattTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_YOTTAWATT; }
 };
-template<> struct UnitTraits<ErgPerSecondTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_ERG_PER_SECOND; }
+template <> struct UnitTraits<ErgPerSecondTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_ERG_PER_SECOND; }
 };
-template<> struct UnitTraits<HorsepowerMetricTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_HORSEPOWER_METRIC; }
+template <> struct UnitTraits<HorsepowerMetricTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_HORSEPOWER_METRIC; }
 };
-template<> struct UnitTraits<HorsepowerElectricTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_HORSEPOWER_ELECTRIC; }
+template <> struct UnitTraits<HorsepowerElectricTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_HORSEPOWER_ELECTRIC; }
 };
-template<> struct UnitTraits<SolarLuminosityTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_SOLAR_LUMINOSITY; }
+template <> struct UnitTraits<SolarLuminosityTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_SOLAR_LUMINOSITY; }
 };
 
 using Yoctowatt = Quantity<YoctowattTag>;

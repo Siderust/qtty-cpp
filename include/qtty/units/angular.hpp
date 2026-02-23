@@ -18,35 +18,35 @@ struct GradianTag {};
 struct TurnTag {};
 struct HourAngleTag {};
 
-template<> struct UnitTraits<MilliradianTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_MILLIRADIAN; }
+template <> struct UnitTraits<MilliradianTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_MILLIRADIAN; }
 };
-template<> struct UnitTraits<RadianTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_RADIAN; }
+template <> struct UnitTraits<RadianTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_RADIAN; }
 };
-template<> struct UnitTraits<MicroArcsecondTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_MICRO_ARCSECOND; }
+template <> struct UnitTraits<MicroArcsecondTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_MICRO_ARCSECOND; }
 };
-template<> struct UnitTraits<MilliArcsecondTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_MILLI_ARCSECOND; }
+template <> struct UnitTraits<MilliArcsecondTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_MILLI_ARCSECOND; }
 };
-template<> struct UnitTraits<ArcsecondTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_ARCSECOND; }
+template <> struct UnitTraits<ArcsecondTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_ARCSECOND; }
 };
-template<> struct UnitTraits<ArcminuteTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_ARCMINUTE; }
+template <> struct UnitTraits<ArcminuteTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_ARCMINUTE; }
 };
-template<> struct UnitTraits<DegreeTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_DEGREE; }
+template <> struct UnitTraits<DegreeTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_DEGREE; }
 };
-template<> struct UnitTraits<GradianTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_GRADIAN; }
+template <> struct UnitTraits<GradianTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_GRADIAN; }
 };
-template<> struct UnitTraits<TurnTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_TURN; }
+template <> struct UnitTraits<TurnTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_TURN; }
 };
-template<> struct UnitTraits<HourAngleTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_HOUR_ANGLE; }
+template <> struct UnitTraits<HourAngleTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_HOUR_ANGLE; }
 };
 
 using Milliradian = Quantity<MilliradianTag>;

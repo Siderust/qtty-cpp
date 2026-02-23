@@ -58,155 +58,167 @@ struct NominalJupiterRadiusTag {};
 struct NominalSolarRadiusTag {};
 struct NominalSolarDiameterTag {};
 
-template<> struct UnitTraits<PlanckLengthTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_PLANCK_LENGTH; }
+template <> struct UnitTraits<PlanckLengthTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_PLANCK_LENGTH; }
 };
-template<> struct UnitTraits<YoctometerTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_YOCTOMETER; }
+template <> struct UnitTraits<YoctometerTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_YOCTOMETER; }
 };
-template<> struct UnitTraits<ZeptometerTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_ZEPTOMETER; }
+template <> struct UnitTraits<ZeptometerTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_ZEPTOMETER; }
 };
-template<> struct UnitTraits<AttometerTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_ATTOMETER; }
+template <> struct UnitTraits<AttometerTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_ATTOMETER; }
 };
-template<> struct UnitTraits<FemtometerTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_FEMTOMETER; }
+template <> struct UnitTraits<FemtometerTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_FEMTOMETER; }
 };
-template<> struct UnitTraits<PicometerTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_PICOMETER; }
+template <> struct UnitTraits<PicometerTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_PICOMETER; }
 };
-template<> struct UnitTraits<NanometerTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_NANOMETER; }
+template <> struct UnitTraits<NanometerTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_NANOMETER; }
 };
-template<> struct UnitTraits<MicrometerTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_MICROMETER; }
+template <> struct UnitTraits<MicrometerTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_MICROMETER; }
 };
-template<> struct UnitTraits<MillimeterTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_MILLIMETER; }
+template <> struct UnitTraits<MillimeterTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_MILLIMETER; }
 };
-template<> struct UnitTraits<CentimeterTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_CENTIMETER; }
+template <> struct UnitTraits<CentimeterTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_CENTIMETER; }
 };
-template<> struct UnitTraits<DecimeterTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_DECIMETER; }
+template <> struct UnitTraits<DecimeterTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_DECIMETER; }
 };
-template<> struct UnitTraits<MeterTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_METER; }
+template <> struct UnitTraits<MeterTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_METER; }
 };
-template<> struct UnitTraits<DecameterTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_DECAMETER; }
+template <> struct UnitTraits<DecameterTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_DECAMETER; }
 };
-template<> struct UnitTraits<HectometerTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_HECTOMETER; }
+template <> struct UnitTraits<HectometerTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_HECTOMETER; }
 };
-template<> struct UnitTraits<KilometerTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_KILOMETER; }
+template <> struct UnitTraits<KilometerTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_KILOMETER; }
 };
-template<> struct UnitTraits<MegameterTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_MEGAMETER; }
+template <> struct UnitTraits<MegameterTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_MEGAMETER; }
 };
-template<> struct UnitTraits<GigameterTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_GIGAMETER; }
+template <> struct UnitTraits<GigameterTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_GIGAMETER; }
 };
-template<> struct UnitTraits<TerameterTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_TERAMETER; }
+template <> struct UnitTraits<TerameterTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_TERAMETER; }
 };
-template<> struct UnitTraits<PetameterTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_PETAMETER; }
+template <> struct UnitTraits<PetameterTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_PETAMETER; }
 };
-template<> struct UnitTraits<ExameterTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_EXAMETER; }
+template <> struct UnitTraits<ExameterTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_EXAMETER; }
 };
-template<> struct UnitTraits<ZettameterTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_ZETTAMETER; }
+template <> struct UnitTraits<ZettameterTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_ZETTAMETER; }
 };
-template<> struct UnitTraits<YottameterTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_YOTTAMETER; }
+template <> struct UnitTraits<YottameterTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_YOTTAMETER; }
 };
-template<> struct UnitTraits<BohrRadiusTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_BOHR_RADIUS; }
+template <> struct UnitTraits<BohrRadiusTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_BOHR_RADIUS; }
 };
-template<> struct UnitTraits<ClassicalElectronRadiusTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_CLASSICAL_ELECTRON_RADIUS; }
+template <> struct UnitTraits<ClassicalElectronRadiusTag> {
+  static constexpr UnitId unit_id() {
+    return UNIT_ID_CLASSICAL_ELECTRON_RADIUS;
+  }
 };
-template<> struct UnitTraits<ElectronReducedComptonWavelengthTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_ELECTRON_REDUCED_COMPTON_WAVELENGTH; }
+template <> struct UnitTraits<ElectronReducedComptonWavelengthTag> {
+  static constexpr UnitId unit_id() {
+    return UNIT_ID_ELECTRON_REDUCED_COMPTON_WAVELENGTH;
+  }
 };
-template<> struct UnitTraits<AstronomicalUnitTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_ASTRONOMICAL_UNIT; }
+template <> struct UnitTraits<AstronomicalUnitTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_ASTRONOMICAL_UNIT; }
 };
-template<> struct UnitTraits<LightYearTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_LIGHT_YEAR; }
+template <> struct UnitTraits<LightYearTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_LIGHT_YEAR; }
 };
-template<> struct UnitTraits<ParsecTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_PARSEC; }
+template <> struct UnitTraits<ParsecTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_PARSEC; }
 };
-template<> struct UnitTraits<KiloparsecTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_KILOPARSEC; }
+template <> struct UnitTraits<KiloparsecTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_KILOPARSEC; }
 };
-template<> struct UnitTraits<MegaparsecTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_MEGAPARSEC; }
+template <> struct UnitTraits<MegaparsecTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_MEGAPARSEC; }
 };
-template<> struct UnitTraits<GigaparsecTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_GIGAPARSEC; }
+template <> struct UnitTraits<GigaparsecTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_GIGAPARSEC; }
 };
-template<> struct UnitTraits<InchTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_INCH; }
+template <> struct UnitTraits<InchTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_INCH; }
 };
-template<> struct UnitTraits<FootTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_FOOT; }
+template <> struct UnitTraits<FootTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_FOOT; }
 };
-template<> struct UnitTraits<YardTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_YARD; }
+template <> struct UnitTraits<YardTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_YARD; }
 };
-template<> struct UnitTraits<MileTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_MILE; }
+template <> struct UnitTraits<MileTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_MILE; }
 };
-template<> struct UnitTraits<LinkTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_LINK; }
+template <> struct UnitTraits<LinkTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_LINK; }
 };
-template<> struct UnitTraits<FathomTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_FATHOM; }
+template <> struct UnitTraits<FathomTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_FATHOM; }
 };
-template<> struct UnitTraits<RodTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_ROD; }
+template <> struct UnitTraits<RodTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_ROD; }
 };
-template<> struct UnitTraits<ChainTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_CHAIN; }
+template <> struct UnitTraits<ChainTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_CHAIN; }
 };
-template<> struct UnitTraits<NauticalMileTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_NAUTICAL_MILE; }
+template <> struct UnitTraits<NauticalMileTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_NAUTICAL_MILE; }
 };
-template<> struct UnitTraits<NominalLunarRadiusTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_NOMINAL_LUNAR_RADIUS; }
+template <> struct UnitTraits<NominalLunarRadiusTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_NOMINAL_LUNAR_RADIUS; }
 };
-template<> struct UnitTraits<NominalLunarDistanceTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_NOMINAL_LUNAR_DISTANCE; }
+template <> struct UnitTraits<NominalLunarDistanceTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_NOMINAL_LUNAR_DISTANCE; }
 };
-template<> struct UnitTraits<NominalEarthPolarRadiusTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_NOMINAL_EARTH_POLAR_RADIUS; }
+template <> struct UnitTraits<NominalEarthPolarRadiusTag> {
+  static constexpr UnitId unit_id() {
+    return UNIT_ID_NOMINAL_EARTH_POLAR_RADIUS;
+  }
 };
-template<> struct UnitTraits<NominalEarthRadiusTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_NOMINAL_EARTH_RADIUS; }
+template <> struct UnitTraits<NominalEarthRadiusTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_NOMINAL_EARTH_RADIUS; }
 };
-template<> struct UnitTraits<NominalEarthEquatorialRadiusTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_NOMINAL_EARTH_EQUATORIAL_RADIUS; }
+template <> struct UnitTraits<NominalEarthEquatorialRadiusTag> {
+  static constexpr UnitId unit_id() {
+    return UNIT_ID_NOMINAL_EARTH_EQUATORIAL_RADIUS;
+  }
 };
-template<> struct UnitTraits<EarthMeridionalCircumferenceTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_EARTH_MERIDIONAL_CIRCUMFERENCE; }
+template <> struct UnitTraits<EarthMeridionalCircumferenceTag> {
+  static constexpr UnitId unit_id() {
+    return UNIT_ID_EARTH_MERIDIONAL_CIRCUMFERENCE;
+  }
 };
-template<> struct UnitTraits<EarthEquatorialCircumferenceTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_EARTH_EQUATORIAL_CIRCUMFERENCE; }
+template <> struct UnitTraits<EarthEquatorialCircumferenceTag> {
+  static constexpr UnitId unit_id() {
+    return UNIT_ID_EARTH_EQUATORIAL_CIRCUMFERENCE;
+  }
 };
-template<> struct UnitTraits<NominalJupiterRadiusTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_NOMINAL_JUPITER_RADIUS; }
+template <> struct UnitTraits<NominalJupiterRadiusTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_NOMINAL_JUPITER_RADIUS; }
 };
-template<> struct UnitTraits<NominalSolarRadiusTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_NOMINAL_SOLAR_RADIUS; }
+template <> struct UnitTraits<NominalSolarRadiusTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_NOMINAL_SOLAR_RADIUS; }
 };
-template<> struct UnitTraits<NominalSolarDiameterTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_NOMINAL_SOLAR_DIAMETER; }
+template <> struct UnitTraits<NominalSolarDiameterTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_NOMINAL_SOLAR_DIAMETER; }
 };
 
 using PlanckLength = Quantity<PlanckLengthTag>;
@@ -233,7 +245,8 @@ using Zettameter = Quantity<ZettameterTag>;
 using Yottameter = Quantity<YottameterTag>;
 using BohrRadius = Quantity<BohrRadiusTag>;
 using ClassicalElectronRadius = Quantity<ClassicalElectronRadiusTag>;
-using ElectronReducedComptonWavelength = Quantity<ElectronReducedComptonWavelengthTag>;
+using ElectronReducedComptonWavelength =
+    Quantity<ElectronReducedComptonWavelengthTag>;
 using AstronomicalUnit = Quantity<AstronomicalUnitTag>;
 using LightYear = Quantity<LightYearTag>;
 using Parsec = Quantity<ParsecTag>;
