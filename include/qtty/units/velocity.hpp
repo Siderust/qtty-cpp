@@ -62,6 +62,57 @@ operator/(const Quantity<LengthTag> &length, const Quantity<TimeTag> &time) {
 }
 
 // ============================================================================
+// UnitTraits for Compound Units
+// ============================================================================
+// Provides symbols for common compound units.
+
+// Generic template specialization for CompoundTag (requires units to have
+// symbols)
+template <typename NumeratorTag, typename DenominatorTag>
+struct UnitTraits<CompoundTag<NumeratorTag, DenominatorTag>> {
+  // Compound units don't have a direct FFI unit ID
+  // Use UNIT_ID_METER as a placeholder (never actually used for conversion)
+  static constexpr UnitId unit_id() { return UNIT_ID_METER; }
+  static constexpr std::string_view symbol() {
+    // This is a compile-time symbol construction for compound units
+    // For runtime construction, we'd need to use std::string
+    // For now, we provide empty string as a fallback
+    return "";
+  }
+};
+
+// Specializations for common velocity types
+template <> struct UnitTraits<CompoundTag<MeterTag, SecondTag>> {
+  static constexpr UnitId unit_id() { return UNIT_ID_METER; }
+  static constexpr std::string_view symbol() { return "m/s"; }
+};
+
+template <> struct UnitTraits<CompoundTag<KilometerTag, HourTag>> {
+  static constexpr UnitId unit_id() { return UNIT_ID_METER; }
+  static constexpr std::string_view symbol() { return "km/h"; }
+};
+
+template <> struct UnitTraits<CompoundTag<MeterTag, HourTag>> {
+  static constexpr UnitId unit_id() { return UNIT_ID_METER; }
+  static constexpr std::string_view symbol() { return "m/h"; }
+};
+
+template <> struct UnitTraits<CompoundTag<KilometerTag, SecondTag>> {
+  static constexpr UnitId unit_id() { return UNIT_ID_METER; }
+  static constexpr std::string_view symbol() { return "km/s"; }
+};
+
+template <> struct UnitTraits<CompoundTag<MeterTag, MinuteTag>> {
+  static constexpr UnitId unit_id() { return UNIT_ID_METER; }
+  static constexpr std::string_view symbol() { return "m/min"; }
+};
+
+template <> struct UnitTraits<CompoundTag<KilometerTag, MinuteTag>> {
+  static constexpr UnitId unit_id() { return UNIT_ID_METER; }
+  static constexpr std::string_view symbol() { return "km/min"; }
+};
+
+// ============================================================================
 // Common Velocity Type Aliases
 // ============================================================================
 // Pre-defined aliases for commonly used velocity combinations.

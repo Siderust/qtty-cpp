@@ -34,8 +34,17 @@ jobs:
           sudo apt-get install -y --no-install-recommends \
             cmake \
             ninja-build \
-            clang-format \
             clang-tidy
+
+      - name: Install clang-format 18
+        shell: bash
+        run: |
+          set -euo pipefail
+          wget -qO /tmp/llvm.sh https://apt.llvm.org/llvm.sh
+          sudo bash /tmp/llvm.sh 18
+          sudo apt-get install -y --no-install-recommends clang-format-18
+          sudo ln -sf /usr/bin/clang-format-18 /usr/local/bin/clang-format
+          clang-format --version
 
       - name: Set up Rust (stable)
         uses: actions-rust-lang/setup-rust-toolchain@v1
@@ -46,7 +55,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          cmake -S . -B build -G Ninja -DQTTY_BUILD_DOCS=OFF -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+          cmake -S . -B build -G Ninja -DQTTY_BUILD_DOCS=OFF -DQTTY_FFI_FEATURES="serde" -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 
       - name: clang-format check
         shell: bash
@@ -147,7 +156,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          cmake -S . -B build -G Ninja -DQTTY_BUILD_DOCS=ON
+          cmake -S . -B build -G Ninja -DQTTY_BUILD_DOCS=ON -DQTTY_FFI_FEATURES="serde"
 
       - name: Build
         shell: bash
@@ -205,6 +214,7 @@ jobs:
           set -euo pipefail
           cmake -S . -B build-coverage -G Ninja \
             -DQTTY_BUILD_DOCS=OFF \
+            -DQTTY_FFI_FEATURES="serde" \
             -DCMAKE_BUILD_TYPE=Debug \
             -DCMAKE_CXX_FLAGS="--coverage" \
             -DCMAKE_EXE_LINKER_FLAGS="--coverage"
