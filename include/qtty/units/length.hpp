@@ -151,15 +151,11 @@ template <> struct UnitTraits<BohrRadiusTag> {
   static constexpr std::string_view symbol() { return "a₀"; }
 };
 template <> struct UnitTraits<ClassicalElectronRadiusTag> {
-  static constexpr UnitId unit_id() {
-    return UNIT_ID_CLASSICAL_ELECTRON_RADIUS;
-  }
+  static constexpr UnitId unit_id() { return UNIT_ID_CLASSICAL_ELECTRON_RADIUS; }
   static constexpr std::string_view symbol() { return "r_e"; }
 };
 template <> struct UnitTraits<ElectronReducedComptonWavelengthTag> {
-  static constexpr UnitId unit_id() {
-    return UNIT_ID_ELECTRON_REDUCED_COMPTON_WAVELENGTH;
-  }
+  static constexpr UnitId unit_id() { return UNIT_ID_ELECTRON_REDUCED_COMPTON_WAVELENGTH; }
   static constexpr std::string_view symbol() { return "λ̄_e"; }
 };
 template <> struct UnitTraits<AstronomicalUnitTag> {
@@ -231,9 +227,7 @@ template <> struct UnitTraits<NominalLunarDistanceTag> {
   static constexpr std::string_view symbol() { return "LD"; }
 };
 template <> struct UnitTraits<NominalEarthPolarRadiusTag> {
-  static constexpr UnitId unit_id() {
-    return UNIT_ID_NOMINAL_EARTH_POLAR_RADIUS;
-  }
+  static constexpr UnitId unit_id() { return UNIT_ID_NOMINAL_EARTH_POLAR_RADIUS; }
   static constexpr std::string_view symbol() { return "R_⊕pol"; }
 };
 template <> struct UnitTraits<NominalEarthRadiusTag> {
@@ -241,21 +235,15 @@ template <> struct UnitTraits<NominalEarthRadiusTag> {
   static constexpr std::string_view symbol() { return "R_⊕"; }
 };
 template <> struct UnitTraits<NominalEarthEquatorialRadiusTag> {
-  static constexpr UnitId unit_id() {
-    return UNIT_ID_NOMINAL_EARTH_EQUATORIAL_RADIUS;
-  }
+  static constexpr UnitId unit_id() { return UNIT_ID_NOMINAL_EARTH_EQUATORIAL_RADIUS; }
   static constexpr std::string_view symbol() { return "R_⊕eq"; }
 };
 template <> struct UnitTraits<EarthMeridionalCircumferenceTag> {
-  static constexpr UnitId unit_id() {
-    return UNIT_ID_EARTH_MERIDIONAL_CIRCUMFERENCE;
-  }
+  static constexpr UnitId unit_id() { return UNIT_ID_EARTH_MERIDIONAL_CIRCUMFERENCE; }
   static constexpr std::string_view symbol() { return "C_mer"; }
 };
 template <> struct UnitTraits<EarthEquatorialCircumferenceTag> {
-  static constexpr UnitId unit_id() {
-    return UNIT_ID_EARTH_EQUATORIAL_CIRCUMFERENCE;
-  }
+  static constexpr UnitId unit_id() { return UNIT_ID_EARTH_EQUATORIAL_CIRCUMFERENCE; }
   static constexpr std::string_view symbol() { return "C_eq"; }
 };
 template <> struct UnitTraits<NominalJupiterRadiusTag> {
@@ -295,8 +283,7 @@ using Zettameter = Quantity<ZettameterTag>;
 using Yottameter = Quantity<YottameterTag>;
 using BohrRadius = Quantity<BohrRadiusTag>;
 using ClassicalElectronRadius = Quantity<ClassicalElectronRadiusTag>;
-using ElectronReducedComptonWavelength =
-    Quantity<ElectronReducedComptonWavelengthTag>;
+using ElectronReducedComptonWavelength = Quantity<ElectronReducedComptonWavelengthTag>;
 using AstronomicalUnit = Quantity<AstronomicalUnitTag>;
 using LightYear = Quantity<LightYearTag>;
 using Parsec = Quantity<ParsecTag>;
