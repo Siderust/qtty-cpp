@@ -138,9 +138,10 @@ def generate_header_for_dimension(dimension: str, units: List[Tuple[str, str, st
     
     # Generate unit traits specializations
     unit_traits = []
-    for const_name, name, _ in units:
+    for const_name, name, symbol in units:
         unit_traits.append(f"""template<> struct UnitTraits<{name}Tag> {{
     static constexpr UnitId unit_id() {{ return UNIT_ID_{const_name}; }}
+    static constexpr std::string_view symbol() {{ return "{symbol}"; }}
 }};""")
     
     # Generate type aliases
