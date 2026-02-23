@@ -39,9 +39,9 @@ else()
     set(QTTY_LIBRARY_PATH ${QTTY_ARTIFACT_DIR}/libqtty_ffi.so)
 endif()
 
-# Generate C++ unit wrappers from qtty_ffi.h
-find_package(Python3 COMPONENTS Interpreter REQUIRED)
-set(QTTY_FFI_HEADER ${QTTY_FFI_INCLUDE_DIR}/qtty_ffi.h)
+# Generate C++ unit wrappers from units.csv via the Rust gen_cpp_units binary.
+# Running `cargo run` builds the binary (and the qtty-ffi library) if needed.
+set(QTTY_UNITS_CSV ${QTTY_SUBMODULE_DIR}/qtty-ffi/units.csv)
 set(GENERATED_HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/length.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/time.hpp
@@ -53,10 +53,11 @@ set(GENERATED_HEADERS
 
 add_custom_command(
     OUTPUT ${GENERATED_HEADERS}
-    COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/gen_cpp_units.py
-    DEPENDS ${QTTY_FFI_HEADER} ${CMAKE_CURRENT_SOURCE_DIR}/gen_cpp_units.py
+    COMMAND ${CARGO_BIN} run --manifest-path ${CMAKE_CURRENT_SOURCE_DIR}/gen_cpp_units/Cargo.toml --release
+        -- ${QTTY_UNITS_CSV} ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty
+    DEPENDS ${QTTY_UNITS_CSV}
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    COMMENT "Generating C++ unit wrappers from qtty_ffi.h"
+    COMMENT "Generating C++ unit wrappers from units.csv (Rust)"
     VERBATIM
 )
 
@@ -231,8 +232,9 @@ install(EXPORT qtty_cppTargets
 # Generate unit files (if needed)
 add_custom_target(
     gen_units
-    COMMAND ${CARGO_BIN} run -p qtty-ffi --bin gen_units
-    WORKING_DIRECTORY ${QTTY_SUBMODULE_DIR}
-    COMMENT "Generating unit files"
+    COMMAND ${CARGO_BIN} run --manifest-path ${CMAKE_CURRENT_SOURCE_DIR}/gen_cpp_units/Cargo.toml --release
+        -- ${QTTY_UNITS_CSV} ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    COMMENT "Generating C++ unit wrappers from units.csv (Rust)"
     VERBATIM
 )

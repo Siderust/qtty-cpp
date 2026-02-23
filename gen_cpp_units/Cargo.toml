@@ -1,0 +1,8 @@
+[package]
+name = "gen_cpp_units"
+version = "0.1.0"
+edition = "2021"
+authors = ["Vallés Puig, Ramon <>"]
+description = "Generator for C++ unit-wrapper headers from units.csv"
+
+[dependencies]
