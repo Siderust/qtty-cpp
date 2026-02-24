@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include <string>
 #include <type_traits>
+#include <ostream>
 extern "C" {
 #include "qtty_ffi.h"
 }
@@ -265,6 +266,16 @@ public:
     Quantity abs() const {
         return Quantity(std::abs(m_value));
     }
-};
+
+// ============================================================================
+// Stream Insertion Operator
+// ============================================================================
+// Prints a quantity with its unit symbol, e.g., "1500 m" or "42.5 km"
+
+template <typename UnitTag>
+std::ostream &operator<<(std::ostream &os, const Quantity<UnitTag> &q) {
+    os << q.value() << " " << UnitTraits<UnitTag>::symbol();
+    return os;
+}
 
 } // namespace qtty
