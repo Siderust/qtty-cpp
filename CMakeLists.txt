@@ -16,7 +16,7 @@ set(QTTY_ARTIFACT_DIR ${QTTY_SUBMODULE_DIR}/target/release)
 
 # Allow enabling Cargo features for qtty-ffi (e.g., serde)
 # Use a STRING cache var (not BOOL) so users can set: "serde", "", or custom lists.
-set(QTTY_FFI_FEATURES "serde" CACHE STRING "Cargo features for qtty-ffi (e.g., 'serde' or empty)")
+set(QTTY_FFI_FEATURES "" CACHE STRING "Cargo features for qtty-ffi (e.g., 'serde' or empty)")
 
 # Normalize feature args: treat OFF/FALSE/0 as empty; ON means default 'serde'.
 set(_QTTY_FEATURES_ARGS "")
