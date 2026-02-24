@@ -10,11 +10,11 @@
 
 #include <cmath>
 #include <iostream>
+#include <ostream>
 #include <stdexcept>
 #include <string>
 #include <string_view>
 #include <type_traits>
-#include <ostream>
 extern "C" {
 #include "qtty_ffi.h"
 }
@@ -107,10 +107,10 @@ template <typename UnitTag> class Quantity;
 // Each unit tag (e.g., MeterTag) must specialize this template to provide
 // its corresponding C FFI unit ID constant (e.g., UNIT_ID_METER).
 // Specializations are auto-generated in include/qtty/units/*.hpp
-template<typename UnitTag>
-struct UnitTraits {
-    // Default symbol returns empty string. Specialize for units that have symbols.
-    static constexpr std::string_view symbol() { return ""; }
+template <typename UnitTag> struct UnitTraits {
+  // Default symbol returns empty string. Specialize for units that have
+  // symbols.
+  static constexpr std::string_view symbol() { return ""; }
 };
 
 // Helper to extract tag from either a tag or Quantity<Tag>
@@ -288,12 +288,13 @@ public:
 // ============================================================================
 // Stream Insertion Operator
 // ============================================================================
-// Prints a quantity's value (with unit symbol support for units that define it).
+// Prints a quantity's value (with unit symbol support for units that define
+// it).
 
 template <typename UnitTag>
 std::ostream &operator<<(std::ostream &os, const Quantity<UnitTag> &q) {
-    os << q.value() << " " << UnitTraits<UnitTag>::symbol();
-    return os;
+  os << q.value() << " " << UnitTraits<UnitTag>::symbol();
+  return os;
 }
 
 } // namespace qtty
