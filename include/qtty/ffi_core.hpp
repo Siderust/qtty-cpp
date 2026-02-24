@@ -80,7 +80,10 @@ class Quantity;
 // its corresponding C FFI unit ID constant (e.g., UNIT_ID_METER).
 // Specializations are auto-generated in include/qtty/units/*.hpp
 template<typename UnitTag>
-struct UnitTraits;
+struct UnitTraits {
+    // Default symbol returns empty string. Specialize for units that have symbols.
+    static constexpr std::string_view symbol() { return ""; }
+};
 
 // Helper to extract tag from either a tag or Quantity<Tag>
 // This allows .to<>() to accept both Quantity<KilometerTag> and KilometerTag,
@@ -266,11 +269,12 @@ public:
     Quantity abs() const {
         return Quantity(std::abs(m_value));
     }
+};
 
 // ============================================================================
 // Stream Insertion Operator
 // ============================================================================
-// Prints a quantity with its unit symbol, e.g., "1500 m" or "42.5 km"
+// Prints a quantity's value (with unit symbol support for units that define it).
 
 template <typename UnitTag>
 std::ostream &operator<<(std::ostream &os, const Quantity<UnitTag> &q) {
