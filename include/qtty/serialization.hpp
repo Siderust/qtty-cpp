@@ -156,14 +156,13 @@ namespace derived_serialization {
  * @param q Source compound quantity.
  * @return JSON string.
  */
-template <typename Tag>
-std::string to_json(const Quantity<Tag> &q) {
+template <typename Tag> std::string to_json(const Quantity<Tag> &q) {
   static_assert(is_compound_v<Tag>,
                 "derived_serialization::to_json requires a compound quantity");
   qtty_derived_quantity_t src{};
-  int32_t status = qtty_derived_make(
-      q.value(), UnitTraits<Tag>::numerator_unit_id(),
-      UnitTraits<Tag>::denominator_unit_id(), &src);
+  int32_t status =
+      qtty_derived_make(q.value(), UnitTraits<Tag>::numerator_unit_id(),
+                        UnitTraits<Tag>::denominator_unit_id(), &src);
   check_status(status, "Creating derived quantity for serialization");
 
   char *out = nullptr;
@@ -191,9 +190,9 @@ Quantity<typename ExtractTag<T>::type> from_json(std::string_view json) {
   if (out_qty.numerator != UnitTraits<Tag>::numerator_unit_id() ||
       out_qty.denominator != UnitTraits<Tag>::denominator_unit_id()) {
     qtty_derived_quantity_t conv{};
-    status = qtty_derived_convert(
-        out_qty, UnitTraits<Tag>::numerator_unit_id(),
-        UnitTraits<Tag>::denominator_unit_id(), &conv);
+    status =
+        qtty_derived_convert(out_qty, UnitTraits<Tag>::numerator_unit_id(),
+                             UnitTraits<Tag>::denominator_unit_id(), &conv);
     check_status(status, "Converting deserialized derived quantity");
     return Quantity<Tag>(conv.value);
   }

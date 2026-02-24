@@ -50,7 +50,7 @@ TEST_F(DerivedQuantityTest, VelocityFromDivision) {
   // Create velocity from actual division
   Kilometer dist(180.0);
   Hour t(2.0);
-  auto v = dist / t;  // type: KilometerPerHour
+  auto v = dist / t; // type: KilometerPerHour
 
   EXPECT_NEAR(v.value(), 90.0, 1e-12);
 
