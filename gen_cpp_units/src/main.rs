@@ -138,10 +138,10 @@ fn parse_csv(path: &Path) -> Vec<UnitDef> {
             continue;
         }
 
-        // Split on (at most) 5 commas to protect ratio values that may
-        // themselves contain commas (defensive, though none currently do).
-        let parts: Vec<&str> = line.splitn(5, ',').collect();
-        if parts.len() != 5 {
+        // Split on commas — we need at least 5 fields, but allow extra
+        // (e.g. an optional 6th field for Rust type path used by qtty-ffi).
+        let parts: Vec<&str> = line.splitn(6, ',').collect();
+        if parts.len() < 5 {
             eprintln!("Warning: skipping malformed line: {line}");
             continue;
         }

@@ -3,11 +3,11 @@
 
 #pragma once
 
-#include "units/angular.hpp"
 #include "units/length.hpp"
+#include "units/time.hpp"
+#include "units/angular.hpp"
 #include "units/mass.hpp"
 #include "units/power.hpp"
-#include "units/time.hpp"
 
 namespace qtty {
 
@@ -189,8 +189,7 @@ constexpr ClassicalElectronRadius operator""_r_e(unsigned long long value) {
 constexpr ElectronReducedComptonWavelength operator""__e(long double value) {
   return ElectronReducedComptonWavelength(static_cast<double>(value));
 }
-constexpr ElectronReducedComptonWavelength
-operator""__e(unsigned long long value) {
+constexpr ElectronReducedComptonWavelength operator""__e(unsigned long long value) {
   return ElectronReducedComptonWavelength(static_cast<double>(value));
 }
 
@@ -316,8 +315,7 @@ constexpr NominalLunarDistance operator""_LD(unsigned long long value) {
 constexpr NominalEarthPolarRadius operator""_R_earthpol(long double value) {
   return NominalEarthPolarRadius(static_cast<double>(value));
 }
-constexpr NominalEarthPolarRadius
-operator""_R_earthpol(unsigned long long value) {
+constexpr NominalEarthPolarRadius operator""_R_earthpol(unsigned long long value) {
   return NominalEarthPolarRadius(static_cast<double>(value));
 }
 
@@ -331,24 +329,21 @@ constexpr NominalEarthRadius operator""_R_earth(unsigned long long value) {
 constexpr NominalEarthEquatorialRadius operator""_R_eartheq(long double value) {
   return NominalEarthEquatorialRadius(static_cast<double>(value));
 }
-constexpr NominalEarthEquatorialRadius
-operator""_R_eartheq(unsigned long long value) {
+constexpr NominalEarthEquatorialRadius operator""_R_eartheq(unsigned long long value) {
   return NominalEarthEquatorialRadius(static_cast<double>(value));
 }
 
 constexpr EarthMeridionalCircumference operator""_C_mer(long double value) {
   return EarthMeridionalCircumference(static_cast<double>(value));
 }
-constexpr EarthMeridionalCircumference
-operator""_C_mer(unsigned long long value) {
+constexpr EarthMeridionalCircumference operator""_C_mer(unsigned long long value) {
   return EarthMeridionalCircumference(static_cast<double>(value));
 }
 
 constexpr EarthEquatorialCircumference operator""_C_eq(long double value) {
   return EarthEquatorialCircumference(static_cast<double>(value));
 }
-constexpr EarthEquatorialCircumference
-operator""_C_eq(unsigned long long value) {
+constexpr EarthEquatorialCircumference operator""_C_eq(unsigned long long value) {
   return EarthEquatorialCircumference(static_cast<double>(value));
 }
 
