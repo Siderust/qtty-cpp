@@ -1,16 +1,19 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2026 Vallés Puig, Ramon
+
 #pragma once
 
-#include <gtest/gtest.h>
-#include <cmath>
 #include "qtty/qtty.hpp"
+#include <cmath>
+#include <gtest/gtest.h>
 
 // Provide qtty symbols directly for each test translation unit.
 using namespace qtty;
 
 class QttyTest : public ::testing::Test {
 protected:
-    void SetUp() override {}
-    void TearDown() override {}
+  void SetUp() override {}
+  void TearDown() override {}
 };
 
 class LengthDimensionTest : public QttyTest {};
