@@ -9,8 +9,10 @@
  */
 
 #include <cmath>
+#include <iomanip>
 #include <iostream>
 #include <ostream>
+#include <sstream>
 #include <stdexcept>
 #include <string>
 #include <string_view>
@@ -316,13 +318,80 @@ public:
   Quantity operator-() const { return Quantity(-m_value); }
 
   Quantity abs() const { return Quantity(std::abs(m_value)); }
+
+  // ========================================================================
+  // String Formatting
+  // ========================================================================
+  // Format the quantity as a human-readable string, mirroring Rust's format
+  // annotations.  The mapping is:
+  //
+  //   Rust             C++
+  //   {}               format()
+  //   {:.2}            format(2)
+  //   {:e}             format(-1, QTTY_FMT_LOWER_EXP)
+  //   {:.4e}           format(4,  QTTY_FMT_LOWER_EXP)
+  //   {:E}             format(-1, QTTY_FMT_UPPER_EXP)
+  //   {:.4E}           format(4,  QTTY_FMT_UPPER_EXP)
+  //
+  // The formatting logic lives in the Rust qtty-ffi library, so precision
+  // semantics are identical on both sides of the FFI boundary.
+
+  /**
+   * @brief Format this quantity as a string.
+   *
+   * Delegates to the Rust qtty-ffi `qtty_quantity_format` function so that
+   * C++ and Rust produce identical output for the same parameters.
+   *
+   * @param precision  Digits after the decimal point.  Pass a negative value
+   *                   (default) for the shortest exact representation.
+   * @param flags      Notation selector:
+   *                   - `QTTY_FMT_DEFAULT`   (0): decimal (e.g. `"1234.57 m"`)
+   *                   - `QTTY_FMT_LOWER_EXP` (1): scientific lower-case `e`
+   *                   - `QTTY_FMT_UPPER_EXP` (2): scientific upper-case `E`
+   * @return Formatted string, e.g. `"1234.57 m"` or `"1.23e3 m"`.
+   * @throws QttyException on formatting failure.
+   */
+  std::string format(int precision = -1,
+                     uint32_t flags = QTTY_FMT_DEFAULT) const {
+    qtty_quantity_t qty;
+    int32_t make_status = qtty_quantity_make(m_value, unit_id(), &qty);
+    check_status(make_status, "format: creating quantity");
+
+    char buf[512];
+    int32_t result =
+        qtty_quantity_format(qty, precision, flags, buf, sizeof(buf));
+    if (result == QTTY_ERR_BUFFER_TOO_SMALL) {
+      // Retry with a generous large buffer (quantities should never need this)
+      char big_buf[4096];
+      result =
+          qtty_quantity_format(qty, precision, flags, big_buf, sizeof(big_buf));
+      if (result < 0) {
+        throw QttyException("format: buffer too small even at 4096 bytes");
+      }
+      return std::string(big_buf);
+    }
+    if (result < 0) {
+      check_status(result, "format: formatting quantity");
+    }
+    return std::string(buf);
+  }
 };
 
 // ============================================================================
 // Stream Insertion Operator
 // ============================================================================
-// Prints a quantity's value (with unit symbol support for units that define
-// it).
+// Prints a quantity with its unit symbol, e.g., "1500 m" or "42.5 km".
+//
+// Because this streams `q.value()` (a plain double) directly into the
+// `std::ostream`, all standard stream format manipulators are respected:
+//
+//   std::cout << std::fixed << std::setprecision(2) << qty;   // "1234.57 m"
+//   std::cout << std::scientific << qty;                       // "1.23457e+003
+//   m" std::cout << std::scientific << std::setprecision(4)
+//             << qty;                                          // "1.2346e+003
+//             m"
+//
+// For `std::format` (C++20) see the std::formatter specialisation below.
 
 template <typename UnitTag>
 std::ostream &operator<<(std::ostream &os, const Quantity<UnitTag> &q) {
@@ -331,3 +400,48 @@ std::ostream &operator<<(std::ostream &os, const Quantity<UnitTag> &q) {
 }
 
 } // namespace qtty
+
+// ============================================================================
+// C++20 std::formatter specialisation
+// ============================================================================
+// Allows `std::format` and `std::print` to be used with any Quantity type,
+// honouring the same format specifiers as std::formatter<double>:
+//
+//   std::format("{}", qty)          → "1234.56789 s"
+//   std::format("{:.2f}", qty)      → "1234.57 s"
+//   std::format("{:e}", qty)        → "1.23457e+03 s"
+//   std::format("{:.4e}", qty)      → "1.2346e+03 s"
+//   std::format("{:E}", qty)        → "1.23457E+03 s"
+//   std::format("{:>15.2f}", qty)   → "        1234.57 s"   (number padded, not
+//   symbol)
+//
+// Note: width / fill / align specifications are applied to the numeric part
+// only; the unit symbol is always appended directly after without padding.
+// This mirrors the behaviour of the Rust Display/LowerExp/UpperExp impls.
+
+#if __cplusplus >= 202002L
+#include <format>
+
+namespace std {
+
+template <typename UnitTag> struct formatter<qtty::Quantity<UnitTag>> {
+private:
+  std::formatter<double> double_fmt_;
+
+public:
+  /// Parse the format specification (e.g. ".2f", "e", ".4e").
+  template <typename ParseContext> constexpr auto parse(ParseContext &ctx) {
+    return double_fmt_.parse(ctx);
+  }
+
+  /// Format the quantity: apply the parsed spec to the value, then append the
+  /// unit symbol.
+  template <typename FormatContext>
+  auto format(const qtty::Quantity<UnitTag> &qty, FormatContext &ctx) const {
+    auto out = double_fmt_.format(qty.value(), ctx);
+    return std::format_to(out, " {}", qtty::UnitTraits<UnitTag>::symbol());
+  }
+};
+
+} // namespace std
+#endif // __cplusplus >= 202002L
