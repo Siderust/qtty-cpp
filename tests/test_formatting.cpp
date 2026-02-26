@@ -15,9 +15,9 @@
  *   Rust `{}`          →  operator<< (default)  /  format(-1, QTTY_FMT_DEFAULT)
  *   Rust `{:.2}`       →  std::setprecision(2) << std::fixed  /  format(2)
  *   Rust `{:e}`        →  std::scientific  /  format(-1, QTTY_FMT_LOWER_EXP)
- *   Rust `{:.4e}`      →  std::scientific << std::setprecision(4)  /  format(4, QTTY_FMT_LOWER_EXP)
- *   Rust `{:E}`        →  format(-1, QTTY_FMT_UPPER_EXP)
- *   Rust `{:.4E}`      →  format(4,  QTTY_FMT_UPPER_EXP)
+ *   Rust `{:.4e}`      →  std::scientific << std::setprecision(4)  /  format(4,
+ * QTTY_FMT_LOWER_EXP) Rust `{:E}`        →  format(-1, QTTY_FMT_UPPER_EXP) Rust
+ * `{:.4E}`      →  format(4,  QTTY_FMT_UPPER_EXP)
  */
 
 #include "fixtures.hpp"
@@ -28,8 +28,7 @@
 // ─── Helper ─────────────────────────────────────────────────────────────────
 
 /// Stream a quantity with the given manipulators and return the string.
-template <typename Q>
-static std::string stream_qty(const Q &q) {
+template <typename Q> static std::string stream_qty(const Q &q) {
   std::ostringstream oss;
   oss << q;
   return oss.str();
@@ -181,7 +180,8 @@ TEST_F(FormattingTest, FormatLargeValue) {
   EXPECT_EQ(m.format(2, QTTY_FMT_LOWER_EXP), "1.50e12 m");
 }
 
-// Verify format() with precision=2 matches operator<< with fixed+setprecision(2).
+// Verify format() with precision=2 matches operator<< with
+// fixed+setprecision(2).
 TEST_F(FormattingTest, FormatMatchesStream) {
   Second s(1234.56789);
   std::ostringstream oss;

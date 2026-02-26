@@ -11,8 +11,8 @@
 #include <cmath>
 #include <iomanip>
 #include <iostream>
-#include <sstream>
 #include <ostream>
+#include <sstream>
 #include <stdexcept>
 #include <string>
 #include <string_view>
@@ -363,8 +363,8 @@ public:
     if (result == QTTY_ERR_BUFFER_TOO_SMALL) {
       // Retry with a generous large buffer (quantities should never need this)
       char big_buf[4096];
-      result = qtty_quantity_format(qty, precision, flags, big_buf,
-                                    sizeof(big_buf));
+      result =
+          qtty_quantity_format(qty, precision, flags, big_buf, sizeof(big_buf));
       if (result < 0) {
         throw QttyException("format: buffer too small even at 4096 bytes");
       }
@@ -386,9 +386,10 @@ public:
 // `std::ostream`, all standard stream format manipulators are respected:
 //
 //   std::cout << std::fixed << std::setprecision(2) << qty;   // "1234.57 m"
-//   std::cout << std::scientific << qty;                       // "1.23457e+003 m"
-//   std::cout << std::scientific << std::setprecision(4)
-//             << qty;                                          // "1.2346e+003 m"
+//   std::cout << std::scientific << qty;                       // "1.23457e+003
+//   m" std::cout << std::scientific << std::setprecision(4)
+//             << qty;                                          // "1.2346e+003
+//             m"
 //
 // For `std::format` (C++20) see the std::formatter specialisation below.
 
@@ -411,7 +412,8 @@ std::ostream &operator<<(std::ostream &os, const Quantity<UnitTag> &q) {
 //   std::format("{:e}", qty)        → "1.23457e+03 s"
 //   std::format("{:.4e}", qty)      → "1.2346e+03 s"
 //   std::format("{:E}", qty)        → "1.23457E+03 s"
-//   std::format("{:>15.2f}", qty)   → "        1234.57 s"   (number padded, not symbol)
+//   std::format("{:>15.2f}", qty)   → "        1234.57 s"   (number padded, not
+//   symbol)
 //
 // Note: width / fill / align specifications are applied to the numeric part
 // only; the unit symbol is always appended directly after without padding.
@@ -422,15 +424,13 @@ std::ostream &operator<<(std::ostream &os, const Quantity<UnitTag> &q) {
 
 namespace std {
 
-template <typename UnitTag>
-struct formatter<qtty::Quantity<UnitTag>> {
+template <typename UnitTag> struct formatter<qtty::Quantity<UnitTag>> {
 private:
   std::formatter<double> double_fmt_;
 
 public:
   /// Parse the format specification (e.g. ".2f", "e", ".4e").
-  template <typename ParseContext>
-  constexpr auto parse(ParseContext &ctx) {
+  template <typename ParseContext> constexpr auto parse(ParseContext &ctx) {
     return double_fmt_.parse(ctx);
   }
 

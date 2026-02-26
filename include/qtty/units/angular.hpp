@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2026 Vallés Puig, Ramon
+
 #pragma once
 
 #include "../ffi_core.hpp"
@@ -15,45 +18,45 @@ struct GradianTag {};
 struct TurnTag {};
 struct HourAngleTag {};
 
-template<> struct UnitTraits<MilliradianTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_MILLIRADIAN; }
-    static constexpr std::string_view symbol() { return "mrad"; }
+template <> struct UnitTraits<MilliradianTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_MILLIRADIAN; }
+  static constexpr std::string_view symbol() { return "mrad"; }
 };
-template<> struct UnitTraits<RadianTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_RADIAN; }
-    static constexpr std::string_view symbol() { return "rad"; }
+template <> struct UnitTraits<RadianTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_RADIAN; }
+  static constexpr std::string_view symbol() { return "rad"; }
 };
-template<> struct UnitTraits<MicroArcsecondTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_MICRO_ARCSECOND; }
-    static constexpr std::string_view symbol() { return "µas"; }
+template <> struct UnitTraits<MicroArcsecondTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_MICRO_ARCSECOND; }
+  static constexpr std::string_view symbol() { return "µas"; }
 };
-template<> struct UnitTraits<MilliArcsecondTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_MILLI_ARCSECOND; }
-    static constexpr std::string_view symbol() { return "mas"; }
+template <> struct UnitTraits<MilliArcsecondTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_MILLI_ARCSECOND; }
+  static constexpr std::string_view symbol() { return "mas"; }
 };
-template<> struct UnitTraits<ArcsecondTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_ARCSECOND; }
-    static constexpr std::string_view symbol() { return "″"; }
+template <> struct UnitTraits<ArcsecondTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_ARCSECOND; }
+  static constexpr std::string_view symbol() { return "″"; }
 };
-template<> struct UnitTraits<ArcminuteTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_ARCMINUTE; }
-    static constexpr std::string_view symbol() { return "′"; }
+template <> struct UnitTraits<ArcminuteTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_ARCMINUTE; }
+  static constexpr std::string_view symbol() { return "′"; }
 };
-template<> struct UnitTraits<DegreeTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_DEGREE; }
-    static constexpr std::string_view symbol() { return "°"; }
+template <> struct UnitTraits<DegreeTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_DEGREE; }
+  static constexpr std::string_view symbol() { return "°"; }
 };
-template<> struct UnitTraits<GradianTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_GRADIAN; }
-    static constexpr std::string_view symbol() { return "gon"; }
+template <> struct UnitTraits<GradianTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_GRADIAN; }
+  static constexpr std::string_view symbol() { return "gon"; }
 };
-template<> struct UnitTraits<TurnTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_TURN; }
-    static constexpr std::string_view symbol() { return "tr"; }
+template <> struct UnitTraits<TurnTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_TURN; }
+  static constexpr std::string_view symbol() { return "tr"; }
 };
-template<> struct UnitTraits<HourAngleTag> {
-    static constexpr UnitId unit_id() { return UNIT_ID_HOUR_ANGLE; }
-    static constexpr std::string_view symbol() { return "ʰ"; }
+template <> struct UnitTraits<HourAngleTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_HOUR_ANGLE; }
+  static constexpr std::string_view symbol() { return "ʰ"; }
 };
 
 using Milliradian = Quantity<MilliradianTag>;
