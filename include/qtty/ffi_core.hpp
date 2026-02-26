@@ -12,6 +12,7 @@
 #include <iomanip>
 #include <iostream>
 #include <sstream>
+#include <ostream>
 #include <stdexcept>
 #include <string>
 #include <string_view>
@@ -103,12 +104,27 @@ inline void check_status(int32_t status, const char *operation) {
 
 // Forward declarations
 template <typename UnitTag> class Quantity;
+template <typename NumeratorTag, typename DenominatorTag> struct CompoundTag;
+
+// Type trait to detect compound (derived) unit tags
+template <typename T> struct is_compound : std::false_type {};
+template <typename N, typename D>
+struct is_compound<CompoundTag<N, D>> : std::true_type {};
+template <typename T>
+inline constexpr bool is_compound_v = is_compound<T>::value;
 
 // Template trait to get unit ID from unit tag
 // Each unit tag (e.g., MeterTag) must specialize this template to provide
 // its corresponding C FFI unit ID constant (e.g., UNIT_ID_METER).
 // Specializations are auto-generated in include/qtty/units/*.hpp
-template <typename UnitTag> struct UnitTraits;
+//
+// For compound tags, specializations provide numerator_unit_id() and
+// denominator_unit_id() instead of a single unit_id().
+template <typename UnitTag> struct UnitTraits {
+  // Default symbol returns empty string. Specialize for units that have
+  // symbols.
+  static constexpr std::string_view symbol() { return ""; }
+};
 
 // Helper to extract tag from either a tag or Quantity<Tag>
 // This allows .to<>() to accept both Quantity<KilometerTag> and KilometerTag,
@@ -169,17 +185,39 @@ public:
   template <typename TargetType>
   Quantity<typename ExtractTag<TargetType>::type> to() const {
     using TargetTag = typename ExtractTag<TargetType>::type;
-    qtty_quantity_t src_qty;
-    qtty_quantity_t dst_qty;
 
-    int32_t status = qtty_quantity_make(m_value, unit_id(), &src_qty);
-    check_status(status, "Creating source quantity");
+    if constexpr (is_compound_v<UnitTag>) {
+      // Compound → compound conversion via qtty_derived_convert
+      static_assert(is_compound_v<TargetTag>,
+                    "Cannot convert compound unit to simple unit");
+      qtty_derived_quantity_t src_qty;
+      qtty_derived_quantity_t dst_qty;
 
-    status = qtty_quantity_convert(src_qty, UnitTraits<TargetTag>::unit_id(),
-                                   &dst_qty);
-    check_status(status, "Converting units");
+      int32_t status = qtty_derived_make(
+          m_value, UnitTraits<UnitTag>::numerator_unit_id(),
+          UnitTraits<UnitTag>::denominator_unit_id(), &src_qty);
+      check_status(status, "Creating derived source quantity");
 
-    return Quantity<TargetTag>(dst_qty.value);
+      status = qtty_derived_convert(
+          src_qty, UnitTraits<TargetTag>::numerator_unit_id(),
+          UnitTraits<TargetTag>::denominator_unit_id(), &dst_qty);
+      check_status(status, "Converting derived units");
+
+      return Quantity<TargetTag>(dst_qty.value);
+    } else {
+      // Simple unit conversion via qtty_quantity_convert
+      qtty_quantity_t src_qty;
+      qtty_quantity_t dst_qty;
+
+      int32_t status = qtty_quantity_make(m_value, unit_id(), &src_qty);
+      check_status(status, "Creating source quantity");
+
+      status = qtty_quantity_convert(src_qty, UnitTraits<TargetTag>::unit_id(),
+                                     &dst_qty);
+      check_status(status, "Converting units");
+
+      return Quantity<TargetTag>(dst_qty.value);
+    }
   }
 
   // ========================================================================
