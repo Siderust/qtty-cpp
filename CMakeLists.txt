@@ -159,6 +159,7 @@ set(TEST_FFI_SOURCES
     tests/test_dimension_safety.cpp
     tests/test_precision.cpp
     tests/test_serialization.cpp
+    tests/test_formatting.cpp
 )
 
 add_executable(test_ffi ${TEST_FFI_SOURCES})
