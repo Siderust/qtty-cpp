@@ -125,6 +125,24 @@ check_command() {
     return 0
 }
 
+ensure_fresh_cmake_build_dir() {
+    local build_dir="$1"
+    local expected_source_dir="$2"
+    local cache_file="${build_dir}/CMakeCache.txt"
+
+    if [[ ! -f "$cache_file" ]]; then
+        return 0
+    fi
+
+    local cached_source_dir
+    cached_source_dir="$(sed -n 's#^CMAKE_HOME_DIRECTORY:INTERNAL=##p' "$cache_file" | head -1)"
+
+    if [[ -n "$cached_source_dir" && "$cached_source_dir" != "$expected_source_dir" ]]; then
+        print_warning "Removing stale CMake build directory: ${build_dir}"
+        rm -rf "$build_dir"
+    fi
+}
+
 # Check and install tools
 if [[ "$SKIP_INSTALL" == "false" ]]; then
     print_header "Checking/Installing build tools"
@@ -224,6 +242,7 @@ if [[ "$RUN_LINT" == "true" ]]; then
     
     # First configure to generate compile_commands.json
     print_warning "Configuring CMake for compile commands..."
+    ensure_fresh_cmake_build_dir "build" "$SCRIPT_DIR"
     if cmake -S . -B build -G Ninja -DQTTY_BUILD_DOCS=OFF -DCMAKE_EXPORT_COMPILE_COMMANDS=ON >/dev/null 2>&1; then
         mapfile -t cpp_files < <(git ls-files '*.cpp' 2>/dev/null || echo "")
         
@@ -256,6 +275,7 @@ fi
 if [[ "$RUN_BUILD" == "true" ]]; then
     print_header "Configure: CMake (build directory)"
     
+    ensure_fresh_cmake_build_dir "build" "$SCRIPT_DIR"
     if cmake -S . -B build -G Ninja -DQTTY_BUILD_DOCS=ON >/dev/null 2>&1; then
         print_success "CMake configuration complete"
     else
@@ -306,6 +326,7 @@ fi
 if [[ "$RUN_COVERAGE" == "true" ]]; then
     print_header "Configure: CMake (coverage build)"
     
+    ensure_fresh_cmake_build_dir "build-coverage" "$SCRIPT_DIR"
     if cmake -S . -B build-coverage -G Ninja \
         -DQTTY_BUILD_DOCS=OFF \
         -DCMAKE_BUILD_TYPE=Debug \
