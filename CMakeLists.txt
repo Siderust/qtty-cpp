@@ -144,6 +144,17 @@ if(DEFINED _qtty_rpath)
     )
 endif()
 
+# JSON serialization example — requires qtty-ffi built with the 'serde' feature:
+#   cmake -B build -DQTTY_FFI_FEATURES=serde && cmake --build build
+add_executable(serialization examples/serialization.cpp)
+target_link_libraries(serialization PRIVATE qtty_cpp)
+if(DEFINED _qtty_rpath)
+    set_target_properties(serialization PROPERTIES
+        BUILD_RPATH ${_qtty_rpath}
+        INSTALL_RPATH ${_qtty_rpath}
+    )
+endif()
+
 # Test executables with Google Test
 set(TEST_FFI_SOURCES
     tests/main.cpp
