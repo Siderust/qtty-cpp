@@ -24,7 +24,7 @@ Adding a new unit to qtty-cpp is a multi-step process that spans both the Rust q
    - Generate updated qtty_ffi.h with new unit IDs
    
 3. Regenerate C++ wrappers
-   - Run gen_cpp_units.py to create C++ bindings
+   - Run the Rust `gen_cpp_units` tool to create C++ bindings
    
 4. Add tests
    - Write Google Test cases for the new unit
@@ -151,7 +151,8 @@ The format is critical for the C++ generator: `/* DisplayName (symbol) */ UNIT_I
 Run the Python generator to create C++ bindings for the new unit:
 
 ```bash
-python3 gen_cpp_units.py
+cargo run --manifest-path gen_cpp_units/Cargo.toml --release -- \
+  qtty/qtty-ffi/units.csv include/qtty
 ```
 
 This updates:
@@ -371,12 +372,13 @@ Output:
 ### 6. Generate C++ Wrappers
 
 ```bash
-python3 gen_cpp_units.py
+cargo run --manifest-path gen_cpp_units/Cargo.toml --release -- \
+  qtty/qtty-ffi/units.csv include/qtty
 ```
 
 Output:
 ```
-Reading units from: qtty/qtty-ffi/include/qtty_ffi.h
+Reading units from: qtty/qtty-ffi/units.csv
 Generated length.hpp with 58 units  # Count increased
 Generated literals.hpp
 ...
@@ -491,7 +493,7 @@ Milliampere = 60001,
 
 ### 3. Update Generator
 
-**File**: `gen_cpp_units.py`
+**File**: `gen_cpp_units/src/main.rs`
 
 Update the dimension mapping:
 
@@ -529,7 +531,7 @@ dimension_files = {
 
 ### 5. Update Literals Header Template
 
-**File**: `gen_cpp_units.py`
+**File**: `gen_cpp_units/src/main.rs`
 
 ```python
 LITERALS_HEADER = """#pragma once
@@ -700,13 +702,14 @@ TEST_F(DimensionNameTest, UnitNameUtilities) {
 
 ### Issue: Unit Not Generated
 
-**Symptom**: After running `gen_cpp_units.py`, your unit doesn't appear in the generated headers.
+**Symptom**: After running `gen_cpp_units`, your unit doesn't appear in the generated headers.
 
 **Diagnosis**:
 
 Check the generator output for warnings:
 ```bash
-python3 gen_cpp_units.py
+cargo run --manifest-path gen_cpp_units/Cargo.toml --release -- \
+  qtty/qtty-ffi/units.csv include/qtty
 ```
 
 Common causes:

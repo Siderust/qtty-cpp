@@ -188,8 +188,7 @@ auto sum2 = m + km.to<Meter>();
 |---------|----------|
 | Submodule missing | `git submodule update --init --recursive` |
 | Library not found | Check RPATH or set `LD_LIBRARY_PATH` |
-| Generated headers missing | Run `python3 gen_cpp_units.py` |
-| Python not found | Install Python 3.6+ or set `Python3_EXECUTABLE` |
+| Generated headers missing | Run `cargo run --manifest-path gen_cpp_units/Cargo.toml --release -- qtty/qtty-ffi/units.csv include/qtty` |
 | Cargo not found | Install Rust: `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs \| sh` |
 
 ---

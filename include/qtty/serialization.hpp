@@ -35,7 +35,7 @@ namespace qtty {
 namespace serialization {
 
 // Thin wrappers over Rust FFI JSON serialize/deserialize.
-// Requires qtty-ffi to be built with the `serde` Cargo feature.
+// Requires qtty-ffi to be built with the `qtty_serde` Cargo feature.
 
 /**
  * @brief Convert an owned C string from FFI into std::string and free it.

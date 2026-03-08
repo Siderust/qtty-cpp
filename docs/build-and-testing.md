@@ -21,7 +21,6 @@ This guide provides comprehensive instructions for building qtty-cpp, running te
 | **CMake** | 3.15+ | Build system orchestration |
 | **C++ Compiler** | C++17 support | Compiling C++ code (GCC 7+, Clang 5+, MSVC 2017+) |
 | **Cargo/Rust** | Latest stable | Building the qtty-ffi Rust library |
-| **Python 3** | 3.6+ | Running the code generator (`gen_cpp_units.py`) |
 | **Git** | Any recent | Cloning repository and submodules |
 
 ### Operating System Support
@@ -104,14 +103,14 @@ FFI ABI Version: 1
 
 ## Build Process Details
 
-The build orchestrates three tools: Python, Cargo, and CMake. Understanding this flow helps diagnose issues.
+The build orchestrates Cargo and CMake. Understanding this flow helps diagnose issues.
 
 ### Build Pipeline
 
 ```
 Step 1: Header Generation
-- Python runs gen_cpp_units.py
-- Parses qtty/qtty-ffi/include/qtty_ffi.h
+- Cargo runs the Rust `gen_cpp_units` binary
+- Parses qtty/qtty-ffi/units.csv
 - Generates include/qtty/units/*.hpp
 - Generates include/qtty/literals.hpp
 
@@ -487,7 +486,7 @@ TEST_F(LengthDimensionTest, MyNewTest) {
 
 **Error**:
 ```
-CMake Error: qtty/qtty-ffi/include/qtty_ffi.h not found
+CMake Error: qtty/qtty-ffi/units.csv not found
 ```
 
 **Solution**:
@@ -496,27 +495,6 @@ git submodule update --init --recursive
 cd qtty
 cargo build -p qtty-ffi --release
 cd ..
-```
-
-### Issue: Python Not Found
-
-**Error**:
-```
-CMake Error: Could not find Python3
-```
-
-**Solution**:
-
-Linux/macOS:
-```bash
-# Install Python 3
-sudo apt install python3  # Ubuntu/Debian
-brew install python3      # macOS
-```
-
-Specify Python path:
-```bash
-cmake -DPython3_EXECUTABLE=/usr/bin/python3 ..
 ```
 
 ### Issue: Cargo Not Found
@@ -604,7 +582,8 @@ fatal error: qtty/units/length.hpp: No such file or directory
 
 Manually run generator:
 ```bash
-python3 gen_cpp_units.py
+cargo run --manifest-path gen_cpp_units/Cargo.toml --release -- \
+  qtty/qtty-ffi/units.csv include/qtty
 ```
 
 Or rebuild the generation target:
@@ -612,9 +591,9 @@ Or rebuild the generation target:
 cmake --build build --target gen_cpp_units
 ```
 
-Check that qtty_ffi.h exists:
+Check that the unit table exists:
 ```bash
-ls qtty/qtty-ffi/include/qtty_ffi.h
+ls qtty/qtty-ffi/units.csv
 ```
 
 If missing, build the FFI library:
@@ -779,11 +758,12 @@ cmake --build . -- VERBOSE=1
 Run generator manually with custom output:
 
 ```bash
-python3 gen_cpp_units.py
+cargo run --manifest-path gen_cpp_units/Cargo.toml --release -- \
+  qtty/qtty-ffi/units.csv include/qtty
 ```
 
-The script looks for:
-- Input: `qtty/qtty-ffi/include/qtty_ffi.h`
+The generator looks for:
+- Input: `qtty/qtty-ffi/units.csv`
 - Output: `include/qtty/units/*.hpp` and `include/qtty/literals.hpp`
 
 ### Using qtty-cpp in Your Project

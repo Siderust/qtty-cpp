@@ -11,14 +11,13 @@ qtty-cpp is a C++17 library for working with physical quantities using unit-safe
 - Strong types per unit (e.g., `Meter`, `Second`) to prevent mixing incompatible dimensions
 - Unit conversion via `Quantity::to<T>()` using the Rust `qtty-ffi` engine
 - User-defined literals for convenient construction (e.g., `10.0_km`, `5.0_s`)
-- Generated unit/type/literal headers derived from `qtty/qtty-ffi/include/qtty_ffi.h`
+- Generated unit/type/literal headers derived from `qtty/qtty-ffi/units.csv`
 - CMake target (`qtty_cpp`) for straightforward integration
 
 ## Requirements
 
 - CMake 3.15+
 - C++17 compiler (GCC 7+, Clang 5+, MSVC 2017+)
-- Python 3.6+ (wrapper generation)
 - Rust/Cargo (builds `qtty-ffi`)
 
 ## Build and Test

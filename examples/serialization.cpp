@@ -7,9 +7,9 @@
  * @brief Demonstrates JSON serialization and deserialization of qtty
  * quantities.
  *
- * Requires the qtty-ffi library built with the `serde` Cargo feature:
+ * Requires the qtty-ffi library built with the `qtty_serde` Cargo feature:
  *
- *   cmake -B build -DQTTY_FFI_FEATURES=serde && cmake --build build
+ *   cmake -B build -DQTTY_FFI_FEATURES=qtty_serde && cmake --build build
  *   ./build/serialization
  *
  * Features shown:

@@ -16,7 +16,7 @@ Rust.
 | **Strong unit types** | Each unit (e.g., `Meter`, `Second`, `Kilogram`) is a distinct C++ type — mixing incompatible dimensions is a compile error |
 | **Unit conversion** | `Quantity::to<T>()` delegates to the `qtty-ffi` Rust engine for exact conversions |
 | **User-defined literals** | Ergonomic construction: `10.0_km`, `5.0_s`, `90.0_deg`, `1.0_kg` |
-| **Generated headers** | Unit aliases and literals auto-generated from `qtty_ffi.h` — always in sync with the Rust layer |
+| **Generated headers** | Unit aliases and literals auto-generated from `units.csv` — always in sync with the Rust layer |
 | **CMake integration** | One `target_link_libraries` call: `qtty_cpp` |
 
 ---
@@ -110,7 +110,6 @@ FFI status codes are translated into typed C++ exceptions:
 
 - C++17 compiler (GCC 7+, Clang 5+, MSVC 2017+)
 - CMake 3.15+
-- Python 3.6+ (for header generation)
 - Rust toolchain (`cargo`) — `qtty-ffi` is built automatically
 
 ---

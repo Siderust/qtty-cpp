@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(qtty_cpp VERSION 0.1.0 LANGUAGES CXX)
+project(qtty_cpp VERSION 0.2.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -14,9 +14,9 @@ set(QTTY_SUBMODULE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/qtty)
 set(QTTY_FFI_INCLUDE_DIR ${QTTY_SUBMODULE_DIR}/qtty-ffi/include)
 set(QTTY_ARTIFACT_DIR ${QTTY_SUBMODULE_DIR}/target/release)
 
-# Allow enabling Cargo features for qtty-ffi (e.g., serde)
-# Use a STRING cache var (not BOOL) so users can set: "serde", "", or custom lists.
-set(QTTY_FFI_FEATURES "" CACHE STRING "Cargo features for qtty-ffi (e.g., 'serde' or empty)")
+# Allow enabling Cargo features for qtty-ffi (e.g., qtty_serde)
+# Use a STRING cache var (not BOOL) so users can set: "qtty_serde", "", or custom lists.
+set(QTTY_FFI_FEATURES "" CACHE STRING "Cargo features for qtty-ffi (e.g., 'qtty_serde' or empty)")
 
 # Normalize feature args: treat OFF/FALSE/0 as empty.
 set(_QTTY_FEATURES_ARGS "")
@@ -144,8 +144,8 @@ if(DEFINED _qtty_rpath)
     )
 endif()
 
-# JSON serialization example — requires qtty-ffi built with the 'serde' feature:
-#   cmake -B build -DQTTY_FFI_FEATURES=serde && cmake --build build
+# JSON serialization example — requires qtty-ffi built with the 'qtty_serde' feature:
+#   cmake -B build -DQTTY_FFI_FEATURES=qtty_serde && cmake --build build
 add_executable(serialization examples/serialization.cpp)
 target_link_libraries(serialization PRIVATE qtty_cpp)
 if(DEFINED _qtty_rpath)
