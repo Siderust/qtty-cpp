@@ -5,14 +5,25 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 option(QTTY_BUILD_DOCS "Enable Doxygen documentation target." ON)
+option(QTTY_USE_CANONICAL_RUST
+       "Build/link against ../../../../rust/qtty instead of the vendored snapshot."
+       OFF)
 
 # Find Cargo for building Rust library
 find_program(CARGO_BIN cargo REQUIRED)
 
 # Paths to qtty-ffi
-set(QTTY_SUBMODULE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/qtty)
+if(QTTY_USE_CANONICAL_RUST)
+    set(QTTY_CANONICAL_RUST_DIR
+        ${CMAKE_CURRENT_SOURCE_DIR}/../../../../rust/qtty
+        CACHE PATH "Path to the canonical rust/qtty workspace")
+    set(QTTY_SUBMODULE_DIR ${QTTY_CANONICAL_RUST_DIR})
+    set(QTTY_ARTIFACT_DIR ${QTTY_CANONICAL_RUST_DIR}/target/release)
+else()
+    set(QTTY_SUBMODULE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/qtty)
+    set(QTTY_ARTIFACT_DIR ${QTTY_SUBMODULE_DIR}/target/release)
+endif()
 set(QTTY_FFI_INCLUDE_DIR ${QTTY_SUBMODULE_DIR}/qtty-ffi/include)
-set(QTTY_ARTIFACT_DIR ${QTTY_SUBMODULE_DIR}/target/release)
 
 # Allow enabling Cargo features for qtty-ffi (e.g., qtty_serde)
 # Use a STRING cache var (not BOOL) so users can set: "qtty_serde", "", or custom lists.
@@ -20,11 +31,18 @@ set(QTTY_FFI_FEATURES "" CACHE STRING "Cargo features for qtty-ffi (e.g., 'qtty_
 
 # Normalize feature args: treat OFF/FALSE/0 as empty.
 set(_QTTY_FEATURES_ARGS "")
+set(QTTY_FFI_HAS_SERDE OFF)
 string(TOUPPER "${QTTY_FFI_FEATURES}" _QTTY_FEATURES_UP)
 if("${_QTTY_FEATURES_UP}" STREQUAL "OFF" OR "${_QTTY_FEATURES_UP}" STREQUAL "FALSE" OR "${_QTTY_FEATURES_UP}" STREQUAL "0")
     # No features
+elseif("${_QTTY_FEATURES_UP}" STREQUAL "ON")
+    set(_QTTY_FEATURES_ARGS --features qtty_serde)
+    set(QTTY_FFI_HAS_SERDE ON)
 elseif(NOT "${QTTY_FFI_FEATURES}" STREQUAL "")
     set(_QTTY_FEATURES_ARGS --features ${QTTY_FFI_FEATURES})
+    if("${QTTY_FFI_FEATURES}" MATCHES "(^|,)qtty_serde(,|$)")
+        set(QTTY_FFI_HAS_SERDE ON)
+    endif()
 endif()
 
 # Platform-specific library paths
@@ -115,9 +133,17 @@ endif()
 
 # Set RPATH for runtime library location
 if(APPLE)
-    set(_qtty_rpath "@loader_path/../qtty/target/release")
+    if(QTTY_USE_CANONICAL_RUST)
+        set(_qtty_rpath "${QTTY_ARTIFACT_DIR}")
+    else()
+        set(_qtty_rpath "@loader_path/../qtty/target/release")
+    endif()
 elseif(UNIX)
-    set(_qtty_rpath "$ORIGIN/../qtty/target/release")
+    if(QTTY_USE_CANONICAL_RUST)
+        set(_qtty_rpath "${QTTY_ARTIFACT_DIR}")
+    else()
+        set(_qtty_rpath "$ORIGIN/../qtty/target/release")
+    endif()
 endif()
 
 # Google Test integration
@@ -146,13 +172,17 @@ endif()
 
 # JSON serialization example — requires qtty-ffi built with the 'qtty_serde' feature:
 #   cmake -B build -DQTTY_FFI_FEATURES=qtty_serde && cmake --build build
-add_executable(serialization examples/serialization.cpp)
-target_link_libraries(serialization PRIVATE qtty_cpp)
-if(DEFINED _qtty_rpath)
-    set_target_properties(serialization PROPERTIES
-        BUILD_RPATH ${_qtty_rpath}
-        INSTALL_RPATH ${_qtty_rpath}
-    )
+if(QTTY_FFI_HAS_SERDE)
+    add_executable(serialization examples/serialization.cpp)
+    target_link_libraries(serialization PRIVATE qtty_cpp)
+    if(DEFINED _qtty_rpath)
+        set_target_properties(serialization PROPERTIES
+            BUILD_RPATH ${_qtty_rpath}
+            INSTALL_RPATH ${_qtty_rpath}
+        )
+    endif()
+else()
+    message(STATUS "Skipping qtty-cpp serialization example because qtty-ffi is built without qtty_serde")
 endif()
 
 # Test executables with Google Test
@@ -168,9 +198,11 @@ set(TEST_FFI_SOURCES
     tests/test_operations.cpp
     tests/test_dimension_safety.cpp
     tests/test_precision.cpp
-    tests/test_serialization.cpp
     tests/test_formatting.cpp
 )
+if(QTTY_FFI_HAS_SERDE)
+    list(APPEND TEST_FFI_SOURCES tests/test_serialization.cpp)
+endif()
 
 add_executable(test_ffi ${TEST_FFI_SOURCES})
 target_link_libraries(test_ffi PRIVATE qtty_cpp GTest::gtest)

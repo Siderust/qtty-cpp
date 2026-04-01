@@ -57,6 +57,14 @@ public:
 };
 
 /**
+ * @brief Raised when a required output pointer was null.
+ */
+class NullPointerError : public QttyException {
+public:
+  explicit NullPointerError(const std::string &msg) : QttyException(msg) {}
+};
+
+/**
  * @brief Raised when value conversion fails at the FFI boundary.
  */
 class ConversionError : public QttyException {
@@ -90,9 +98,15 @@ inline void check_status(int32_t status, const char *operation) {
   case QTTY_ERR_INCOMPATIBLE_DIM:
     throw IncompatibleDimensionsError(msg + "incompatible dimensions");
   case QTTY_ERR_NULL_OUT:
-    throw QttyException(msg + "null output pointer");
+    throw NullPointerError(msg + "null output pointer");
+#ifdef QTTY_ERR_INVALID_VALUE
   case QTTY_ERR_INVALID_VALUE:
     throw ConversionError(msg + "invalid value");
+#endif
+#ifdef QTTY_ERR_BUFFER_TOO_SMALL
+  case QTTY_ERR_BUFFER_TOO_SMALL:
+    throw QttyException(msg + "output buffer too small");
+#endif
   default:
     throw QttyException(msg + "unknown error");
   }
