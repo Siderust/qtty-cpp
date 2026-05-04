@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
+// SPDX-License-Identifier: BSD-3-Clause
 // Copyright (C) 2026 Vallés Puig, Ramon
 
 #pragma once
@@ -86,27 +86,21 @@ public:
  * @param operation Human-readable operation label for error context.
  * @throws QttyException and derived exception types on failure statuses.
  */
-inline void check_status(int32_t status, const char *operation) {
-  if (status == QTTY_OK) {
+inline void check_status(QttyStatus status, const char *operation) {
+  if (status == QTTY_STATUS_OK) {
     return;
   }
 
   std::string msg = std::string(operation) + " failed: ";
   switch (status) {
-  case QTTY_ERR_UNKNOWN_UNIT:
+  case QTTY_STATUS_UNKNOWN_UNIT:
     throw InvalidUnitError(msg + "unknown unit");
-  case QTTY_ERR_INCOMPATIBLE_DIM:
+  case QTTY_STATUS_INCOMPATIBLE_DIM:
     throw IncompatibleDimensionsError(msg + "incompatible dimensions");
-  case QTTY_ERR_NULL_OUT:
+  case QTTY_STATUS_NULL_OUT:
     throw NullPointerError(msg + "null output pointer");
-#ifdef QTTY_ERR_INVALID_VALUE
-  case QTTY_ERR_INVALID_VALUE:
-    throw ConversionError(msg + "invalid value");
-#endif
-#ifdef QTTY_ERR_BUFFER_TOO_SMALL
-  case QTTY_ERR_BUFFER_TOO_SMALL:
+  case QTTY_STATUS_BUFFER_TOO_SMALL:
     throw QttyException(msg + "output buffer too small");
-#endif
   default:
     throw QttyException(msg + "unknown error");
   }
@@ -207,7 +201,7 @@ public:
       qtty_derived_quantity_t src_qty;
       qtty_derived_quantity_t dst_qty;
 
-      int32_t status = qtty_derived_make(
+      QttyStatus status = qtty_derived_make(
           m_value, UnitTraits<UnitTag>::numerator_unit_id(),
           UnitTraits<UnitTag>::denominator_unit_id(), &src_qty);
       check_status(status, "Creating derived source quantity");
@@ -223,7 +217,7 @@ public:
       qtty_quantity_t src_qty;
       qtty_quantity_t dst_qty;
 
-      int32_t status = qtty_quantity_make(m_value, unit_id(), &src_qty);
+      QttyStatus status = qtty_quantity_make(m_value, unit_id(), &src_qty);
       check_status(status, "Creating source quantity");
 
       status = qtty_quantity_convert(src_qty, UnitTraits<TargetTag>::unit_id(),
@@ -368,13 +362,13 @@ public:
   std::string format(int precision = -1,
                      uint32_t flags = QTTY_FMT_DEFAULT) const {
     qtty_quantity_t qty;
-    int32_t make_status = qtty_quantity_make(m_value, unit_id(), &qty);
+    QttyStatus make_status = qtty_quantity_make(m_value, unit_id(), &qty);
     check_status(make_status, "format: creating quantity");
 
     char buf[512];
-    int32_t result =
+    QttyStatus result =
         qtty_quantity_format(qty, precision, flags, buf, sizeof(buf));
-    if (result == QTTY_ERR_BUFFER_TOO_SMALL) {
+    if (result == QTTY_STATUS_BUFFER_TOO_SMALL) {
       // Retry with a generous large buffer (quantities should never need this)
       char big_buf[4096];
       result =

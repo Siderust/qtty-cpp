@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(qtty_cpp VERSION 0.2.0 LANGUAGES CXX)
+project(qtty_cpp VERSION 0.3.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -57,13 +57,18 @@ endif()
 
 # Generate C++ unit wrappers from units.csv via the Rust gen_cpp_units binary.
 # Running `cargo run` builds the binary (and the qtty-ffi library) if needed.
-set(QTTY_UNITS_CSV ${QTTY_SUBMODULE_DIR}/qtty-ffi/units.csv)
+set(QTTY_UNITS_CSV ${QTTY_SUBMODULE_DIR}/qtty-ffi/discriminants.csv)
 set(GENERATED_HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/length.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/time.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/angular.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/mass.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/power.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/area.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/volume.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/acceleration.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/force.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/energy.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/literals.hpp
 )
 

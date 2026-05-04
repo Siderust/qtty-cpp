@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
+// SPDX-License-Identifier: BSD-3-Clause
 // Copyright (C) 2026 Vallés Puig, Ramon
 
 #pragma once
@@ -60,7 +60,7 @@ struct NominalSolarDiameterTag {};
 
 template <> struct UnitTraits<PlanckLengthTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_PLANCK_LENGTH; }
-  static constexpr std::string_view symbol() { return "l_P"; }
+  static constexpr std::string_view symbol() { return "lp"; }
 };
 template <> struct UnitTraits<YoctometerTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_YOCTOMETER; }
@@ -88,7 +88,7 @@ template <> struct UnitTraits<NanometerTag> {
 };
 template <> struct UnitTraits<MicrometerTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_MICROMETER; }
-  static constexpr std::string_view symbol() { return "µm"; }
+  static constexpr std::string_view symbol() { return "μm"; }
 };
 template <> struct UnitTraits<MillimeterTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_MILLIMETER; }
@@ -148,15 +148,15 @@ template <> struct UnitTraits<YottameterTag> {
 };
 template <> struct UnitTraits<BohrRadiusTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_BOHR_RADIUS; }
-  static constexpr std::string_view symbol() { return "a₀"; }
+  static constexpr std::string_view symbol() { return "a0"; }
 };
 template <> struct UnitTraits<ClassicalElectronRadiusTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_CLASSICAL_ELECTRON_RADIUS; }
-  static constexpr std::string_view symbol() { return "r_e"; }
+  static constexpr std::string_view symbol() { return "re"; }
 };
 template <> struct UnitTraits<ElectronReducedComptonWavelengthTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_ELECTRON_REDUCED_COMPTON_WAVELENGTH; }
-  static constexpr std::string_view symbol() { return "λ̄_e"; }
+  static constexpr std::string_view symbol() { return "lambda_bar_e"; }
 };
 template <> struct UnitTraits<AstronomicalUnitTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_ASTRONOMICAL_UNIT; }
@@ -220,7 +220,7 @@ template <> struct UnitTraits<NauticalMileTag> {
 };
 template <> struct UnitTraits<NominalLunarRadiusTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_NOMINAL_LUNAR_RADIUS; }
-  static constexpr std::string_view symbol() { return "R_☾"; }
+  static constexpr std::string_view symbol() { return "Rmoon"; }
 };
 template <> struct UnitTraits<NominalLunarDistanceTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_NOMINAL_LUNAR_DISTANCE; }
@@ -228,35 +228,35 @@ template <> struct UnitTraits<NominalLunarDistanceTag> {
 };
 template <> struct UnitTraits<NominalEarthPolarRadiusTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_NOMINAL_EARTH_POLAR_RADIUS; }
-  static constexpr std::string_view symbol() { return "R_⊕pol"; }
+  static constexpr std::string_view symbol() { return "Rearth_p"; }
 };
 template <> struct UnitTraits<NominalEarthRadiusTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_NOMINAL_EARTH_RADIUS; }
-  static constexpr std::string_view symbol() { return "R_⊕"; }
+  static constexpr std::string_view symbol() { return "Rearth"; }
 };
 template <> struct UnitTraits<NominalEarthEquatorialRadiusTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_NOMINAL_EARTH_EQUATORIAL_RADIUS; }
-  static constexpr std::string_view symbol() { return "R_⊕eq"; }
+  static constexpr std::string_view symbol() { return "Rearth_eq"; }
 };
 template <> struct UnitTraits<EarthMeridionalCircumferenceTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_EARTH_MERIDIONAL_CIRCUMFERENCE; }
-  static constexpr std::string_view symbol() { return "C_mer"; }
+  static constexpr std::string_view symbol() { return "Cmer"; }
 };
 template <> struct UnitTraits<EarthEquatorialCircumferenceTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_EARTH_EQUATORIAL_CIRCUMFERENCE; }
-  static constexpr std::string_view symbol() { return "C_eq"; }
+  static constexpr std::string_view symbol() { return "Ceq"; }
 };
 template <> struct UnitTraits<NominalJupiterRadiusTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_NOMINAL_JUPITER_RADIUS; }
-  static constexpr std::string_view symbol() { return "R_♃"; }
+  static constexpr std::string_view symbol() { return "Rjup"; }
 };
 template <> struct UnitTraits<NominalSolarRadiusTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_NOMINAL_SOLAR_RADIUS; }
-  static constexpr std::string_view symbol() { return "R_☉"; }
+  static constexpr std::string_view symbol() { return "Rsun"; }
 };
 template <> struct UnitTraits<NominalSolarDiameterTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_NOMINAL_SOLAR_DIAMETER; }
-  static constexpr std::string_view symbol() { return "D_☉"; }
+  static constexpr std::string_view symbol() { return "Dsun"; }
 };
 
 using PlanckLength = Quantity<PlanckLengthTag>;

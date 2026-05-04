@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
+// SPDX-License-Identifier: BSD-3-Clause
 // Copyright (C) 2026 Vallés Puig, Ramon
 
 #pragma once
@@ -28,7 +28,7 @@ template <> struct UnitTraits<RadianTag> {
 };
 template <> struct UnitTraits<MicroArcsecondTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_MICRO_ARCSECOND; }
-  static constexpr std::string_view symbol() { return "µas"; }
+  static constexpr std::string_view symbol() { return "μas"; }
 };
 template <> struct UnitTraits<MilliArcsecondTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_MILLI_ARCSECOND; }
@@ -56,7 +56,7 @@ template <> struct UnitTraits<TurnTag> {
 };
 template <> struct UnitTraits<HourAngleTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_HOUR_ANGLE; }
-  static constexpr std::string_view symbol() { return "ʰ"; }
+  static constexpr std::string_view symbol() { return "h"; }
 };
 
 using Milliradian = Quantity<MilliradianTag>;

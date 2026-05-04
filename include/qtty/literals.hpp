@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
+// SPDX-License-Identifier: BSD-3-Clause
 // Copyright (C) 2026 Vallés Puig, Ramon
 
 #pragma once
@@ -8,6 +8,11 @@
 #include "units/angular.hpp"
 #include "units/mass.hpp"
 #include "units/power.hpp"
+#include "units/area.hpp"
+#include "units/volume.hpp"
+#include "units/acceleration.hpp"
+#include "units/force.hpp"
+#include "units/energy.hpp"
 
 namespace qtty {
 
@@ -18,10 +23,10 @@ inline namespace literals {
 // Length literals
 // ====================
 
-constexpr PlanckLength operator""_l_P(long double value) {
+constexpr PlanckLength operator""_lp(long double value) {
   return PlanckLength(static_cast<double>(value));
 }
-constexpr PlanckLength operator""_l_P(unsigned long long value) {
+constexpr PlanckLength operator""_lp(unsigned long long value) {
   return PlanckLength(static_cast<double>(value));
 }
 
@@ -172,24 +177,24 @@ constexpr Yottameter operator""_Ym(unsigned long long value) {
   return Yottameter(static_cast<double>(value));
 }
 
-constexpr BohrRadius operator""_a(long double value) {
+constexpr BohrRadius operator""_a0(long double value) {
   return BohrRadius(static_cast<double>(value));
 }
-constexpr BohrRadius operator""_a(unsigned long long value) {
+constexpr BohrRadius operator""_a0(unsigned long long value) {
   return BohrRadius(static_cast<double>(value));
 }
 
-constexpr ClassicalElectronRadius operator""_r_e(long double value) {
+constexpr ClassicalElectronRadius operator""_re(long double value) {
   return ClassicalElectronRadius(static_cast<double>(value));
 }
-constexpr ClassicalElectronRadius operator""_r_e(unsigned long long value) {
+constexpr ClassicalElectronRadius operator""_re(unsigned long long value) {
   return ClassicalElectronRadius(static_cast<double>(value));
 }
 
-constexpr ElectronReducedComptonWavelength operator""__e(long double value) {
+constexpr ElectronReducedComptonWavelength operator""_lambda_bar_e(long double value) {
   return ElectronReducedComptonWavelength(static_cast<double>(value));
 }
-constexpr ElectronReducedComptonWavelength operator""__e(unsigned long long value) {
+constexpr ElectronReducedComptonWavelength operator""_lambda_bar_e(unsigned long long value) {
   return ElectronReducedComptonWavelength(static_cast<double>(value));
 }
 
@@ -298,10 +303,10 @@ constexpr NauticalMile operator""_nmi(unsigned long long value) {
   return NauticalMile(static_cast<double>(value));
 }
 
-constexpr NominalLunarRadius operator""_R_moon(long double value) {
+constexpr NominalLunarRadius operator""_Rmoon(long double value) {
   return NominalLunarRadius(static_cast<double>(value));
 }
-constexpr NominalLunarRadius operator""_R_moon(unsigned long long value) {
+constexpr NominalLunarRadius operator""_Rmoon(unsigned long long value) {
   return NominalLunarRadius(static_cast<double>(value));
 }
 
@@ -312,59 +317,59 @@ constexpr NominalLunarDistance operator""_LD(unsigned long long value) {
   return NominalLunarDistance(static_cast<double>(value));
 }
 
-constexpr NominalEarthPolarRadius operator""_R_earthpol(long double value) {
+constexpr NominalEarthPolarRadius operator""_Rearth_p(long double value) {
   return NominalEarthPolarRadius(static_cast<double>(value));
 }
-constexpr NominalEarthPolarRadius operator""_R_earthpol(unsigned long long value) {
+constexpr NominalEarthPolarRadius operator""_Rearth_p(unsigned long long value) {
   return NominalEarthPolarRadius(static_cast<double>(value));
 }
 
-constexpr NominalEarthRadius operator""_R_earth(long double value) {
+constexpr NominalEarthRadius operator""_Rearth(long double value) {
   return NominalEarthRadius(static_cast<double>(value));
 }
-constexpr NominalEarthRadius operator""_R_earth(unsigned long long value) {
+constexpr NominalEarthRadius operator""_Rearth(unsigned long long value) {
   return NominalEarthRadius(static_cast<double>(value));
 }
 
-constexpr NominalEarthEquatorialRadius operator""_R_eartheq(long double value) {
+constexpr NominalEarthEquatorialRadius operator""_Rearth_eq(long double value) {
   return NominalEarthEquatorialRadius(static_cast<double>(value));
 }
-constexpr NominalEarthEquatorialRadius operator""_R_eartheq(unsigned long long value) {
+constexpr NominalEarthEquatorialRadius operator""_Rearth_eq(unsigned long long value) {
   return NominalEarthEquatorialRadius(static_cast<double>(value));
 }
 
-constexpr EarthMeridionalCircumference operator""_C_mer(long double value) {
+constexpr EarthMeridionalCircumference operator""_Cmer(long double value) {
   return EarthMeridionalCircumference(static_cast<double>(value));
 }
-constexpr EarthMeridionalCircumference operator""_C_mer(unsigned long long value) {
+constexpr EarthMeridionalCircumference operator""_Cmer(unsigned long long value) {
   return EarthMeridionalCircumference(static_cast<double>(value));
 }
 
-constexpr EarthEquatorialCircumference operator""_C_eq(long double value) {
+constexpr EarthEquatorialCircumference operator""_Ceq(long double value) {
   return EarthEquatorialCircumference(static_cast<double>(value));
 }
-constexpr EarthEquatorialCircumference operator""_C_eq(unsigned long long value) {
+constexpr EarthEquatorialCircumference operator""_Ceq(unsigned long long value) {
   return EarthEquatorialCircumference(static_cast<double>(value));
 }
 
-constexpr NominalJupiterRadius operator""_R_jupiter(long double value) {
+constexpr NominalJupiterRadius operator""_Rjup(long double value) {
   return NominalJupiterRadius(static_cast<double>(value));
 }
-constexpr NominalJupiterRadius operator""_R_jupiter(unsigned long long value) {
+constexpr NominalJupiterRadius operator""_Rjup(unsigned long long value) {
   return NominalJupiterRadius(static_cast<double>(value));
 }
 
-constexpr NominalSolarRadius operator""_R_sol(long double value) {
+constexpr NominalSolarRadius operator""_Rsun(long double value) {
   return NominalSolarRadius(static_cast<double>(value));
 }
-constexpr NominalSolarRadius operator""_R_sol(unsigned long long value) {
+constexpr NominalSolarRadius operator""_Rsun(unsigned long long value) {
   return NominalSolarRadius(static_cast<double>(value));
 }
 
-constexpr NominalSolarDiameter operator""_D_sol(long double value) {
+constexpr NominalSolarDiameter operator""_Dsun(long double value) {
   return NominalSolarDiameter(static_cast<double>(value));
 }
-constexpr NominalSolarDiameter operator""_D_sol(unsigned long long value) {
+constexpr NominalSolarDiameter operator""_Dsun(unsigned long long value) {
   return NominalSolarDiameter(static_cast<double>(value));
 }
 
@@ -540,10 +545,17 @@ constexpr Millennium operator""_mill(unsigned long long value) {
   return Millennium(static_cast<double>(value));
 }
 
-constexpr JulianCentury operator""_jc(long double value) {
+constexpr JulianYear operator""_a(long double value) {
+  return JulianYear(static_cast<double>(value));
+}
+constexpr JulianYear operator""_a(unsigned long long value) {
+  return JulianYear(static_cast<double>(value));
+}
+
+constexpr JulianCentury operator""_JC(long double value) {
   return JulianCentury(static_cast<double>(value));
 }
-constexpr JulianCentury operator""_jc(unsigned long long value) {
+constexpr JulianCentury operator""_JC(unsigned long long value) {
   return JulianCentury(static_cast<double>(value));
 }
 
@@ -554,17 +566,17 @@ constexpr SiderealDay operator""_sd(unsigned long long value) {
   return SiderealDay(static_cast<double>(value));
 }
 
-constexpr SynodicMonth operator""_mo_s(long double value) {
+constexpr SynodicMonth operator""_synmo(long double value) {
   return SynodicMonth(static_cast<double>(value));
 }
-constexpr SynodicMonth operator""_mo_s(unsigned long long value) {
+constexpr SynodicMonth operator""_synmo(unsigned long long value) {
   return SynodicMonth(static_cast<double>(value));
 }
 
-constexpr SiderealYear operator""_yr_s(long double value) {
+constexpr SiderealYear operator""_syr(long double value) {
   return SiderealYear(static_cast<double>(value));
 }
-constexpr SiderealYear operator""_yr_s(unsigned long long value) {
+constexpr SiderealYear operator""_syr(unsigned long long value) {
   return SiderealYear(static_cast<double>(value));
 }
 
@@ -814,17 +826,17 @@ constexpr Stone operator""_st(unsigned long long value) {
   return Stone(static_cast<double>(value));
 }
 
-constexpr ShortTon operator""_ton(long double value) {
+constexpr ShortTon operator""_ton_us(long double value) {
   return ShortTon(static_cast<double>(value));
 }
-constexpr ShortTon operator""_ton(unsigned long long value) {
+constexpr ShortTon operator""_ton_us(unsigned long long value) {
   return ShortTon(static_cast<double>(value));
 }
 
-constexpr LongTon operator""_ton_l(long double value) {
+constexpr LongTon operator""_ton_uk(long double value) {
   return LongTon(static_cast<double>(value));
 }
-constexpr LongTon operator""_ton_l(unsigned long long value) {
+constexpr LongTon operator""_ton_uk(unsigned long long value) {
   return LongTon(static_cast<double>(value));
 }
 
@@ -849,10 +861,10 @@ constexpr AtomicMassUnit operator""_u(unsigned long long value) {
   return AtomicMassUnit(static_cast<double>(value));
 }
 
-constexpr SolarMass operator""_M_sol(long double value) {
+constexpr SolarMass operator""_Msol(long double value) {
   return SolarMass(static_cast<double>(value));
 }
-constexpr SolarMass operator""_M_sol(unsigned long long value) {
+constexpr SolarMass operator""_Msol(unsigned long long value) {
   return SolarMass(static_cast<double>(value));
 }
 
@@ -1021,11 +1033,248 @@ constexpr HorsepowerElectric operator""_hp_e(unsigned long long value) {
   return HorsepowerElectric(static_cast<double>(value));
 }
 
-constexpr SolarLuminosity operator""_L_sol(long double value) {
+constexpr SolarLuminosity operator""_Lsol(long double value) {
   return SolarLuminosity(static_cast<double>(value));
 }
-constexpr SolarLuminosity operator""_L_sol(unsigned long long value) {
+constexpr SolarLuminosity operator""_Lsol(unsigned long long value) {
   return SolarLuminosity(static_cast<double>(value));
+}
+
+// ====================
+// Area literals
+// ====================
+
+constexpr Hectare operator""_ha(long double value) {
+  return Hectare(static_cast<double>(value));
+}
+constexpr Hectare operator""_ha(unsigned long long value) {
+  return Hectare(static_cast<double>(value));
+}
+
+constexpr Acre operator""_ac(long double value) {
+  return Acre(static_cast<double>(value));
+}
+constexpr Acre operator""_ac(unsigned long long value) {
+  return Acre(static_cast<double>(value));
+}
+
+// ====================
+// Volume literals
+// ====================
+
+constexpr Liter operator""_L(long double value) {
+  return Liter(static_cast<double>(value));
+}
+constexpr Liter operator""_L(unsigned long long value) {
+  return Liter(static_cast<double>(value));
+}
+
+constexpr Milliliter operator""_mL(long double value) {
+  return Milliliter(static_cast<double>(value));
+}
+constexpr Milliliter operator""_mL(unsigned long long value) {
+  return Milliliter(static_cast<double>(value));
+}
+
+constexpr Microliter operator""_uL(long double value) {
+  return Microliter(static_cast<double>(value));
+}
+constexpr Microliter operator""_uL(unsigned long long value) {
+  return Microliter(static_cast<double>(value));
+}
+
+constexpr Centiliter operator""_cL(long double value) {
+  return Centiliter(static_cast<double>(value));
+}
+constexpr Centiliter operator""_cL(unsigned long long value) {
+  return Centiliter(static_cast<double>(value));
+}
+
+constexpr Deciliter operator""_dL(long double value) {
+  return Deciliter(static_cast<double>(value));
+}
+constexpr Deciliter operator""_dL(unsigned long long value) {
+  return Deciliter(static_cast<double>(value));
+}
+
+constexpr UsGallon operator""_gal(long double value) {
+  return UsGallon(static_cast<double>(value));
+}
+constexpr UsGallon operator""_gal(unsigned long long value) {
+  return UsGallon(static_cast<double>(value));
+}
+
+constexpr UsFluidOunce operator""_fl_oz(long double value) {
+  return UsFluidOunce(static_cast<double>(value));
+}
+constexpr UsFluidOunce operator""_fl_oz(unsigned long long value) {
+  return UsFluidOunce(static_cast<double>(value));
+}
+
+// ====================
+// Acceleration literals
+// ====================
+
+constexpr MeterPerSecondSquared operator""_m_per_s(long double value) {
+  return MeterPerSecondSquared(static_cast<double>(value));
+}
+constexpr MeterPerSecondSquared operator""_m_per_s(unsigned long long value) {
+  return MeterPerSecondSquared(static_cast<double>(value));
+}
+
+// ====================
+// Force literals
+// ====================
+
+constexpr Newton operator""_N(long double value) {
+  return Newton(static_cast<double>(value));
+}
+constexpr Newton operator""_N(unsigned long long value) {
+  return Newton(static_cast<double>(value));
+}
+
+constexpr Micronewton operator""_uN(long double value) {
+  return Micronewton(static_cast<double>(value));
+}
+constexpr Micronewton operator""_uN(unsigned long long value) {
+  return Micronewton(static_cast<double>(value));
+}
+
+constexpr Millinewton operator""_mN(long double value) {
+  return Millinewton(static_cast<double>(value));
+}
+constexpr Millinewton operator""_mN(unsigned long long value) {
+  return Millinewton(static_cast<double>(value));
+}
+
+constexpr Kilonewton operator""_kN(long double value) {
+  return Kilonewton(static_cast<double>(value));
+}
+constexpr Kilonewton operator""_kN(unsigned long long value) {
+  return Kilonewton(static_cast<double>(value));
+}
+
+constexpr Meganewton operator""_MN(long double value) {
+  return Meganewton(static_cast<double>(value));
+}
+constexpr Meganewton operator""_MN(unsigned long long value) {
+  return Meganewton(static_cast<double>(value));
+}
+
+constexpr Giganewton operator""_GN(long double value) {
+  return Giganewton(static_cast<double>(value));
+}
+constexpr Giganewton operator""_GN(unsigned long long value) {
+  return Giganewton(static_cast<double>(value));
+}
+
+constexpr Dyne operator""_dyn(long double value) {
+  return Dyne(static_cast<double>(value));
+}
+constexpr Dyne operator""_dyn(unsigned long long value) {
+  return Dyne(static_cast<double>(value));
+}
+
+constexpr PoundForce operator""_lbf(long double value) {
+  return PoundForce(static_cast<double>(value));
+}
+constexpr PoundForce operator""_lbf(unsigned long long value) {
+  return PoundForce(static_cast<double>(value));
+}
+
+// ====================
+// Energy literals
+// ====================
+
+constexpr Joule operator""_J(long double value) {
+  return Joule(static_cast<double>(value));
+}
+constexpr Joule operator""_J(unsigned long long value) {
+  return Joule(static_cast<double>(value));
+}
+
+constexpr Microjoule operator""_uJ(long double value) {
+  return Microjoule(static_cast<double>(value));
+}
+constexpr Microjoule operator""_uJ(unsigned long long value) {
+  return Microjoule(static_cast<double>(value));
+}
+
+constexpr Millijoule operator""_mJ(long double value) {
+  return Millijoule(static_cast<double>(value));
+}
+constexpr Millijoule operator""_mJ(unsigned long long value) {
+  return Millijoule(static_cast<double>(value));
+}
+
+constexpr Kilojoule operator""_kJ(long double value) {
+  return Kilojoule(static_cast<double>(value));
+}
+constexpr Kilojoule operator""_kJ(unsigned long long value) {
+  return Kilojoule(static_cast<double>(value));
+}
+
+constexpr Megajoule operator""_MJ(long double value) {
+  return Megajoule(static_cast<double>(value));
+}
+constexpr Megajoule operator""_MJ(unsigned long long value) {
+  return Megajoule(static_cast<double>(value));
+}
+
+constexpr Gigajoule operator""_GJ(long double value) {
+  return Gigajoule(static_cast<double>(value));
+}
+constexpr Gigajoule operator""_GJ(unsigned long long value) {
+  return Gigajoule(static_cast<double>(value));
+}
+
+constexpr Terajoule operator""_TJ(long double value) {
+  return Terajoule(static_cast<double>(value));
+}
+constexpr Terajoule operator""_TJ(unsigned long long value) {
+  return Terajoule(static_cast<double>(value));
+}
+
+constexpr Erg operator""_erg(long double value) {
+  return Erg(static_cast<double>(value));
+}
+constexpr Erg operator""_erg(unsigned long long value) {
+  return Erg(static_cast<double>(value));
+}
+
+constexpr Electronvolt operator""_eV(long double value) {
+  return Electronvolt(static_cast<double>(value));
+}
+constexpr Electronvolt operator""_eV(unsigned long long value) {
+  return Electronvolt(static_cast<double>(value));
+}
+
+constexpr Kiloelectronvolt operator""_keV(long double value) {
+  return Kiloelectronvolt(static_cast<double>(value));
+}
+constexpr Kiloelectronvolt operator""_keV(unsigned long long value) {
+  return Kiloelectronvolt(static_cast<double>(value));
+}
+
+constexpr Megaelectronvolt operator""_MeV(long double value) {
+  return Megaelectronvolt(static_cast<double>(value));
+}
+constexpr Megaelectronvolt operator""_MeV(unsigned long long value) {
+  return Megaelectronvolt(static_cast<double>(value));
+}
+
+constexpr Calorie operator""_cal(long double value) {
+  return Calorie(static_cast<double>(value));
+}
+constexpr Calorie operator""_cal(unsigned long long value) {
+  return Calorie(static_cast<double>(value));
+}
+
+constexpr Kilocalorie operator""_kcal(long double value) {
+  return Kilocalorie(static_cast<double>(value));
+}
+constexpr Kilocalorie operator""_kcal(unsigned long long value) {
+  return Kilocalorie(static_cast<double>(value));
 }
 
 } // namespace literals

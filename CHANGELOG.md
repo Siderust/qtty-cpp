@@ -5,6 +5,34 @@ All notable changes to `qtty-cpp` are documented in this file.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2026-05-04
+
+### Added
+- Five new dimension headers generated for the full FFI unit inventory:
+  `area.hpp` (11 units), `volume.hpp` (13 units), `acceleration.hpp` (2 units),
+  `force.hpp` (8 units), `energy.hpp` (13 units).
+- `include/qtty/qtty.hpp` now includes all ten dimension headers so every
+  FFI-backed unit is available with a single `#include "qtty/qtty.hpp"`.
+- Extended `examples/demo.cpp` with four new numbered sections covering area,
+  volume, force/acceleration, and energy conversions.
+- Added an area and energy serialisation round-trip to
+  `examples/serialization.cpp` (section 5).
+
+### Changed
+- **License**: the project is now released under the BSD 3-Clause License,
+  matching the upstream `qtty` crate.  All source files and the `LICENSE` file
+  have been updated accordingly.
+- Updated bundled `qtty` submodule to `v0.2.2-189-g318b1fc`, bringing support
+  for 191 FFI units across 10 physical dimensions.
+- `gen_cpp_units` generator rewritten to read `discriminants.csv` (2-field
+  format) instead of the now-removed `units.csv`.  Symbols are now resolved at
+  compile time from the `qtty-ffi` Rust crate instead of being duplicated in the
+  CSV.  Generator version bumped to 0.3.0.
+- `CMakeLists.txt` project version bumped to 0.3.0; `QTTY_UNITS_CSV` now
+  points to `qtty-ffi/discriminants.csv`; `GENERATED_HEADERS` extended with the
+  five new dimension filenames.
+- `include/qtty/qtty.hpp` version struct updated to `0.3.0`.
+
 ## [0.2.0] - 2026-03-08
 
 ### Added

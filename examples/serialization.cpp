@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
+// SPDX-License-Identifier: BSD-3-Clause
 // Copyright (C) 2026 Vallés Puig, Ramon
 
 /**
@@ -109,6 +109,23 @@ int main() {
   Meter pc_m = from_json<Meter>(ext_full);
   std::cout << std::scientific << std::setprecision(4);
   std::cout << "   1 pc from JSON → " << pc_m << std::endl;
+
+  // ── 5. New dimensions: area and energy ─────────────────────────────────
+  std::cout << "\n5. Area and Energy serialization:" << std::endl;
+
+  auto field = Hectare(2.5);
+  auto work = Kilojoule(8.4);
+
+  std::string field_json = to_json(field);
+  std::string work_json = to_json(work);
+  std::cout << "   " << field << " → " << field_json << std::endl;
+  std::cout << "   " << work << " → " << work_json << std::endl;
+
+  Hectare field_rt = from_json<Hectare>(field_json);
+  Kilojoule work_rt = from_json<Kilojoule>(work_json);
+  std::cout << "   (restored) " << field_rt << ", " << work_rt << std::endl;
+  assert(std::abs(field_rt.value() - 2.5) < 1e-9);
+  assert(std::abs(work_rt.value() - 8.4) < 1e-9);
 
   std::cout << "\n=== Serialization demo completed successfully ==="
             << std::endl;

@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
+// SPDX-License-Identifier: BSD-3-Clause
 // Copyright (C) 2026 Vallés Puig, Ramon
 
 #pragma once
@@ -12,7 +12,8 @@
  * - Template-based Quantity class with compile-time unit checking
  * - Operator overloading for natural arithmetic syntax
  * - User-defined literals for convenient quantity creation
- * - Support for length, time, angular, and compound (velocity) units
+ * - Support for length, time, angular, mass, power, area, volume,
+ *   acceleration, force, energy, and compound (velocity) units
  *
  * Usage example:
  * @code
@@ -28,8 +29,13 @@
  * // Convert units
  * Kilometer km = distance.to<Kilometer>();
  *
- * // Create compound units (velocity)
+ * // Derived quantities (velocity)
  * auto velocity = distance / time;
+ *
+ * // New dimensions
+ * Hectare field(2.5);
+ * Newton force(9.8);
+ * Joule energy(500.0);
  * @endcode
  */
 
@@ -42,6 +48,11 @@
 #include "units/mass.hpp"
 #include "units/power.hpp"
 #include "units/time.hpp"
+#include "units/area.hpp"
+#include "units/volume.hpp"
+#include "units/acceleration.hpp"
+#include "units/force.hpp"
+#include "units/energy.hpp"
 #include "units/velocity.hpp"
 
 // User-defined literals
@@ -54,7 +65,7 @@ namespace qtty {
  */
 inline constexpr struct {
   int major = 0;
-  int minor = 1;
+  int minor = 3;
   int patch = 0;
 } version;
 

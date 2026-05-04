@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
+// SPDX-License-Identifier: BSD-3-Clause
 // Copyright (C) 2026 Vallés Puig, Ramon
 
 #pragma once
@@ -139,7 +139,7 @@ template <> struct UnitTraits<JulianYearTag> {
 };
 template <> struct UnitTraits<JulianCenturyTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_JULIAN_CENTURY; }
-  static constexpr std::string_view symbol() { return "jc"; }
+  static constexpr std::string_view symbol() { return "JC"; }
 };
 template <> struct UnitTraits<SiderealDayTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_SIDEREAL_DAY; }
@@ -147,11 +147,11 @@ template <> struct UnitTraits<SiderealDayTag> {
 };
 template <> struct UnitTraits<SynodicMonthTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_SYNODIC_MONTH; }
-  static constexpr std::string_view symbol() { return "mo_s"; }
+  static constexpr std::string_view symbol() { return "synmo"; }
 };
 template <> struct UnitTraits<SiderealYearTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_SIDEREAL_YEAR; }
-  static constexpr std::string_view symbol() { return "yr_s"; }
+  static constexpr std::string_view symbol() { return "syr"; }
 };
 
 using Attosecond = Quantity<AttosecondTag>;

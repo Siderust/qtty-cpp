@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
+// SPDX-License-Identifier: BSD-3-Clause
 // Copyright (C) 2026 Vallés Puig, Ramon
 
 #pragma once
@@ -126,7 +126,7 @@ template <> struct UnitTraits<HorsepowerElectricTag> {
 };
 template <> struct UnitTraits<SolarLuminosityTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_SOLAR_LUMINOSITY; }
-  static constexpr std::string_view symbol() { return "L_☉"; }
+  static constexpr std::string_view symbol() { return "L☉"; }
 };
 
 using Yoctowatt = Quantity<YoctowattTag>;

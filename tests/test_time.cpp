@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
+// SPDX-License-Identifier: BSD-3-Clause
 // Copyright (C) 2026 Vallés Puig, Ramon
 
 #include "fixtures.hpp"
@@ -33,7 +33,7 @@ TEST_F(TimeDimensionTest, TimeConversions) {
   Day days = week_val.to<Day>();
   EXPECT_NEAR(days.value(), 14.0, 1e-12);
 
-  auto year_val = 1.0_yr;
+  auto year_val = 1.0_a; // JulianYear (symbol "a") = exactly 365.25 days
   Day days2 = year_val.to<Day>();
   EXPECT_NEAR(days2.value(), 365.25, 1e-9);
 }

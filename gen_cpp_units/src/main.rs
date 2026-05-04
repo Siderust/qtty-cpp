@@ -1,23 +1,25 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
+// SPDX-License-Identifier: BSD-3-Clause
 // Copyright (C) 2026 Vallés Puig, Ramon
 
-//! Generate C++ unit-wrapper headers from `units.csv`.
+//! Generate C++ unit-wrapper headers from `discriminants.csv`.
 //!
-//! Reads the canonical `units.csv` (source-of-truth for every supported unit),
-//! then emits one header per physical dimension and a `literals.hpp` with
-//! user-defined literal operators for every unit that has a usable C++
-//! identifier suffix.
+//! Reads the canonical `discriminants.csv` (source-of-truth for every
+//! supported FFI unit), then emits one header per physical dimension and a
+//! `literals.hpp` with user-defined literal operators for every unit that has
+//! a usable C++ identifier suffix.  Symbols are resolved at compile time via
+//! the `qtty-ffi` crate.
 //!
 //! # Usage
 //!
 //! ```text
 //! cargo run -p gen_cpp_units --bin gen_cpp_units --release \
-//!     -- <path/to/units.csv> <path/to/include/qtty>
+//!     -- <path/to/discriminants.csv> <path/to/include/qtty>
 //! ```
 //!
 //! The second argument must point to the directory that contains `ffi_core.hpp`
 //! (i.e., `include/qtty`).  The script creates `units/` under that directory.
 
+use qtty_ffi::UnitId;
 use std::collections::HashMap;
 use std::env;
 use std::fmt::Write as FmtWrite;
@@ -28,16 +30,21 @@ use std::path::{Path, PathBuf};
 // Constants
 // ---------------------------------------------------------------------------
 
-const LICENSE: &str = "// SPDX-License-Identifier: AGPL-3.0-or-later\n\
+const LICENSE: &str = "// SPDX-License-Identifier: BSD-3-Clause\n\
                         // Copyright (C) 2026 Vallés Puig, Ramon\n";
 
-/// Dimension name → (output file name, discriminant leading digit).
+/// Dimension name → (output file name, discriminant leading code).
 const DIMENSIONS: &[(&str, &str, u32)] = &[
-    ("Length", "length.hpp", 1),
-    ("Time", "time.hpp", 2),
-    ("Angle", "angular.hpp", 3),
-    ("Mass", "mass.hpp", 4),
-    ("Power", "power.hpp", 5),
+    ("Length",       "length.hpp",       1),
+    ("Time",         "time.hpp",         2),
+    ("Angle",        "angular.hpp",      3),
+    ("Mass",         "mass.hpp",         4),
+    ("Power",        "power.hpp",        5),
+    ("Area",         "area.hpp",         6),
+    ("Volume",       "volume.hpp",       7),
+    ("Acceleration", "acceleration.hpp", 8),
+    ("Force",        "force.hpp",        9),
+    ("Energy",       "energy.hpp",       10),
 ];
 
 // ---------------------------------------------------------------------------
@@ -64,7 +71,7 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     if args.len() != 3 {
         eprintln!(
-            "Usage: gen_cpp_units <units_csv_path> <output_qtty_include_dir>"
+            "Usage: gen_cpp_units <discriminants_csv_path> <output_qtty_include_dir>"
         );
         std::process::exit(1);
     }
@@ -120,16 +127,20 @@ fn main() {
 // CSV parsing
 // ---------------------------------------------------------------------------
 
-/// Parse `units.csv`, skipping comments and blank lines.
+/// Parse `discriminants.csv`, skipping comments and blank lines.
 //
-/// Expected format (5 comma-separated fields per row):
+/// Expected format (2 comma-separated fields per row):
 /// ```csv
-/// discriminant,dimension,name,symbol,ratio
-/// 10011,Length,Meter,m,1.0
+/// discriminant,name
+/// 10011,Meter
 /// ```
+///
+/// The dimension is derived from the leading digit(s) of the discriminant
+/// (e.g. 10xxx → Length, 60xxx → Area, 100xxx → Energy).  The symbol is
+/// looked up from the compiled `qtty-ffi` crate via `UnitId::symbol()`.
 fn parse_csv(path: &Path) -> Vec<UnitDef> {
     let content =
-        fs::read_to_string(path).expect("Failed to read units.csv");
+        fs::read_to_string(path).expect("Failed to read discriminants.csv");
     let mut units = Vec::new();
 
     for line in content.lines() {
@@ -138,10 +149,8 @@ fn parse_csv(path: &Path) -> Vec<UnitDef> {
             continue;
         }
 
-        // Split on commas — we need at least 5 fields, but allow extra
-        // (e.g. an optional 6th field for Rust type path used by qtty-ffi).
-        let parts: Vec<&str> = line.splitn(6, ',').collect();
-        if parts.len() < 5 {
+        let parts: Vec<&str> = line.splitn(3, ',').collect();
+        if parts.len() < 2 {
             eprintln!("Warning: skipping malformed line: {line}");
             continue;
         }
@@ -154,23 +163,36 @@ fn parse_csv(path: &Path) -> Vec<UnitDef> {
             }
         };
 
-        // Map the leading digit to a dimension name.
+        // Map the leading code to a dimension name.
+        // Energy uses a 6-digit discriminant (100000+), giving dim_code = 10.
         let dim_code = discriminant / 10_000;
         let dimension = match dim_code {
-            1 => "Length",
-            2 => "Time",
-            3 => "Angle",
-            4 => "Mass",
-            5 => "Power",
+            1  => "Length",
+            2  => "Time",
+            3  => "Angle",
+            4  => "Mass",
+            5  => "Power",
+            6  => "Area",
+            7  => "Volume",
+            8  => "Acceleration",
+            9  => "Force",
+            10 => "Energy",
             _ => {
                 eprintln!("Warning: unknown dimension code {dim_code} for discriminant {discriminant}");
                 continue;
             }
         };
 
-        let name = parts[2].trim().to_owned();
-        let symbol = parts[3].trim().to_owned();
+        let name = parts[1].trim().to_owned();
         let const_suffix = pascal_to_upper_snake(&name);
+
+        // Resolve the unit symbol from the compiled qtty-ffi crate.
+        let symbol = UnitId::from_u32(discriminant)
+            .map(|u| u.symbol().to_owned())
+            .unwrap_or_else(|| {
+                eprintln!("Warning: no UnitId for discriminant {discriminant} ({name}); symbol will be empty");
+                String::new()
+            });
 
         units.push(UnitDef {
             name,
@@ -304,6 +326,11 @@ fn generate_literals(
     writeln!(s, "#include \"units/angular.hpp\"").unwrap();
     writeln!(s, "#include \"units/mass.hpp\"").unwrap();
     writeln!(s, "#include \"units/power.hpp\"").unwrap();
+    writeln!(s, "#include \"units/area.hpp\"").unwrap();
+    writeln!(s, "#include \"units/volume.hpp\"").unwrap();
+    writeln!(s, "#include \"units/acceleration.hpp\"").unwrap();
+    writeln!(s, "#include \"units/force.hpp\"").unwrap();
+    writeln!(s, "#include \"units/energy.hpp\"").unwrap();
     writeln!(s).unwrap();
     writeln!(s, "namespace qtty {{").unwrap();
     writeln!(s).unwrap();
@@ -395,7 +422,8 @@ fn generate_literals(
 /// - `°`   → `deg`
 /// - `′`   → `arcmin`
 /// - `″`   → `arcsec`
-/// - `µ`   → `u`
+/// - `µ`   → `u`  (U+00B5 MICRO SIGN)
+/// - `μ`   → `u`  (U+03BC GREEK SMALL LETTER MU)
 /// - `☉`   → `sol`
 /// - `⊕`   → `earth`
 /// - `☾`   → `moon`
@@ -408,7 +436,8 @@ fn make_literal_suffix(symbol: &str) -> Option<String> {
         .replace('°', "deg")
         .replace('′', "arcmin")
         .replace('″', "arcsec")
-        .replace('µ', "u")
+        .replace('µ', "u") // U+00B5 MICRO SIGN
+        .replace('μ', "u") // U+03BC GREEK SMALL LETTER MU
         .replace('☉', "sol")
         .replace('⊕', "earth")
         .replace('☾', "moon")
@@ -491,7 +520,8 @@ mod tests {
 
     #[test]
     fn literal_suffix_unicode() {
-        assert_eq!(make_literal_suffix("µm").as_deref(), Some("um"));
+        assert_eq!(make_literal_suffix("µm").as_deref(), Some("um")); // U+00B5
+        assert_eq!(make_literal_suffix("μm").as_deref(), Some("um")); // U+03BC
         assert_eq!(make_literal_suffix("°").as_deref(), Some("deg"));
         assert_eq!(make_literal_suffix("′").as_deref(), Some("arcmin"));
     }

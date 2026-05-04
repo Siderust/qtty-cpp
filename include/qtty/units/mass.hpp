@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
+// SPDX-License-Identifier: BSD-3-Clause
 // Copyright (C) 2026 Vallés Puig, Ramon
 
 #pragma once
@@ -141,11 +141,11 @@ template <> struct UnitTraits<StoneTag> {
 };
 template <> struct UnitTraits<ShortTonTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_SHORT_TON; }
-  static constexpr std::string_view symbol() { return "ton"; }
+  static constexpr std::string_view symbol() { return "ton_us"; }
 };
 template <> struct UnitTraits<LongTonTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_LONG_TON; }
-  static constexpr std::string_view symbol() { return "ton_l"; }
+  static constexpr std::string_view symbol() { return "ton_uk"; }
 };
 template <> struct UnitTraits<CaratTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_CARAT; }
@@ -161,7 +161,7 @@ template <> struct UnitTraits<AtomicMassUnitTag> {
 };
 template <> struct UnitTraits<SolarMassTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_SOLAR_MASS; }
-  static constexpr std::string_view symbol() { return "M_☉"; }
+  static constexpr std::string_view symbol() { return "M☉"; }
 };
 
 using Yoctogram = Quantity<YoctogramTag>;
