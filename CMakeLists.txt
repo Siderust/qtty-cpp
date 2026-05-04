@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(qtty_cpp VERSION 0.3.0 LANGUAGES CXX)
+project(qtty_cpp VERSION 0.4.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -69,6 +69,28 @@ set(GENERATED_HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/acceleration.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/force.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/energy.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/pressure.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/solid_angle.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/temperature.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/radiance.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/spectral_radiance.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/photon_radiance.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/spectral_photon_radiance.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/inverse_solid_angle.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/luminous_intensity.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/luminous_flux.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/illuminance.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/frequency.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/amount.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/current.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/charge.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/voltage.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/resistance.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/capacitance.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/inductance.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/magnetic_flux.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/magnetic_flux_density.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/density.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/literals.hpp
 )
 
@@ -175,6 +197,15 @@ if(DEFINED _qtty_rpath)
     )
 endif()
 
+add_executable(all_features examples/all_features.cpp)
+target_link_libraries(all_features PRIVATE qtty_cpp)
+if(DEFINED _qtty_rpath)
+    set_target_properties(all_features PROPERTIES
+        BUILD_RPATH ${_qtty_rpath}
+        INSTALL_RPATH ${_qtty_rpath}
+    )
+endif()
+
 # JSON serialization example — requires qtty-ffi built with the 'qtty_serde' feature:
 #   cmake -B build -DQTTY_FFI_FEATURES=qtty_serde && cmake --build build
 if(QTTY_FFI_HAS_SERDE)
@@ -204,6 +235,7 @@ set(TEST_FFI_SOURCES
     tests/test_dimension_safety.cpp
     tests/test_precision.cpp
     tests/test_formatting.cpp
+    tests/test_extended_inventory.cpp
 )
 if(QTTY_FFI_HAS_SERDE)
     list(APPEND TEST_FFI_SOURCES tests/test_serialization.cpp)

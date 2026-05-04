@@ -8,22 +8,36 @@
 namespace qtty {
 
 struct JouleTag {};
+struct PicojouleTag {};
+struct NanojouleTag {};
 struct MicrojouleTag {};
 struct MillijouleTag {};
 struct KilojouleTag {};
 struct MegajouleTag {};
 struct GigajouleTag {};
 struct TerajouleTag {};
+struct WattHourTag {};
+struct KilowattHourTag {};
 struct ErgTag {};
 struct ElectronvoltTag {};
 struct KiloelectronvoltTag {};
 struct MegaelectronvoltTag {};
 struct CalorieTag {};
 struct KilocalorieTag {};
+struct BritishThermalUnitTag {};
+struct ThermTag {};
 
 template <> struct UnitTraits<JouleTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_JOULE; }
   static constexpr std::string_view symbol() { return "J"; }
+};
+template <> struct UnitTraits<PicojouleTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_PICOJOULE; }
+  static constexpr std::string_view symbol() { return "pJ"; }
+};
+template <> struct UnitTraits<NanojouleTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_NANOJOULE; }
+  static constexpr std::string_view symbol() { return "nJ"; }
 };
 template <> struct UnitTraits<MicrojouleTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_MICROJOULE; }
@@ -49,6 +63,14 @@ template <> struct UnitTraits<TerajouleTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_TERAJOULE; }
   static constexpr std::string_view symbol() { return "TJ"; }
 };
+template <> struct UnitTraits<WattHourTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_WATT_HOUR; }
+  static constexpr std::string_view symbol() { return "Wh"; }
+};
+template <> struct UnitTraits<KilowattHourTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_KILOWATT_HOUR; }
+  static constexpr std::string_view symbol() { return "kWh"; }
+};
 template <> struct UnitTraits<ErgTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_ERG; }
   static constexpr std::string_view symbol() { return "erg"; }
@@ -73,19 +95,33 @@ template <> struct UnitTraits<KilocalorieTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_KILOCALORIE; }
   static constexpr std::string_view symbol() { return "kcal"; }
 };
+template <> struct UnitTraits<BritishThermalUnitTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_BRITISH_THERMAL_UNIT; }
+  static constexpr std::string_view symbol() { return "BTU"; }
+};
+template <> struct UnitTraits<ThermTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_THERM; }
+  static constexpr std::string_view symbol() { return "therm"; }
+};
 
 using Joule = Quantity<JouleTag>;
+using Picojoule = Quantity<PicojouleTag>;
+using Nanojoule = Quantity<NanojouleTag>;
 using Microjoule = Quantity<MicrojouleTag>;
 using Millijoule = Quantity<MillijouleTag>;
 using Kilojoule = Quantity<KilojouleTag>;
 using Megajoule = Quantity<MegajouleTag>;
 using Gigajoule = Quantity<GigajouleTag>;
 using Terajoule = Quantity<TerajouleTag>;
+using WattHour = Quantity<WattHourTag>;
+using KilowattHour = Quantity<KilowattHourTag>;
 using Erg = Quantity<ErgTag>;
 using Electronvolt = Quantity<ElectronvoltTag>;
 using Kiloelectronvolt = Quantity<KiloelectronvoltTag>;
 using Megaelectronvolt = Quantity<MegaelectronvoltTag>;
 using Calorie = Quantity<CalorieTag>;
 using Kilocalorie = Quantity<KilocalorieTag>;
+using BritishThermalUnit = Quantity<BritishThermalUnitTag>;
+using Therm = Quantity<ThermTag>;
 
 } // namespace qtty

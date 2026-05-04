@@ -152,7 +152,7 @@ checksum = "d9c4f5dac5e15c24eb999c26181a6ca40b39fe946cbe4c263c7209467bc83af2"
 
 [[package]]
 name = "gen_cpp_units"
-version = "0.3.0"
+version = "0.4.0"
 dependencies = [
  "qtty-ffi",
 ]
@@ -290,7 +290,7 @@ dependencies = [
 
 [[package]]
 name = "qtty"
-version = "0.6.1"
+version = "0.7.0"
 dependencies = [
  "qtty-core",
  "qtty-derive",
@@ -298,7 +298,7 @@ dependencies = [
 
 [[package]]
 name = "qtty-core"
-version = "0.6.1"
+version = "0.7.0"
 dependencies = [
  "libm",
  "qtty-derive",
@@ -307,7 +307,7 @@ dependencies = [
 
 [[package]]
 name = "qtty-derive"
-version = "0.6.1"
+version = "0.7.0"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -316,7 +316,7 @@ dependencies = [
 
 [[package]]
 name = "qtty-ffi"
-version = "0.6.1"
+version = "0.7.0"
 dependencies = [
  "cbindgen",
  "qtty",

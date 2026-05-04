@@ -35,16 +35,38 @@ const LICENSE: &str = "// SPDX-License-Identifier: BSD-3-Clause\n\
 
 /// Dimension name → (output file name, discriminant leading code).
 const DIMENSIONS: &[(&str, &str, u32)] = &[
-    ("Length",       "length.hpp",       1),
-    ("Time",         "time.hpp",         2),
-    ("Angle",        "angular.hpp",      3),
-    ("Mass",         "mass.hpp",         4),
-    ("Power",        "power.hpp",        5),
-    ("Area",         "area.hpp",         6),
-    ("Volume",       "volume.hpp",       7),
+    ("Length", "length.hpp", 1),
+    ("Time", "time.hpp", 2),
+    ("Angle", "angular.hpp", 3),
+    ("Mass", "mass.hpp", 4),
+    ("Power", "power.hpp", 5),
+    ("Area", "area.hpp", 6),
+    ("Volume", "volume.hpp", 7),
     ("Acceleration", "acceleration.hpp", 8),
-    ("Force",        "force.hpp",        9),
-    ("Energy",       "energy.hpp",       10),
+    ("Force", "force.hpp", 9),
+    ("Energy", "energy.hpp", 10),
+    ("Pressure", "pressure.hpp", 11),
+    ("SolidAngle", "solid_angle.hpp", 12),
+    ("Temperature", "temperature.hpp", 13),
+    ("Radiance", "radiance.hpp", 14),
+    ("SpectralRadiance", "spectral_radiance.hpp", 15),
+    ("PhotonRadiance", "photon_radiance.hpp", 16),
+    ("SpectralPhotonRadiance", "spectral_photon_radiance.hpp", 17),
+    ("InverseSolidAngle", "inverse_solid_angle.hpp", 18),
+    ("LuminousIntensity", "luminous_intensity.hpp", 19),
+    ("LuminousFlux", "luminous_flux.hpp", 20),
+    ("Illuminance", "illuminance.hpp", 21),
+    ("Frequency", "frequency.hpp", 22),
+    ("AmountOfSubstance", "amount.hpp", 23),
+    ("Current", "current.hpp", 24),
+    ("Charge", "charge.hpp", 25),
+    ("Voltage", "voltage.hpp", 26),
+    ("Resistance", "resistance.hpp", 27),
+    ("Capacitance", "capacitance.hpp", 28),
+    ("Inductance", "inductance.hpp", 29),
+    ("MagneticFlux", "magnetic_flux.hpp", 30),
+    ("MagneticFluxDensity", "magnetic_flux_density.hpp", 31),
+    ("Density", "density.hpp", 32),
 ];
 
 // ---------------------------------------------------------------------------
@@ -70,9 +92,7 @@ struct UnitDef {
 fn main() {
     let args: Vec<String> = env::args().collect();
     if args.len() != 3 {
-        eprintln!(
-            "Usage: gen_cpp_units <discriminants_csv_path> <output_qtty_include_dir>"
-        );
+        eprintln!("Usage: gen_cpp_units <discriminants_csv_path> <output_qtty_include_dir>");
         std::process::exit(1);
     }
 
@@ -94,15 +114,13 @@ fn main() {
 
     // Generate one header per dimension.
     let units_dir = out_dir.join("units");
-    fs::create_dir_all(&units_dir)
-        .expect("Failed to create units output directory");
+    fs::create_dir_all(&units_dir).expect("Failed to create units output directory");
 
     for (dim_name, file_name, _) in DIMENSIONS {
         if let Some(units) = by_dim.get(dim_name) {
             let content = generate_dimension_header(dim_name, units);
             let path = units_dir.join(file_name);
-            fs::write(&path, &content)
-                .unwrap_or_else(|_| panic!("Failed to write {file_name}"));
+            fs::write(&path, &content).unwrap_or_else(|_| panic!("Failed to write {file_name}"));
             eprintln!("Generated {file_name} ({} units)", units.len());
         } else {
             eprintln!("Warning: no units found for dimension {dim_name}");
@@ -112,8 +130,7 @@ fn main() {
     // Generate literals.hpp.
     let literals_content = generate_literals(&by_dim, &order);
     let literals_path = out_dir.join("literals.hpp");
-    fs::write(&literals_path, &literals_content)
-        .expect("Failed to write literals.hpp");
+    fs::write(&literals_path, &literals_content).expect("Failed to write literals.hpp");
     eprintln!("Generated literals.hpp");
 
     let total: usize = by_dim.values().map(|v| v.len()).sum();
@@ -139,8 +156,7 @@ fn main() {
 /// (e.g. 10xxx → Length, 60xxx → Area, 100xxx → Energy).  The symbol is
 /// looked up from the compiled `qtty-ffi` crate via `UnitId::symbol()`.
 fn parse_csv(path: &Path) -> Vec<UnitDef> {
-    let content =
-        fs::read_to_string(path).expect("Failed to read discriminants.csv");
+    let content = fs::read_to_string(path).expect("Failed to read discriminants.csv");
     let mut units = Vec::new();
 
     for line in content.lines() {
@@ -164,21 +180,46 @@ fn parse_csv(path: &Path) -> Vec<UnitDef> {
         };
 
         // Map the leading code to a dimension name.
-        // Energy uses a 6-digit discriminant (100000+), giving dim_code = 10.
+        // Dimensions 10+ use 6-digit discriminants (100000+), so `dim_code`
+        // remains the leading 1-2 digit dimension code via `/ 10_000`.
         let dim_code = discriminant / 10_000;
         let dimension = match dim_code {
-            1  => "Length",
-            2  => "Time",
-            3  => "Angle",
-            4  => "Mass",
-            5  => "Power",
-            6  => "Area",
-            7  => "Volume",
-            8  => "Acceleration",
-            9  => "Force",
+            1 => "Length",
+            2 => "Time",
+            3 => "Angle",
+            4 => "Mass",
+            5 => "Power",
+            6 => "Area",
+            7 => "Volume",
+            8 => "Acceleration",
+            9 => "Force",
             10 => "Energy",
+            11 => "Pressure",
+            12 => "SolidAngle",
+            13 => "Temperature",
+            14 => "Radiance",
+            15 => "SpectralRadiance",
+            16 => "PhotonRadiance",
+            17 => "SpectralPhotonRadiance",
+            18 => "InverseSolidAngle",
+            19 => "LuminousIntensity",
+            20 => "LuminousFlux",
+            21 => "Illuminance",
+            22 => "Frequency",
+            23 => "AmountOfSubstance",
+            24 => "Current",
+            25 => "Charge",
+            26 => "Voltage",
+            27 => "Resistance",
+            28 => "Capacitance",
+            29 => "Inductance",
+            30 => "MagneticFlux",
+            31 => "MagneticFluxDensity",
+            32 => "Density",
             _ => {
-                eprintln!("Warning: unknown dimension code {dim_code} for discriminant {discriminant}");
+                eprintln!(
+                    "Warning: unknown dimension code {dim_code} for discriminant {discriminant}"
+                );
                 continue;
             }
         };
@@ -218,10 +259,11 @@ fn parse_csv(path: &Path) -> Vec<UnitDef> {
 /// - `AstronomicalUnit`   → `ASTRONOMICAL_UNIT`
 /// - `ErgPerSecond`       → `ERG_PER_SECOND`
 //
+///
 /// The algorithm inserts `_` before an uppercase letter when:
-/// 1. The preceding character is lowercase, **or**
-/// 2. The preceding character is uppercase **and** the following character is
-///    lowercase (handles abbreviations like `HTTPSClient` → `HTTPS_CLIENT`).
+/// - The preceding character is lowercase, **or**
+/// - The preceding character is uppercase **and** the following character is
+///   lowercase (handles abbreviations like `HTTPSClient` → `HTTPS_CLIENT`).
 fn pascal_to_upper_snake(name: &str) -> String {
     let chars: Vec<char> = name.chars().collect();
     let mut out = String::with_capacity(name.len() + 8);
@@ -231,8 +273,7 @@ fn pascal_to_upper_snake(name: &str) -> String {
             let prev = chars[i - 1];
             let next = chars.get(i + 1).copied();
             let need_sep = prev.is_lowercase()
-                || (prev.is_uppercase()
-                    && next.map_or(false, |n| n.is_lowercase()));
+                || (prev.is_uppercase() && next.is_some_and(|n| n.is_lowercase()));
             if need_sep {
                 out.push('_');
             }
@@ -269,12 +310,7 @@ fn generate_dimension_header(_dimension: &str, units: &[&UnitDef]) -> String {
 
     // UnitTraits specializations
     for unit in units {
-        writeln!(
-            s,
-            "template <> struct UnitTraits<{}Tag> {{",
-            unit.name
-        )
-        .unwrap();
+        writeln!(s, "template <> struct UnitTraits<{}Tag> {{", unit.name).unwrap();
         writeln!(
             s,
             "  static constexpr UnitId unit_id() {{ return UNIT_ID_{}; }}",
@@ -293,12 +329,7 @@ fn generate_dimension_header(_dimension: &str, units: &[&UnitDef]) -> String {
 
     // Type aliases
     for unit in units {
-        writeln!(
-            s,
-            "using {name} = Quantity<{name}Tag>;",
-            name = unit.name
-        )
-        .unwrap();
+        writeln!(s, "using {name} = Quantity<{name}Tag>;", name = unit.name).unwrap();
     }
     writeln!(s).unwrap();
 
@@ -311,10 +342,7 @@ fn generate_dimension_header(_dimension: &str, units: &[&UnitDef]) -> String {
 // Header generation — literals.hpp
 // ---------------------------------------------------------------------------
 
-fn generate_literals(
-    by_dim: &HashMap<&str, Vec<&UnitDef>>,
-    _order: &[&str],
-) -> String {
+fn generate_literals(by_dim: &HashMap<&str, Vec<&UnitDef>>, _order: &[&str]) -> String {
     let mut s = String::new();
 
     // License + pragma once + includes
@@ -331,6 +359,28 @@ fn generate_literals(
     writeln!(s, "#include \"units/acceleration.hpp\"").unwrap();
     writeln!(s, "#include \"units/force.hpp\"").unwrap();
     writeln!(s, "#include \"units/energy.hpp\"").unwrap();
+    writeln!(s, "#include \"units/pressure.hpp\"").unwrap();
+    writeln!(s, "#include \"units/solid_angle.hpp\"").unwrap();
+    writeln!(s, "#include \"units/temperature.hpp\"").unwrap();
+    writeln!(s, "#include \"units/radiance.hpp\"").unwrap();
+    writeln!(s, "#include \"units/spectral_radiance.hpp\"").unwrap();
+    writeln!(s, "#include \"units/photon_radiance.hpp\"").unwrap();
+    writeln!(s, "#include \"units/spectral_photon_radiance.hpp\"").unwrap();
+    writeln!(s, "#include \"units/inverse_solid_angle.hpp\"").unwrap();
+    writeln!(s, "#include \"units/luminous_intensity.hpp\"").unwrap();
+    writeln!(s, "#include \"units/luminous_flux.hpp\"").unwrap();
+    writeln!(s, "#include \"units/illuminance.hpp\"").unwrap();
+    writeln!(s, "#include \"units/frequency.hpp\"").unwrap();
+    writeln!(s, "#include \"units/amount.hpp\"").unwrap();
+    writeln!(s, "#include \"units/current.hpp\"").unwrap();
+    writeln!(s, "#include \"units/charge.hpp\"").unwrap();
+    writeln!(s, "#include \"units/voltage.hpp\"").unwrap();
+    writeln!(s, "#include \"units/resistance.hpp\"").unwrap();
+    writeln!(s, "#include \"units/capacitance.hpp\"").unwrap();
+    writeln!(s, "#include \"units/inductance.hpp\"").unwrap();
+    writeln!(s, "#include \"units/magnetic_flux.hpp\"").unwrap();
+    writeln!(s, "#include \"units/magnetic_flux_density.hpp\"").unwrap();
+    writeln!(s, "#include \"units/density.hpp\"").unwrap();
     writeln!(s).unwrap();
     writeln!(s, "namespace qtty {{").unwrap();
     writeln!(s).unwrap();
@@ -436,8 +486,7 @@ fn make_literal_suffix(symbol: &str) -> Option<String> {
         .replace('°', "deg")
         .replace('′', "arcmin")
         .replace('″', "arcsec")
-        .replace('µ', "u") // U+00B5 MICRO SIGN
-        .replace('μ', "u") // U+03BC GREEK SMALL LETTER MU
+        .replace(['µ', 'μ'], "u") // U+00B5 MICRO SIGN / U+03BC GREEK SMALL LETTER MU
         .replace('☉', "sol")
         .replace('⊕', "earth")
         .replace('☾', "moon")
@@ -512,10 +561,7 @@ mod tests {
 
     #[test]
     fn literal_suffix_slash() {
-        assert_eq!(
-            make_literal_suffix("m/s").as_deref(),
-            Some("m_per_s")
-        );
+        assert_eq!(make_literal_suffix("m/s").as_deref(), Some("m_per_s"));
     }
 
     #[test]

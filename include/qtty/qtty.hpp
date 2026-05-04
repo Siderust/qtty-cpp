@@ -12,8 +12,10 @@
  * - Template-based Quantity class with compile-time unit checking
  * - Operator overloading for natural arithmetic syntax
  * - User-defined literals for convenient quantity creation
- * - Support for length, time, angular, mass, power, area, volume,
- *   acceleration, force, energy, and compound (velocity) units
+ * - Support for the full qtty-ffi linear unit catalog, including pressure,
+ *   solid angle, temperature, radiometry, photometric SI units, frequency,
+ *   chemistry, electrical, and density families
+ * - Compound quotient units such as velocity through `CompoundTag`
  *
  * Usage example:
  * @code
@@ -43,17 +45,39 @@
 #include "ffi_core.hpp"
 
 // Unit-specific headers
-#include "units/angular.hpp"
-#include "units/length.hpp"
-#include "units/mass.hpp"
-#include "units/power.hpp"
-#include "units/time.hpp"
-#include "units/area.hpp"
-#include "units/volume.hpp"
 #include "units/acceleration.hpp"
-#include "units/force.hpp"
+#include "units/amount.hpp"
+#include "units/angular.hpp"
+#include "units/area.hpp"
+#include "units/capacitance.hpp"
+#include "units/charge.hpp"
+#include "units/current.hpp"
+#include "units/density.hpp"
 #include "units/energy.hpp"
+#include "units/force.hpp"
+#include "units/frequency.hpp"
+#include "units/illuminance.hpp"
+#include "units/inductance.hpp"
+#include "units/inverse_solid_angle.hpp"
+#include "units/length.hpp"
+#include "units/luminous_flux.hpp"
+#include "units/luminous_intensity.hpp"
+#include "units/magnetic_flux.hpp"
+#include "units/magnetic_flux_density.hpp"
+#include "units/mass.hpp"
+#include "units/photon_radiance.hpp"
+#include "units/power.hpp"
+#include "units/pressure.hpp"
+#include "units/radiance.hpp"
+#include "units/resistance.hpp"
+#include "units/solid_angle.hpp"
+#include "units/spectral_photon_radiance.hpp"
+#include "units/spectral_radiance.hpp"
+#include "units/temperature.hpp"
+#include "units/time.hpp"
 #include "units/velocity.hpp"
+#include "units/voltage.hpp"
+#include "units/volume.hpp"
 
 // User-defined literals
 #include "literals.hpp"
@@ -65,7 +89,7 @@ namespace qtty {
  */
 inline constexpr struct {
   int major = 0;
-  int minor = 3;
+  int minor = 4;
   int patch = 0;
 } version;
 

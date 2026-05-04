@@ -13,6 +13,28 @@
 #include "units/acceleration.hpp"
 #include "units/force.hpp"
 #include "units/energy.hpp"
+#include "units/pressure.hpp"
+#include "units/solid_angle.hpp"
+#include "units/temperature.hpp"
+#include "units/radiance.hpp"
+#include "units/spectral_radiance.hpp"
+#include "units/photon_radiance.hpp"
+#include "units/spectral_photon_radiance.hpp"
+#include "units/inverse_solid_angle.hpp"
+#include "units/luminous_intensity.hpp"
+#include "units/luminous_flux.hpp"
+#include "units/illuminance.hpp"
+#include "units/frequency.hpp"
+#include "units/amount.hpp"
+#include "units/current.hpp"
+#include "units/charge.hpp"
+#include "units/voltage.hpp"
+#include "units/resistance.hpp"
+#include "units/capacitance.hpp"
+#include "units/inductance.hpp"
+#include "units/magnetic_flux.hpp"
+#include "units/magnetic_flux_density.hpp"
+#include "units/density.hpp"
 
 namespace qtty {
 
@@ -1193,6 +1215,20 @@ constexpr Joule operator""_J(unsigned long long value) {
   return Joule(static_cast<double>(value));
 }
 
+constexpr Picojoule operator""_pJ(long double value) {
+  return Picojoule(static_cast<double>(value));
+}
+constexpr Picojoule operator""_pJ(unsigned long long value) {
+  return Picojoule(static_cast<double>(value));
+}
+
+constexpr Nanojoule operator""_nJ(long double value) {
+  return Nanojoule(static_cast<double>(value));
+}
+constexpr Nanojoule operator""_nJ(unsigned long long value) {
+  return Nanojoule(static_cast<double>(value));
+}
+
 constexpr Microjoule operator""_uJ(long double value) {
   return Microjoule(static_cast<double>(value));
 }
@@ -1235,6 +1271,20 @@ constexpr Terajoule operator""_TJ(unsigned long long value) {
   return Terajoule(static_cast<double>(value));
 }
 
+constexpr WattHour operator""_Wh(long double value) {
+  return WattHour(static_cast<double>(value));
+}
+constexpr WattHour operator""_Wh(unsigned long long value) {
+  return WattHour(static_cast<double>(value));
+}
+
+constexpr KilowattHour operator""_kWh(long double value) {
+  return KilowattHour(static_cast<double>(value));
+}
+constexpr KilowattHour operator""_kWh(unsigned long long value) {
+  return KilowattHour(static_cast<double>(value));
+}
+
 constexpr Erg operator""_erg(long double value) {
   return Erg(static_cast<double>(value));
 }
@@ -1275,6 +1325,629 @@ constexpr Kilocalorie operator""_kcal(long double value) {
 }
 constexpr Kilocalorie operator""_kcal(unsigned long long value) {
   return Kilocalorie(static_cast<double>(value));
+}
+
+constexpr BritishThermalUnit operator""_BTU(long double value) {
+  return BritishThermalUnit(static_cast<double>(value));
+}
+constexpr BritishThermalUnit operator""_BTU(unsigned long long value) {
+  return BritishThermalUnit(static_cast<double>(value));
+}
+
+constexpr Therm operator""_therm(long double value) {
+  return Therm(static_cast<double>(value));
+}
+constexpr Therm operator""_therm(unsigned long long value) {
+  return Therm(static_cast<double>(value));
+}
+
+// ====================
+// Pressure literals
+// ====================
+
+constexpr Pascal operator""_Pa(long double value) {
+  return Pascal(static_cast<double>(value));
+}
+constexpr Pascal operator""_Pa(unsigned long long value) {
+  return Pascal(static_cast<double>(value));
+}
+
+constexpr Millipascal operator""_mPa(long double value) {
+  return Millipascal(static_cast<double>(value));
+}
+constexpr Millipascal operator""_mPa(unsigned long long value) {
+  return Millipascal(static_cast<double>(value));
+}
+
+constexpr Hectopascal operator""_hPa(long double value) {
+  return Hectopascal(static_cast<double>(value));
+}
+constexpr Hectopascal operator""_hPa(unsigned long long value) {
+  return Hectopascal(static_cast<double>(value));
+}
+
+constexpr Kilopascal operator""_kPa(long double value) {
+  return Kilopascal(static_cast<double>(value));
+}
+constexpr Kilopascal operator""_kPa(unsigned long long value) {
+  return Kilopascal(static_cast<double>(value));
+}
+
+constexpr Megapascal operator""_MPa(long double value) {
+  return Megapascal(static_cast<double>(value));
+}
+constexpr Megapascal operator""_MPa(unsigned long long value) {
+  return Megapascal(static_cast<double>(value));
+}
+
+constexpr Gigapascal operator""_GPa(long double value) {
+  return Gigapascal(static_cast<double>(value));
+}
+constexpr Gigapascal operator""_GPa(unsigned long long value) {
+  return Gigapascal(static_cast<double>(value));
+}
+
+constexpr Bar operator""_bar(long double value) {
+  return Bar(static_cast<double>(value));
+}
+constexpr Bar operator""_bar(unsigned long long value) {
+  return Bar(static_cast<double>(value));
+}
+
+constexpr Atmosphere operator""_atm(long double value) {
+  return Atmosphere(static_cast<double>(value));
+}
+constexpr Atmosphere operator""_atm(unsigned long long value) {
+  return Atmosphere(static_cast<double>(value));
+}
+
+constexpr Torr operator""_Torr(long double value) {
+  return Torr(static_cast<double>(value));
+}
+constexpr Torr operator""_Torr(unsigned long long value) {
+  return Torr(static_cast<double>(value));
+}
+
+constexpr MillimeterOfMercury operator""_mmHg(long double value) {
+  return MillimeterOfMercury(static_cast<double>(value));
+}
+constexpr MillimeterOfMercury operator""_mmHg(unsigned long long value) {
+  return MillimeterOfMercury(static_cast<double>(value));
+}
+
+constexpr PoundPerSquareInch operator""_psi(long double value) {
+  return PoundPerSquareInch(static_cast<double>(value));
+}
+constexpr PoundPerSquareInch operator""_psi(unsigned long long value) {
+  return PoundPerSquareInch(static_cast<double>(value));
+}
+
+constexpr InchOfMercury operator""_inHg(long double value) {
+  return InchOfMercury(static_cast<double>(value));
+}
+constexpr InchOfMercury operator""_inHg(unsigned long long value) {
+  return InchOfMercury(static_cast<double>(value));
+}
+
+// ====================
+// Temperature literals
+// ====================
+
+constexpr Kelvin operator""_K(long double value) {
+  return Kelvin(static_cast<double>(value));
+}
+constexpr Kelvin operator""_K(unsigned long long value) {
+  return Kelvin(static_cast<double>(value));
+}
+
+constexpr Rankine operator""_degR(long double value) {
+  return Rankine(static_cast<double>(value));
+}
+constexpr Rankine operator""_degR(unsigned long long value) {
+  return Rankine(static_cast<double>(value));
+}
+
+// ====================
+// Radiance literals
+// ====================
+
+constexpr WattPerSquareMeterSteradian operator""_Wmsr(long double value) {
+  return WattPerSquareMeterSteradian(static_cast<double>(value));
+}
+constexpr WattPerSquareMeterSteradian operator""_Wmsr(unsigned long long value) {
+  return WattPerSquareMeterSteradian(static_cast<double>(value));
+}
+
+constexpr ErgPerSecondSquareCentimeterSteradian operator""_ergscmsr(long double value) {
+  return ErgPerSecondSquareCentimeterSteradian(static_cast<double>(value));
+}
+constexpr ErgPerSecondSquareCentimeterSteradian operator""_ergscmsr(unsigned long long value) {
+  return ErgPerSecondSquareCentimeterSteradian(static_cast<double>(value));
+}
+
+// ====================
+// SpectralRadiance literals
+// ====================
+
+constexpr WattPerSquareMeterSteradianMeter operator""_Wmsrm(long double value) {
+  return WattPerSquareMeterSteradianMeter(static_cast<double>(value));
+}
+constexpr WattPerSquareMeterSteradianMeter operator""_Wmsrm(unsigned long long value) {
+  return WattPerSquareMeterSteradianMeter(static_cast<double>(value));
+}
+
+constexpr WattPerSquareMeterSteradianNanometer operator""_Wmsrnm(long double value) {
+  return WattPerSquareMeterSteradianNanometer(static_cast<double>(value));
+}
+constexpr WattPerSquareMeterSteradianNanometer operator""_Wmsrnm(unsigned long long value) {
+  return WattPerSquareMeterSteradianNanometer(static_cast<double>(value));
+}
+
+// ====================
+// PhotonRadiance literals
+// ====================
+
+constexpr PhotonPerSquareMeterSecondSteradian operator""_phmssr(long double value) {
+  return PhotonPerSquareMeterSecondSteradian(static_cast<double>(value));
+}
+constexpr PhotonPerSquareMeterSecondSteradian operator""_phmssr(unsigned long long value) {
+  return PhotonPerSquareMeterSecondSteradian(static_cast<double>(value));
+}
+
+constexpr PhotonPerSquareCentimeterSecondSteradian operator""_phcmssr(long double value) {
+  return PhotonPerSquareCentimeterSecondSteradian(static_cast<double>(value));
+}
+constexpr PhotonPerSquareCentimeterSecondSteradian operator""_phcmssr(unsigned long long value) {
+  return PhotonPerSquareCentimeterSecondSteradian(static_cast<double>(value));
+}
+
+constexpr PhotonPerSquareCentimeterNanosecondSteradian operator""_phcmnssr(long double value) {
+  return PhotonPerSquareCentimeterNanosecondSteradian(static_cast<double>(value));
+}
+constexpr PhotonPerSquareCentimeterNanosecondSteradian operator""_phcmnssr(unsigned long long value) {
+  return PhotonPerSquareCentimeterNanosecondSteradian(static_cast<double>(value));
+}
+
+// ====================
+// SpectralPhotonRadiance literals
+// ====================
+
+constexpr PhotonPerSquareMeterSecondSteradianMeter operator""_phmssrm(long double value) {
+  return PhotonPerSquareMeterSecondSteradianMeter(static_cast<double>(value));
+}
+constexpr PhotonPerSquareMeterSecondSteradianMeter operator""_phmssrm(unsigned long long value) {
+  return PhotonPerSquareMeterSecondSteradianMeter(static_cast<double>(value));
+}
+
+constexpr PhotonPerSquareCentimeterSecondSteradianNanometer operator""_phcmssrnm(long double value) {
+  return PhotonPerSquareCentimeterSecondSteradianNanometer(static_cast<double>(value));
+}
+constexpr PhotonPerSquareCentimeterSecondSteradianNanometer operator""_phcmssrnm(unsigned long long value) {
+  return PhotonPerSquareCentimeterSecondSteradianNanometer(static_cast<double>(value));
+}
+
+constexpr PhotonPerSquareCentimeterNanosecondSteradianNanometer operator""_phcmnssrnm(long double value) {
+  return PhotonPerSquareCentimeterNanosecondSteradianNanometer(static_cast<double>(value));
+}
+constexpr PhotonPerSquareCentimeterNanosecondSteradianNanometer operator""_phcmnssrnm(unsigned long long value) {
+  return PhotonPerSquareCentimeterNanosecondSteradianNanometer(static_cast<double>(value));
+}
+
+// ====================
+// InverseSolidAngle literals
+// ====================
+
+constexpr S10 operator""_S10(long double value) {
+  return S10(static_cast<double>(value));
+}
+constexpr S10 operator""_S10(unsigned long long value) {
+  return S10(static_cast<double>(value));
+}
+
+// ====================
+// LuminousIntensity literals
+// ====================
+
+constexpr Candela operator""_cd(long double value) {
+  return Candela(static_cast<double>(value));
+}
+constexpr Candela operator""_cd(unsigned long long value) {
+  return Candela(static_cast<double>(value));
+}
+
+// ====================
+// LuminousFlux literals
+// ====================
+
+constexpr Lumen operator""_lm(long double value) {
+  return Lumen(static_cast<double>(value));
+}
+constexpr Lumen operator""_lm(unsigned long long value) {
+  return Lumen(static_cast<double>(value));
+}
+
+constexpr Millilumen operator""_mlm(long double value) {
+  return Millilumen(static_cast<double>(value));
+}
+constexpr Millilumen operator""_mlm(unsigned long long value) {
+  return Millilumen(static_cast<double>(value));
+}
+
+constexpr Kilolumen operator""_klm(long double value) {
+  return Kilolumen(static_cast<double>(value));
+}
+constexpr Kilolumen operator""_klm(unsigned long long value) {
+  return Kilolumen(static_cast<double>(value));
+}
+
+// ====================
+// Illuminance literals
+// ====================
+
+constexpr Lux operator""_lx(long double value) {
+  return Lux(static_cast<double>(value));
+}
+constexpr Lux operator""_lx(unsigned long long value) {
+  return Lux(static_cast<double>(value));
+}
+
+constexpr Millilux operator""_mlx(long double value) {
+  return Millilux(static_cast<double>(value));
+}
+constexpr Millilux operator""_mlx(unsigned long long value) {
+  return Millilux(static_cast<double>(value));
+}
+
+constexpr Kilolux operator""_klx(long double value) {
+  return Kilolux(static_cast<double>(value));
+}
+constexpr Kilolux operator""_klx(unsigned long long value) {
+  return Kilolux(static_cast<double>(value));
+}
+
+// ====================
+// Frequency literals
+// ====================
+
+constexpr Hertz operator""_Hz(long double value) {
+  return Hertz(static_cast<double>(value));
+}
+constexpr Hertz operator""_Hz(unsigned long long value) {
+  return Hertz(static_cast<double>(value));
+}
+
+constexpr Millihertz operator""_mHz(long double value) {
+  return Millihertz(static_cast<double>(value));
+}
+constexpr Millihertz operator""_mHz(unsigned long long value) {
+  return Millihertz(static_cast<double>(value));
+}
+
+constexpr Kilohertz operator""_kHz(long double value) {
+  return Kilohertz(static_cast<double>(value));
+}
+constexpr Kilohertz operator""_kHz(unsigned long long value) {
+  return Kilohertz(static_cast<double>(value));
+}
+
+constexpr Megahertz operator""_MHz(long double value) {
+  return Megahertz(static_cast<double>(value));
+}
+constexpr Megahertz operator""_MHz(unsigned long long value) {
+  return Megahertz(static_cast<double>(value));
+}
+
+constexpr Gigahertz operator""_GHz(long double value) {
+  return Gigahertz(static_cast<double>(value));
+}
+constexpr Gigahertz operator""_GHz(unsigned long long value) {
+  return Gigahertz(static_cast<double>(value));
+}
+
+constexpr Terahertz operator""_THz(long double value) {
+  return Terahertz(static_cast<double>(value));
+}
+constexpr Terahertz operator""_THz(unsigned long long value) {
+  return Terahertz(static_cast<double>(value));
+}
+
+// ====================
+// AmountOfSubstance literals
+// ====================
+
+constexpr Mole operator""_mol(long double value) {
+  return Mole(static_cast<double>(value));
+}
+constexpr Mole operator""_mol(unsigned long long value) {
+  return Mole(static_cast<double>(value));
+}
+
+constexpr Nanomole operator""_nmol(long double value) {
+  return Nanomole(static_cast<double>(value));
+}
+constexpr Nanomole operator""_nmol(unsigned long long value) {
+  return Nanomole(static_cast<double>(value));
+}
+
+constexpr Micromole operator""_umol(long double value) {
+  return Micromole(static_cast<double>(value));
+}
+constexpr Micromole operator""_umol(unsigned long long value) {
+  return Micromole(static_cast<double>(value));
+}
+
+constexpr Millimole operator""_mmol(long double value) {
+  return Millimole(static_cast<double>(value));
+}
+constexpr Millimole operator""_mmol(unsigned long long value) {
+  return Millimole(static_cast<double>(value));
+}
+
+constexpr Kilomole operator""_kmol(long double value) {
+  return Kilomole(static_cast<double>(value));
+}
+constexpr Kilomole operator""_kmol(unsigned long long value) {
+  return Kilomole(static_cast<double>(value));
+}
+
+// ====================
+// Current literals
+// ====================
+
+constexpr Ampere operator""_A(long double value) {
+  return Ampere(static_cast<double>(value));
+}
+constexpr Ampere operator""_A(unsigned long long value) {
+  return Ampere(static_cast<double>(value));
+}
+
+constexpr Microampere operator""_uA(long double value) {
+  return Microampere(static_cast<double>(value));
+}
+constexpr Microampere operator""_uA(unsigned long long value) {
+  return Microampere(static_cast<double>(value));
+}
+
+constexpr Milliampere operator""_mA(long double value) {
+  return Milliampere(static_cast<double>(value));
+}
+constexpr Milliampere operator""_mA(unsigned long long value) {
+  return Milliampere(static_cast<double>(value));
+}
+
+constexpr Kiloampere operator""_kA(long double value) {
+  return Kiloampere(static_cast<double>(value));
+}
+constexpr Kiloampere operator""_kA(unsigned long long value) {
+  return Kiloampere(static_cast<double>(value));
+}
+
+// ====================
+// Charge literals
+// ====================
+
+constexpr Coulomb operator""_C(long double value) {
+  return Coulomb(static_cast<double>(value));
+}
+constexpr Coulomb operator""_C(unsigned long long value) {
+  return Coulomb(static_cast<double>(value));
+}
+
+constexpr Millicoulomb operator""_mC(long double value) {
+  return Millicoulomb(static_cast<double>(value));
+}
+constexpr Millicoulomb operator""_mC(unsigned long long value) {
+  return Millicoulomb(static_cast<double>(value));
+}
+
+constexpr Microcoulomb operator""_uC(long double value) {
+  return Microcoulomb(static_cast<double>(value));
+}
+constexpr Microcoulomb operator""_uC(unsigned long long value) {
+  return Microcoulomb(static_cast<double>(value));
+}
+
+constexpr Kilocoulomb operator""_kC(long double value) {
+  return Kilocoulomb(static_cast<double>(value));
+}
+constexpr Kilocoulomb operator""_kC(unsigned long long value) {
+  return Kilocoulomb(static_cast<double>(value));
+}
+
+// ====================
+// Voltage literals
+// ====================
+
+constexpr Volt operator""_V(long double value) {
+  return Volt(static_cast<double>(value));
+}
+constexpr Volt operator""_V(unsigned long long value) {
+  return Volt(static_cast<double>(value));
+}
+
+constexpr Microvolt operator""_uV(long double value) {
+  return Microvolt(static_cast<double>(value));
+}
+constexpr Microvolt operator""_uV(unsigned long long value) {
+  return Microvolt(static_cast<double>(value));
+}
+
+constexpr Millivolt operator""_mV(long double value) {
+  return Millivolt(static_cast<double>(value));
+}
+constexpr Millivolt operator""_mV(unsigned long long value) {
+  return Millivolt(static_cast<double>(value));
+}
+
+constexpr Kilovolt operator""_kV(long double value) {
+  return Kilovolt(static_cast<double>(value));
+}
+constexpr Kilovolt operator""_kV(unsigned long long value) {
+  return Kilovolt(static_cast<double>(value));
+}
+
+constexpr Megavolt operator""_MV(long double value) {
+  return Megavolt(static_cast<double>(value));
+}
+constexpr Megavolt operator""_MV(unsigned long long value) {
+  return Megavolt(static_cast<double>(value));
+}
+
+// ====================
+// Resistance literals
+// ====================
+
+constexpr Kilohm operator""_k(long double value) {
+  return Kilohm(static_cast<double>(value));
+}
+constexpr Kilohm operator""_k(unsigned long long value) {
+  return Kilohm(static_cast<double>(value));
+}
+
+constexpr Megaohm operator""_M(long double value) {
+  return Megaohm(static_cast<double>(value));
+}
+constexpr Megaohm operator""_M(unsigned long long value) {
+  return Megaohm(static_cast<double>(value));
+}
+
+// ====================
+// Capacitance literals
+// ====================
+
+constexpr Farad operator""_F(long double value) {
+  return Farad(static_cast<double>(value));
+}
+constexpr Farad operator""_F(unsigned long long value) {
+  return Farad(static_cast<double>(value));
+}
+
+constexpr Picofarad operator""_pF(long double value) {
+  return Picofarad(static_cast<double>(value));
+}
+constexpr Picofarad operator""_pF(unsigned long long value) {
+  return Picofarad(static_cast<double>(value));
+}
+
+constexpr Nanofarad operator""_nF(long double value) {
+  return Nanofarad(static_cast<double>(value));
+}
+constexpr Nanofarad operator""_nF(unsigned long long value) {
+  return Nanofarad(static_cast<double>(value));
+}
+
+constexpr Microfarad operator""_uF(long double value) {
+  return Microfarad(static_cast<double>(value));
+}
+constexpr Microfarad operator""_uF(unsigned long long value) {
+  return Microfarad(static_cast<double>(value));
+}
+
+constexpr Millifarad operator""_mF(long double value) {
+  return Millifarad(static_cast<double>(value));
+}
+constexpr Millifarad operator""_mF(unsigned long long value) {
+  return Millifarad(static_cast<double>(value));
+}
+
+// ====================
+// Inductance literals
+// ====================
+
+constexpr Henry operator""_H(long double value) {
+  return Henry(static_cast<double>(value));
+}
+constexpr Henry operator""_H(unsigned long long value) {
+  return Henry(static_cast<double>(value));
+}
+
+constexpr Microhenry operator""_uH(long double value) {
+  return Microhenry(static_cast<double>(value));
+}
+constexpr Microhenry operator""_uH(unsigned long long value) {
+  return Microhenry(static_cast<double>(value));
+}
+
+constexpr Millihenry operator""_mH(long double value) {
+  return Millihenry(static_cast<double>(value));
+}
+constexpr Millihenry operator""_mH(unsigned long long value) {
+  return Millihenry(static_cast<double>(value));
+}
+
+// ====================
+// MagneticFlux literals
+// ====================
+
+constexpr Weber operator""_Wb(long double value) {
+  return Weber(static_cast<double>(value));
+}
+constexpr Weber operator""_Wb(unsigned long long value) {
+  return Weber(static_cast<double>(value));
+}
+
+constexpr Milliweber operator""_mWb(long double value) {
+  return Milliweber(static_cast<double>(value));
+}
+constexpr Milliweber operator""_mWb(unsigned long long value) {
+  return Milliweber(static_cast<double>(value));
+}
+
+// ====================
+// MagneticFluxDensity literals
+// ====================
+
+constexpr Tesla operator""_T(long double value) {
+  return Tesla(static_cast<double>(value));
+}
+constexpr Tesla operator""_T(unsigned long long value) {
+  return Tesla(static_cast<double>(value));
+}
+
+constexpr Millitesla operator""_mT(long double value) {
+  return Millitesla(static_cast<double>(value));
+}
+constexpr Millitesla operator""_mT(unsigned long long value) {
+  return Millitesla(static_cast<double>(value));
+}
+
+constexpr Microtesla operator""_uT(long double value) {
+  return Microtesla(static_cast<double>(value));
+}
+constexpr Microtesla operator""_uT(unsigned long long value) {
+  return Microtesla(static_cast<double>(value));
+}
+
+// ====================
+// Density literals
+// ====================
+
+constexpr KilogramPerCubicMeter operator""_kg_per_m(long double value) {
+  return KilogramPerCubicMeter(static_cast<double>(value));
+}
+constexpr KilogramPerCubicMeter operator""_kg_per_m(unsigned long long value) {
+  return KilogramPerCubicMeter(static_cast<double>(value));
+}
+
+constexpr GramPerCubicCentimeter operator""_g_per_cm(long double value) {
+  return GramPerCubicCentimeter(static_cast<double>(value));
+}
+constexpr GramPerCubicCentimeter operator""_g_per_cm(unsigned long long value) {
+  return GramPerCubicCentimeter(static_cast<double>(value));
+}
+
+constexpr GramPerMilliliter operator""_g_per_mL(long double value) {
+  return GramPerMilliliter(static_cast<double>(value));
+}
+constexpr GramPerMilliliter operator""_g_per_mL(unsigned long long value) {
+  return GramPerMilliliter(static_cast<double>(value));
+}
+
+constexpr PoundPerCubicFoot operator""_lb_per_ft(long double value) {
+  return PoundPerCubicFoot(static_cast<double>(value));
+}
+constexpr PoundPerCubicFoot operator""_lb_per_ft(unsigned long long value) {
+  return PoundPerCubicFoot(static_cast<double>(value));
 }
 
 } // namespace literals

@@ -5,6 +5,26 @@ All notable changes to `qtty-cpp` are documented in this file.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2026-05-04
+
+### Added
+- Generated headers for the full `qtty-ffi` linear inventory, extending the
+  C++ wrapper beyond the original ten families to pressure, solid angle,
+  temperature, radiometry, photometric SI units, frequency, chemistry,
+  electrical, and density.
+- New example `examples/all_features.cpp` demonstrating one conversion from
+  each newly exposed unit family.
+- New regression coverage in `tests/test_extended_inventory.cpp` for pressure,
+  solid angle, temperature, frequency, chemistry, electrical, density,
+  radiometry, and photometric SI units.
+
+### Changed
+- Updated bundled `qtty` integration target to the `0.7.0` release line and
+  aligned the generator with the expanded `discriminants.csv` dimension ranges.
+- `qtty.hpp`, `literals.hpp`, and the generated unit headers now expose the
+  full linear `qtty` catalog available through `qtty-ffi`.
+- `qtty-cpp` project version bumped to `0.4.0`.
+
 ## [0.3.0] - 2026-05-04
 
 ### Added

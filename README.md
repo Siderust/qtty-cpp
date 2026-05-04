@@ -11,7 +11,8 @@ qtty-cpp is a C++17 library for working with physical quantities using unit-safe
 - Strong types per unit (e.g., `Meter`, `Second`) to prevent mixing incompatible dimensions
 - Unit conversion via `Quantity::to<T>()` using the Rust `qtty-ffi` engine
 - User-defined literals for convenient construction (e.g., `10.0_km`, `5.0_s`)
-- Generated unit/type/literal headers derived from `qtty/qtty-ffi/units.csv`
+- Generated unit/type/literal headers derived from `qtty/qtty-ffi/discriminants.csv`
+- Coverage for the full linear `qtty` unit catalog carried by `qtty-ffi`, including pressure, solid angle, temperature, radiometry, photometric SI units, frequency, chemistry, electrical, and density
 - CMake target (`qtty_cpp`) for straightforward integration
 
 ## Requirements
@@ -30,6 +31,7 @@ cmake -S . -B build
 cmake --build build --parallel
 ctest --test-dir build --output-on-failure
 ./build/demo
+./build/all_features
 ```
 
 If you cloned without submodules:
@@ -58,9 +60,17 @@ int main() {
 }
 ```
 
-### Compound Units
+### Coverage Notes
 
-Division creates compound quantity types (e.g., velocity). The FFI conversion layer only supports base dimensions, so compound types cannot be converted directly (for example, `m/s` to `km/h`). See `include/qtty/units/velocity.hpp` and `docs/architecture.md`.
+Division creates quotient-based compound quantity types (for example,
+velocity), and `Quantity::to<T>()` supports compound-to-compound conversion
+through `qtty_derived_convert()` when both sides are simple
+numerator/denominator unit pairs.
+
+The C++ adapter now covers every **linear** unit family exposed by `qtty-ffi`.
+Rust-only non-linear helpers such as `photometry::Magnitude`,
+`photometry::SurfaceBrightness`, and other non-`Quantity` APIs are not exposed
+through the C ABI and therefore remain Rust-only.
 
 ## Documentation
 
