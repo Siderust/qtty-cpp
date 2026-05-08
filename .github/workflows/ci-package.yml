@@ -55,9 +55,9 @@ jobs:
             -DCMAKE_BUILD_TYPE=Release \
             -DQTTY_BUILD_DOCS=OFF
 
-      - name: Build
+      - name: Build (full)
         shell: bash
-        run: cmake --build build --target test_ffi
+        run: cmake --build build
 
       - name: Install to staging prefix
         shell: bash
