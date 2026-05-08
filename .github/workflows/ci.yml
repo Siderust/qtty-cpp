@@ -3,6 +3,9 @@ name: CI
 on:
   pull_request:
   workflow_dispatch:
+  push:
+    tags:
+      - "v*"
 
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
