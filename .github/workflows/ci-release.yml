@@ -3,8 +3,6 @@ name: CI Release
 on:
   workflow_call:
     secrets:
-      GITHUB_TOKEN:
-        required: false
       PAGES_DEPLOY_TOKEN:
         required: true
 
@@ -35,7 +33,7 @@ jobs:
           files: dist/*
           generate_release_notes: true
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Install repository tools
         shell: bash
@@ -64,11 +62,6 @@ jobs:
           cp dist/*.rpm site/rpm/
 
           createrepo_c site/rpm
-
-      - name: Add custom domain
-        shell: bash
-        run: |
-          echo "siderust.org" > site/CNAME
 
       - name: Publish repositories to siderust.github.io
         uses: peaceiris/actions-gh-pages@v4
