@@ -68,7 +68,7 @@ jobs:
         with:
           personal_token: ${{ secrets.PAGES_DEPLOY_TOKEN }}
           external_repository: Siderust/siderust.github.io
-          publish_branch: gh-pages
+          publish_branch: main
           publish_dir: ./site
+          destination_dir: .
           keep_files: true
-          cname: siderust.org
