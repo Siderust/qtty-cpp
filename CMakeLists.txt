@@ -183,6 +183,9 @@ FetchContent_Declare(
 )
 # For Windows: Prevent overriding the parent project's compiler/linker settings
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+# Disable googletest installation rules in downstream projects —
+# we don't want GTest/GMock files installed when packaging qtty-cpp.
+set(INSTALL_GTEST OFF CACHE BOOL "Disable installing googletest components" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 # Enable testing

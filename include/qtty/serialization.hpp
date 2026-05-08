@@ -22,8 +22,7 @@ extern "C" {
 // compile time when linking against a serde-enabled qtty-ffi.
 extern "C" {
 int32_t qtty_quantity_to_json_value(qtty_quantity_t src, char **out_json);
-int32_t qtty_quantity_from_json_value(UnitId unit, const char *json,
-                                      qtty_quantity_t *out);
+int32_t qtty_quantity_from_json_value(UnitId unit, const char *json, qtty_quantity_t *out);
 int32_t qtty_quantity_to_json(qtty_quantity_t src, char **out_json);
 int32_t qtty_quantity_from_json(const char *json, qtty_quantity_t *out);
 int32_t qtty_derived_to_json(qtty_derived_quantity_t src, char **out);
@@ -60,16 +59,14 @@ inline std::string from_owned_c(char *ptr) {
  * @param q Source quantity.
  * @return JSON string representing only the value.
  */
-template <typename UnitTag>
-std::string to_json_value(const Quantity<UnitTag> &q) {
+template <typename UnitTag> std::string to_json_value(const Quantity<UnitTag> &q) {
   qtty_quantity_t src{};
-  int32_t status =
-      qtty_quantity_make(q.value(), UnitTraits<UnitTag>::unit_id(), &src);
-  check_status(status, "Creating source quantity for to_json_value");
+  int32_t status = qtty_quantity_make(q.value(), UnitTraits<UnitTag>::unit_id(), &src);
+  check_status(static_cast<QttyStatus>(status), "Creating source quantity for to_json_value");
 
   char *out = nullptr;
   status = qtty_quantity_to_json_value(src, &out);
-  check_status(status, "Serializing value to JSON");
+  check_status(static_cast<QttyStatus>(status), "Serializing value to JSON");
   return from_owned_c(out);
 }
 
@@ -83,9 +80,9 @@ template <typename T>
 Quantity<typename ExtractTag<T>::type> from_json_value(std::string_view json) {
   using UnitTag = typename ExtractTag<T>::type;
   qtty_quantity_t out_qty{};
-  int32_t status = qtty_quantity_from_json_value(UnitTraits<UnitTag>::unit_id(),
-                                                 json.data(), &out_qty);
-  check_status(status, "Deserializing value from JSON");
+  int32_t status =
+      qtty_quantity_from_json_value(UnitTraits<UnitTag>::unit_id(), json.data(), &out_qty);
+  check_status(static_cast<QttyStatus>(status), "Deserializing value from JSON");
   return Quantity<UnitTag>(out_qty.value);
 }
 
@@ -99,13 +96,12 @@ Quantity<typename ExtractTag<T>::type> from_json_value(std::string_view json) {
  */
 template <typename UnitTag> std::string to_json(const Quantity<UnitTag> &q) {
   qtty_quantity_t src{};
-  int32_t status =
-      qtty_quantity_make(q.value(), UnitTraits<UnitTag>::unit_id(), &src);
-  check_status(status, "Creating source quantity for to_json");
+  int32_t status = qtty_quantity_make(q.value(), UnitTraits<UnitTag>::unit_id(), &src);
+  check_status(static_cast<QttyStatus>(status), "Creating source quantity for to_json");
 
   char *out = nullptr;
   status = qtty_quantity_to_json(src, &out);
-  check_status(status, "Serializing quantity to JSON");
+  check_status(static_cast<QttyStatus>(status), "Serializing quantity to JSON");
   return from_owned_c(out);
 }
 
@@ -123,19 +119,18 @@ inline UnitId unit_id_from_u32(uint32_t raw) {
  * @param json JSON input string view.
  * @return Quantity converted to requested target unit.
  */
-template <typename T>
-Quantity<typename ExtractTag<T>::type> from_json(std::string_view json) {
+template <typename T> Quantity<typename ExtractTag<T>::type> from_json(std::string_view json) {
   using UnitTag = typename ExtractTag<T>::type;
   qtty_quantity_t out_qty{};
   int32_t status = qtty_quantity_from_json(json.data(), &out_qty);
-  check_status(status, "Deserializing quantity from JSON");
+  check_status(static_cast<QttyStatus>(status), "Deserializing quantity from JSON");
 
   // Convert to requested UnitTag if needed; Rust returns the unit in JSON
   if (out_qty.unit != UnitTraits<UnitTag>::unit_id()) {
     qtty_quantity_t conv{};
-    status =
-        qtty_quantity_convert(out_qty, UnitTraits<UnitTag>::unit_id(), &conv);
-    check_status(status, "Converting deserialized quantity to target unit");
+    status = qtty_quantity_convert(out_qty, UnitTraits<UnitTag>::unit_id(), &conv);
+    check_status(static_cast<QttyStatus>(status),
+                 "Converting deserialized quantity to target unit");
     return Quantity<UnitTag>(conv.value);
   }
   return Quantity<UnitTag>(out_qty.value);
@@ -157,17 +152,15 @@ namespace derived_serialization {
  * @return JSON string.
  */
 template <typename Tag> std::string to_json(const Quantity<Tag> &q) {
-  static_assert(is_compound_v<Tag>,
-                "derived_serialization::to_json requires a compound quantity");
+  static_assert(is_compound_v<Tag>, "derived_serialization::to_json requires a compound quantity");
   qtty_derived_quantity_t src{};
-  int32_t status =
-      qtty_derived_make(q.value(), UnitTraits<Tag>::numerator_unit_id(),
-                        UnitTraits<Tag>::denominator_unit_id(), &src);
-  check_status(status, "Creating derived quantity for serialization");
+  int32_t status = qtty_derived_make(q.value(), UnitTraits<Tag>::numerator_unit_id(),
+                                     UnitTraits<Tag>::denominator_unit_id(), &src);
+  check_status(static_cast<QttyStatus>(status), "Creating derived quantity for serialization");
 
   char *out = nullptr;
   status = qtty_derived_to_json(src, &out);
-  check_status(status, "Serializing derived quantity to JSON");
+  check_status(static_cast<QttyStatus>(status), "Serializing derived quantity to JSON");
   return serialization::from_owned_c(out);
 }
 
@@ -177,23 +170,20 @@ template <typename Tag> std::string to_json(const Quantity<Tag> &q) {
  * @param json JSON input string view.
  * @return Deserialized compound quantity, converted to requested target units.
  */
-template <typename T>
-Quantity<typename ExtractTag<T>::type> from_json(std::string_view json) {
+template <typename T> Quantity<typename ExtractTag<T>::type> from_json(std::string_view json) {
   using Tag = typename ExtractTag<T>::type;
-  static_assert(is_compound_v<Tag>,
-                "derived_serialization::from_json requires a compound type");
+  static_assert(is_compound_v<Tag>, "derived_serialization::from_json requires a compound type");
   qtty_derived_quantity_t out_qty{};
   int32_t status = qtty_derived_from_json(json.data(), &out_qty);
-  check_status(status, "Deserializing derived quantity from JSON");
+  check_status(static_cast<QttyStatus>(status), "Deserializing derived quantity from JSON");
 
   // Convert to requested units if needed
   if (out_qty.numerator != UnitTraits<Tag>::numerator_unit_id() ||
       out_qty.denominator != UnitTraits<Tag>::denominator_unit_id()) {
     qtty_derived_quantity_t conv{};
-    status =
-        qtty_derived_convert(out_qty, UnitTraits<Tag>::numerator_unit_id(),
-                             UnitTraits<Tag>::denominator_unit_id(), &conv);
-    check_status(status, "Converting deserialized derived quantity");
+    status = qtty_derived_convert(out_qty, UnitTraits<Tag>::numerator_unit_id(),
+                                  UnitTraits<Tag>::denominator_unit_id(), &conv);
+    check_status(static_cast<QttyStatus>(status), "Converting deserialized derived quantity");
     return Quantity<Tag>(conv.value);
   }
   return Quantity<Tag>(out_qty.value);

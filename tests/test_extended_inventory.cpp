@@ -30,14 +30,13 @@ TEST_F(QttyTest, ElectricalAndDensityConversions) {
   Volt v = Millivolt(1000.0).to<Volt>();
   EXPECT_NEAR(v.value(), 1.0, 1e-12);
 
-  KilogramPerCubicMeter rho =
-      PoundPerCubicFoot(1.0).to<KilogramPerCubicMeter>();
+  KilogramPerCubicMeter rho = PoundPerCubicFoot(1.0).to<KilogramPerCubicMeter>();
   EXPECT_NEAR(rho.value(), 16.018463373, 1e-9);
 }
 
 TEST_F(QttyTest, RadiometryAndPhotometryConversions) {
-  WattPerSquareMeterSteradian si = ErgPerSecondSquareCentimeterSteradian(1.0)
-                                       .to<WattPerSquareMeterSteradian>();
+  WattPerSquareMeterSteradian si =
+      ErgPerSecondSquareCentimeterSteradian(1.0).to<WattPerSquareMeterSteradian>();
   EXPECT_NEAR(si.value(), 1.0e-3, 1e-15);
 
   Lumen lm = Kilolumen(1.0).to<Lumen>();
@@ -67,7 +66,8 @@ TEST_F(QttyTest, DimensionlessUnits) {
   Refractivity n(2.7e-4);
   EXPECT_NEAR(n.value(), 2.7e-4, 1e-18);
 
-  // Conversion between dimensionless units is identity (same dimension, ratio 1).
+  // Conversion between dimensionless units is identity (same dimension, ratio
+  // 1).
   Airmass from_tau = tau.to<Airmass>();
   EXPECT_NEAR(from_tau.value(), 0.5, 1e-15);
 

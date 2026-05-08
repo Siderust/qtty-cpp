@@ -32,6 +32,5 @@ TEST_F(SerializationTest, JsonWithUnitIdAutoConvert) {
 }
 
 TEST_F(SerializationTest, ValueOnlyRejectsInvalidJson) {
-  EXPECT_THROW((serialization::from_json_value<Meter>("not a number")),
-               ConversionError);
+  EXPECT_THROW((serialization::from_json_value<Meter>("not a number")), ConversionError);
 }
