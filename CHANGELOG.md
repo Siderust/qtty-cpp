@@ -5,6 +5,36 @@ All notable changes to `qtty-cpp` are documented in this file.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.1] - 2026-05-08
+
+### Added
+- Expose named dimensionless units in the C++ wrapper: `OpticalDepth`,
+  `Airmass`, `Transmittance`, `Albedo`, `IlluminationFraction`, and
+  `Refractivity`. A generated header `include/qtty/units/dimensionless.hpp`
+  provides tag types and type aliases for these units and `include/qtty/qtty.hpp`
+  includes the new header so the units are available with a single include.
+- Add FFI discriminants and identifiers for the new dimensionless units and
+  dimension: `DIMENSION_ID_DIMENSIONLESS = 33` and
+  `UNIT_ID_OPTICAL_DEPTH = 330000` … `UNIT_ID_REFRACTIVITY = 330005` in the
+  generated `qtty_ffi.h` so the units are available across the C ABI.
+
+### Changed
+- `gen_cpp_units` generator: include `Dimensionless` in the `DIMENSIONS`
+  constant and map discriminant code `33` to the `Dimensionless` group so
+  `dimensionless.hpp` is generated automatically from `discriminants.csv`.
+  `literals.hpp` was regenerated (no user-defined literals for these units as
+  they have empty symbols).
+- `CMakeLists.txt` and the generator invocation updated to include the new
+  generated `dimensionless.hpp` so it is installed and packaged like other
+  generated headers.
+- Tests: added `DimensionlessUnits` coverage in
+  `tests/test_extended_inventory.cpp` to verify construction and cross-unit
+  conversions for the new named dimensionless units.
+
+### Notes
+- The generator output and ABI remain backward compatible: new discriminant
+  values were appended and existing values were not changed.
+
 ## [0.4.0] - 2026-05-04
 
 ### Added

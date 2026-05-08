@@ -53,6 +53,7 @@
 #include "units/charge.hpp"
 #include "units/current.hpp"
 #include "units/density.hpp"
+#include "units/dimensionless.hpp"
 #include "units/energy.hpp"
 #include "units/force.hpp"
 #include "units/frequency.hpp"

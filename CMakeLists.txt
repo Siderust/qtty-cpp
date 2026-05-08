@@ -91,6 +91,7 @@ set(GENERATED_HEADERS
     ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/magnetic_flux.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/magnetic_flux_density.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/density.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/units/dimensionless.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/include/qtty/literals.hpp
 )
 
