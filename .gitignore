@@ -4,6 +4,7 @@ coverage*/
 cmake-build-*/
 out/
 gen_cpp_units/target/
+*.xml
 
 # IDE files
 .vscode/

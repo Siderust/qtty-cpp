@@ -52,8 +52,7 @@ public:
  */
 class IncompatibleDimensionsError : public QttyException {
 public:
-  explicit IncompatibleDimensionsError(const std::string &msg)
-      : QttyException(msg) {}
+  explicit IncompatibleDimensionsError(const std::string &msg) : QttyException(msg) {}
 };
 
 /**
@@ -116,10 +115,8 @@ template <typename NumeratorTag, typename DenominatorTag> struct CompoundTag;
 
 // Type trait to detect compound (derived) unit tags
 template <typename T> struct is_compound : std::false_type {};
-template <typename N, typename D>
-struct is_compound<CompoundTag<N, D>> : std::true_type {};
-template <typename T>
-inline constexpr bool is_compound_v = is_compound<T>::value;
+template <typename N, typename D> struct is_compound<CompoundTag<N, D>> : std::true_type {};
+template <typename T> inline constexpr bool is_compound_v = is_compound<T>::value;
 
 // Template trait to get unit ID from unit tag
 // Each unit tag (e.g., MeterTag) must specialize this template to provide
@@ -190,25 +187,21 @@ public:
   // different dimensions (e.g., length to time).
 
   // Convert to another unit type (accepts either Tag or Quantity<Tag>)
-  template <typename TargetType>
-  Quantity<typename ExtractTag<TargetType>::type> to() const {
+  template <typename TargetType> Quantity<typename ExtractTag<TargetType>::type> to() const {
     using TargetTag = typename ExtractTag<TargetType>::type;
 
     if constexpr (is_compound_v<UnitTag>) {
       // Compound → compound conversion via qtty_derived_convert
-      static_assert(is_compound_v<TargetTag>,
-                    "Cannot convert compound unit to simple unit");
+      static_assert(is_compound_v<TargetTag>, "Cannot convert compound unit to simple unit");
       qtty_derived_quantity_t src_qty;
       qtty_derived_quantity_t dst_qty;
 
-      QttyStatus status = qtty_derived_make(
-          m_value, UnitTraits<UnitTag>::numerator_unit_id(),
-          UnitTraits<UnitTag>::denominator_unit_id(), &src_qty);
+      QttyStatus status = qtty_derived_make(m_value, UnitTraits<UnitTag>::numerator_unit_id(),
+                                            UnitTraits<UnitTag>::denominator_unit_id(), &src_qty);
       check_status(status, "Creating derived source quantity");
 
-      status = qtty_derived_convert(
-          src_qty, UnitTraits<TargetTag>::numerator_unit_id(),
-          UnitTraits<TargetTag>::denominator_unit_id(), &dst_qty);
+      status = qtty_derived_convert(src_qty, UnitTraits<TargetTag>::numerator_unit_id(),
+                                    UnitTraits<TargetTag>::denominator_unit_id(), &dst_qty);
       check_status(status, "Converting derived units");
 
       return Quantity<TargetTag>(dst_qty.value);
@@ -220,8 +213,7 @@ public:
       QttyStatus status = qtty_quantity_make(m_value, unit_id(), &src_qty);
       check_status(status, "Creating source quantity");
 
-      status = qtty_quantity_convert(src_qty, UnitTraits<TargetTag>::unit_id(),
-                                     &dst_qty);
+      status = qtty_quantity_convert(src_qty, UnitTraits<TargetTag>::unit_id(), &dst_qty);
       check_status(status, "Converting units");
 
       return Quantity<TargetTag>(dst_qty.value);
@@ -236,13 +228,9 @@ public:
   // of different units, explicitly convert one to match the other first.
 
   // Arithmetic operators - same unit
-  Quantity operator+(const Quantity &other) const {
-    return Quantity(m_value + other.m_value);
-  }
+  Quantity operator+(const Quantity &other) const { return Quantity(m_value + other.m_value); }
 
-  Quantity operator-(const Quantity &other) const {
-    return Quantity(m_value - other.m_value);
-  }
+  Quantity operator-(const Quantity &other) const { return Quantity(m_value - other.m_value); }
 
   // ========================================================================
   // Scalar Operations
@@ -256,9 +244,7 @@ public:
   Quantity operator/(double scalar) const { return Quantity(m_value / scalar); }
 
   // Friend function for scalar * quantity
-  friend Quantity operator*(double scalar, const Quantity &q) {
-    return q * scalar;
-  }
+  friend Quantity operator*(double scalar, const Quantity &q) { return q * scalar; }
 
   // ========================================================================
   // Comparison Operators
@@ -268,29 +254,17 @@ public:
   // enforcing type safety at compile time.
 
   // Comparison operators
-  bool operator==(const Quantity &other) const {
-    return m_value == other.m_value;
-  }
+  bool operator==(const Quantity &other) const { return m_value == other.m_value; }
 
-  bool operator!=(const Quantity &other) const {
-    return m_value != other.m_value;
-  }
+  bool operator!=(const Quantity &other) const { return m_value != other.m_value; }
 
-  bool operator<(const Quantity &other) const {
-    return m_value < other.m_value;
-  }
+  bool operator<(const Quantity &other) const { return m_value < other.m_value; }
 
-  bool operator>(const Quantity &other) const {
-    return m_value > other.m_value;
-  }
+  bool operator>(const Quantity &other) const { return m_value > other.m_value; }
 
-  bool operator<=(const Quantity &other) const {
-    return m_value <= other.m_value;
-  }
+  bool operator<=(const Quantity &other) const { return m_value <= other.m_value; }
 
-  bool operator>=(const Quantity &other) const {
-    return m_value >= other.m_value;
-  }
+  bool operator>=(const Quantity &other) const { return m_value >= other.m_value; }
 
   // ========================================================================
   // Compound Assignment Operators
@@ -359,20 +333,17 @@ public:
    * @return Formatted string, e.g. `"1234.57 m"` or `"1.23e3 m"`.
    * @throws QttyException on formatting failure.
    */
-  std::string format(int precision = -1,
-                     uint32_t flags = QTTY_FMT_DEFAULT) const {
+  std::string format(int precision = -1, uint32_t flags = QTTY_FMT_DEFAULT) const {
     qtty_quantity_t qty;
     QttyStatus make_status = qtty_quantity_make(m_value, unit_id(), &qty);
     check_status(make_status, "format: creating quantity");
 
     char buf[512];
-    QttyStatus result =
-        qtty_quantity_format(qty, precision, flags, buf, sizeof(buf));
+    QttyStatus result = qtty_quantity_format(qty, precision, flags, buf, sizeof(buf));
     if (result == QTTY_STATUS_BUFFER_TOO_SMALL) {
       // Retry with a generous large buffer (quantities should never need this)
       char big_buf[4096];
-      result =
-          qtty_quantity_format(qty, precision, flags, big_buf, sizeof(big_buf));
+      result = qtty_quantity_format(qty, precision, flags, big_buf, sizeof(big_buf));
       if (result < 0) {
         throw QttyException("format: buffer too small even at 4096 bytes");
       }
@@ -401,8 +372,7 @@ public:
 //
 // For `std::format` (C++20) see the std::formatter specialisation below.
 
-template <typename UnitTag>
-std::ostream &operator<<(std::ostream &os, const Quantity<UnitTag> &q) {
+template <typename UnitTag> std::ostream &operator<<(std::ostream &os, const Quantity<UnitTag> &q) {
   os << q.value() << " " << UnitTraits<UnitTag>::symbol();
   return os;
 }

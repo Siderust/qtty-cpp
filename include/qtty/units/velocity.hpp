@@ -28,8 +28,7 @@ namespace qtty {
 // This is a template alias, not a concrete type. Instantiate with specific
 // length and time units, e.g., Velocity<Meter, Second>.
 template <typename LengthUnit, typename TimeUnit>
-using Velocity = Quantity<
-    CompoundTag<typename LengthUnit::unit_tag, typename TimeUnit::unit_tag>>;
+using Velocity = Quantity<CompoundTag<typename LengthUnit::unit_tag, typename TimeUnit::unit_tag>>;
 
 // ============================================================================
 // Division Operator: Create Compound Units
@@ -47,10 +46,9 @@ using Velocity = Quantity<
 
 // Division operator to create velocity from length and time
 template <typename LengthTag, typename TimeTag>
-Quantity<CompoundTag<LengthTag, TimeTag>>
-operator/(const Quantity<LengthTag> &length, const Quantity<TimeTag> &time) {
-  return Quantity<CompoundTag<LengthTag, TimeTag>>(length.value() /
-                                                   time.value());
+Quantity<CompoundTag<LengthTag, TimeTag>> operator/(const Quantity<LengthTag> &length,
+                                                    const Quantity<TimeTag> &time) {
+  return Quantity<CompoundTag<LengthTag, TimeTag>>(length.value() / time.value());
 }
 
 // ============================================================================
@@ -63,12 +61,8 @@ operator/(const Quantity<LengthTag> &length, const Quantity<TimeTag> &time) {
 // Generic template: derives unit IDs from the component tags
 template <typename NumeratorTag, typename DenominatorTag>
 struct UnitTraits<CompoundTag<NumeratorTag, DenominatorTag>> {
-  static constexpr UnitId numerator_unit_id() {
-    return UnitTraits<NumeratorTag>::unit_id();
-  }
-  static constexpr UnitId denominator_unit_id() {
-    return UnitTraits<DenominatorTag>::unit_id();
-  }
+  static constexpr UnitId numerator_unit_id() { return UnitTraits<NumeratorTag>::unit_id(); }
+  static constexpr UnitId denominator_unit_id() { return UnitTraits<DenominatorTag>::unit_id(); }
   static constexpr std::string_view symbol() { return ""; }
 };
 

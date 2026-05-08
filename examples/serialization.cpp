@@ -33,8 +33,7 @@ int main() {
   std::cout << "FFI ABI Version: " << abi_version() << "\n" << std::endl;
 
   // ── 1. Value-only JSON ──────────────────────────────────────────────────
-  std::cout << "1. Value-only JSON (compact, default serde format):"
-            << std::endl;
+  std::cout << "1. Value-only JSON (compact, default serde format):" << std::endl;
 
   auto distance = Meter(42.5);
   auto time = Second(9.58);
@@ -53,8 +52,7 @@ int main() {
   Second t_rt = from_json_value<Second>(json_t);
   Kilogram m_rt = from_json_value<Kilogram>(json_m);
 
-  std::cout << "   (restored) " << d_rt << ", " << t_rt << ", " << m_rt
-            << std::endl;
+  std::cout << "   (restored) " << d_rt << ", " << t_rt << ", " << m_rt << std::endl;
   assert(std::abs(d_rt.value() - 42.5) < 1e-9);
   assert(std::abs(t_rt.value() - 9.58) < 1e-9);
   assert(std::abs(m_rt.value() - 70.0) < 1e-9);
@@ -80,15 +78,13 @@ int main() {
   assert(std::abs(p_rt.value() - 24.0) < 1e-9);
 
   // ── 3. DerivedQuantity JSON round-trip ─────────────────────────────────────
-  std::cout << "\n3. DerivedQuantity JSON (velocity = length / time):"
-            << std::endl;
+  std::cout << "\n3. DerivedQuantity JSON (velocity = length / time):" << std::endl;
 
   auto velocity = MeterPerSecond(343.0); // speed of sound in air at 20 °C
   std::string vel_json = derived_serialization::to_json(velocity);
   std::cout << "   " << velocity << " → " << vel_json << std::endl;
 
-  MeterPerSecond vel_rt =
-      derived_serialization::from_json<MeterPerSecond>(vel_json);
+  MeterPerSecond vel_rt = derived_serialization::from_json<MeterPerSecond>(vel_json);
   std::cout << "   (restored) " << vel_rt << std::endl;
   assert(std::abs(vel_rt.value() - 343.0) < 1e-9);
 
@@ -104,8 +100,7 @@ int main() {
   std::cout << "   1 AU from JSON → " << au_km << std::endl;
 
   // Self-documenting
-  const std::string ext_full =
-      R"({"value":3.085677581e+16,"unit":"Meter"})"; // 1 parsec
+  const std::string ext_full = R"({"value":3.085677581e+16,"unit":"Meter"})"; // 1 parsec
   Meter pc_m = from_json<Meter>(ext_full);
   std::cout << std::scientific << std::setprecision(4);
   std::cout << "   1 pc from JSON → " << pc_m << std::endl;
@@ -127,7 +122,6 @@ int main() {
   assert(std::abs(field_rt.value() - 2.5) < 1e-9);
   assert(std::abs(work_rt.value() - 8.4) < 1e-9);
 
-  std::cout << "\n=== Serialization demo completed successfully ==="
-            << std::endl;
+  std::cout << "\n=== Serialization demo completed successfully ===" << std::endl;
   return 0;
 }

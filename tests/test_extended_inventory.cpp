@@ -30,14 +30,13 @@ TEST_F(QttyTest, ElectricalAndDensityConversions) {
   Volt v = Millivolt(1000.0).to<Volt>();
   EXPECT_NEAR(v.value(), 1.0, 1e-12);
 
-  KilogramPerCubicMeter rho =
-      PoundPerCubicFoot(1.0).to<KilogramPerCubicMeter>();
+  KilogramPerCubicMeter rho = PoundPerCubicFoot(1.0).to<KilogramPerCubicMeter>();
   EXPECT_NEAR(rho.value(), 16.018463373, 1e-9);
 }
 
 TEST_F(QttyTest, RadiometryAndPhotometryConversions) {
-  WattPerSquareMeterSteradian si = ErgPerSecondSquareCentimeterSteradian(1.0)
-                                       .to<WattPerSquareMeterSteradian>();
+  WattPerSquareMeterSteradian si =
+      ErgPerSecondSquareCentimeterSteradian(1.0).to<WattPerSquareMeterSteradian>();
   EXPECT_NEAR(si.value(), 1.0e-3, 1e-15);
 
   Lumen lm = Kilolumen(1.0).to<Lumen>();
