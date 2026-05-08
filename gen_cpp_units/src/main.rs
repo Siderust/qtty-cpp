@@ -67,6 +67,7 @@ const DIMENSIONS: &[(&str, &str, u32)] = &[
     ("MagneticFlux", "magnetic_flux.hpp", 30),
     ("MagneticFluxDensity", "magnetic_flux_density.hpp", 31),
     ("Density", "density.hpp", 32),
+    ("Dimensionless", "dimensionless.hpp", 33),
 ];
 
 // ---------------------------------------------------------------------------
@@ -216,6 +217,7 @@ fn parse_csv(path: &Path) -> Vec<UnitDef> {
             30 => "MagneticFlux",
             31 => "MagneticFluxDensity",
             32 => "Density",
+            33 => "Dimensionless",
             _ => {
                 eprintln!(
                     "Warning: unknown dimension code {dim_code} for discriminant {discriminant}"
@@ -381,6 +383,7 @@ fn generate_literals(by_dim: &HashMap<&str, Vec<&UnitDef>>, _order: &[&str]) -> 
     writeln!(s, "#include \"units/magnetic_flux.hpp\"").unwrap();
     writeln!(s, "#include \"units/magnetic_flux_density.hpp\"").unwrap();
     writeln!(s, "#include \"units/density.hpp\"").unwrap();
+    writeln!(s, "#include \"units/dimensionless.hpp\"").unwrap();
     writeln!(s).unwrap();
     writeln!(s, "namespace qtty {{").unwrap();
     writeln!(s).unwrap();

@@ -35,6 +35,7 @@
 #include "units/magnetic_flux.hpp"
 #include "units/magnetic_flux_density.hpp"
 #include "units/density.hpp"
+#include "units/dimensionless.hpp"
 
 namespace qtty {
 

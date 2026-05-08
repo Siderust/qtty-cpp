@@ -46,3 +46,31 @@ TEST_F(QttyTest, RadiometryAndPhotometryConversions) {
   Lux lx = Millilux(1000.0).to<Lux>();
   EXPECT_NEAR(lx.value(), 1.0, 1e-12);
 }
+
+TEST_F(QttyTest, DimensionlessUnits) {
+  // All dimensionless units have ratio 1.0, so conversion is identity.
+  OpticalDepth tau(0.5);
+  EXPECT_NEAR(tau.value(), 0.5, 1e-15);
+
+  Airmass X(1.2);
+  EXPECT_NEAR(X.value(), 1.2, 1e-15);
+
+  Transmittance T(0.8);
+  EXPECT_NEAR(T.value(), 0.8, 1e-15);
+
+  Albedo A(0.3);
+  EXPECT_NEAR(A.value(), 0.3, 1e-15);
+
+  IlluminationFraction k(0.75);
+  EXPECT_NEAR(k.value(), 0.75, 1e-15);
+
+  Refractivity n(2.7e-4);
+  EXPECT_NEAR(n.value(), 2.7e-4, 1e-18);
+
+  // Conversion between dimensionless units is identity (same dimension, ratio 1).
+  Airmass from_tau = tau.to<Airmass>();
+  EXPECT_NEAR(from_tau.value(), 0.5, 1e-15);
+
+  Transmittance from_albedo = A.to<Transmittance>();
+  EXPECT_NEAR(from_albedo.value(), 0.3, 1e-15);
+}

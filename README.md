@@ -101,6 +101,60 @@ find_package(qtty_cpp REQUIRED)
 target_link_libraries(your_target PRIVATE qtty::qtty_cpp)
 ```
 
+## Deployment
+
+Packages for Debian/Ubuntu (`.deb`) and RHEL/Fedora/openSUSE (`.rpm`) are built
+with CPack.
+
+### Prerequisites
+
+```bash
+# Debian/Ubuntu
+sudo apt-get install cmake ninja-build rpm
+
+# RHEL/Fedora
+sudo dnf install cmake ninja-build dpkg
+```
+
+### Build the packages
+
+```bash
+git clone --recurse-submodules <repo-url>
+cd qtty-cpp
+
+cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DQTTY_BUILD_DOCS=OFF
+cmake --build build --parallel
+
+# Install headers + cmake config to a staging prefix
+cmake --install build --prefix build/staging
+
+# Generate .deb and .rpm in build/packages/
+cd build
+cpack --config CPackConfig.cmake -G "DEB;RPM" -B packages
+ls packages/
+```
+
+### Install on the target system
+
+```bash
+# Debian/Ubuntu
+sudo dpkg -i packages/qtty-cpp-*.deb
+
+# RHEL/Fedora/openSUSE
+sudo rpm -i packages/qtty-cpp-*.rpm
+```
+
+After installation, headers land in `/usr/local/include/qtty/` and the
+shared library in `/usr/local/lib/`.  CMake consumers can then use:
+
+```cmake
+find_package(qtty_cpp REQUIRED)
+target_link_libraries(your_target PRIVATE qtty::qtty_cpp)
+```
+
+> **Note:** Pre-built `.deb` and `.rpm` packages are also automatically attached
+> to every [GitHub Release](https://github.com/Siderust/qtty-cpp/releases).
+
 ## License
 
 This repository wraps the upstream `qtty` project (git submodule in `qtty/`). See `qtty/LICENSE` for licensing details.
