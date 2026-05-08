@@ -3,39 +3,39 @@
 
 #pragma once
 
-#include "units/length.hpp"
-#include "units/time.hpp"
-#include "units/angular.hpp"
-#include "units/mass.hpp"
-#include "units/power.hpp"
-#include "units/area.hpp"
-#include "units/volume.hpp"
 #include "units/acceleration.hpp"
-#include "units/force.hpp"
-#include "units/energy.hpp"
-#include "units/pressure.hpp"
-#include "units/solid_angle.hpp"
-#include "units/temperature.hpp"
-#include "units/radiance.hpp"
-#include "units/spectral_radiance.hpp"
-#include "units/photon_radiance.hpp"
-#include "units/spectral_photon_radiance.hpp"
-#include "units/inverse_solid_angle.hpp"
-#include "units/luminous_intensity.hpp"
-#include "units/luminous_flux.hpp"
-#include "units/illuminance.hpp"
-#include "units/frequency.hpp"
 #include "units/amount.hpp"
-#include "units/current.hpp"
-#include "units/charge.hpp"
-#include "units/voltage.hpp"
-#include "units/resistance.hpp"
+#include "units/angular.hpp"
+#include "units/area.hpp"
 #include "units/capacitance.hpp"
-#include "units/inductance.hpp"
-#include "units/magnetic_flux.hpp"
-#include "units/magnetic_flux_density.hpp"
+#include "units/charge.hpp"
+#include "units/current.hpp"
 #include "units/density.hpp"
 #include "units/dimensionless.hpp"
+#include "units/energy.hpp"
+#include "units/force.hpp"
+#include "units/frequency.hpp"
+#include "units/illuminance.hpp"
+#include "units/inductance.hpp"
+#include "units/inverse_solid_angle.hpp"
+#include "units/length.hpp"
+#include "units/luminous_flux.hpp"
+#include "units/luminous_intensity.hpp"
+#include "units/magnetic_flux.hpp"
+#include "units/magnetic_flux_density.hpp"
+#include "units/mass.hpp"
+#include "units/photon_radiance.hpp"
+#include "units/power.hpp"
+#include "units/pressure.hpp"
+#include "units/radiance.hpp"
+#include "units/resistance.hpp"
+#include "units/solid_angle.hpp"
+#include "units/spectral_photon_radiance.hpp"
+#include "units/spectral_radiance.hpp"
+#include "units/temperature.hpp"
+#include "units/time.hpp"
+#include "units/voltage.hpp"
+#include "units/volume.hpp"
 
 namespace qtty {
 
@@ -214,10 +214,12 @@ constexpr ClassicalElectronRadius operator""_re(unsigned long long value) {
   return ClassicalElectronRadius(static_cast<double>(value));
 }
 
-constexpr ElectronReducedComptonWavelength operator""_lambda_bar_e(long double value) {
+constexpr ElectronReducedComptonWavelength
+operator""_lambda_bar_e(long double value) {
   return ElectronReducedComptonWavelength(static_cast<double>(value));
 }
-constexpr ElectronReducedComptonWavelength operator""_lambda_bar_e(unsigned long long value) {
+constexpr ElectronReducedComptonWavelength
+operator""_lambda_bar_e(unsigned long long value) {
   return ElectronReducedComptonWavelength(static_cast<double>(value));
 }
 
@@ -343,7 +345,8 @@ constexpr NominalLunarDistance operator""_LD(unsigned long long value) {
 constexpr NominalEarthPolarRadius operator""_Rearth_p(long double value) {
   return NominalEarthPolarRadius(static_cast<double>(value));
 }
-constexpr NominalEarthPolarRadius operator""_Rearth_p(unsigned long long value) {
+constexpr NominalEarthPolarRadius
+operator""_Rearth_p(unsigned long long value) {
   return NominalEarthPolarRadius(static_cast<double>(value));
 }
 
@@ -357,21 +360,24 @@ constexpr NominalEarthRadius operator""_Rearth(unsigned long long value) {
 constexpr NominalEarthEquatorialRadius operator""_Rearth_eq(long double value) {
   return NominalEarthEquatorialRadius(static_cast<double>(value));
 }
-constexpr NominalEarthEquatorialRadius operator""_Rearth_eq(unsigned long long value) {
+constexpr NominalEarthEquatorialRadius
+operator""_Rearth_eq(unsigned long long value) {
   return NominalEarthEquatorialRadius(static_cast<double>(value));
 }
 
 constexpr EarthMeridionalCircumference operator""_Cmer(long double value) {
   return EarthMeridionalCircumference(static_cast<double>(value));
 }
-constexpr EarthMeridionalCircumference operator""_Cmer(unsigned long long value) {
+constexpr EarthMeridionalCircumference
+operator""_Cmer(unsigned long long value) {
   return EarthMeridionalCircumference(static_cast<double>(value));
 }
 
 constexpr EarthEquatorialCircumference operator""_Ceq(long double value) {
   return EarthEquatorialCircumference(static_cast<double>(value));
 }
-constexpr EarthEquatorialCircumference operator""_Ceq(unsigned long long value) {
+constexpr EarthEquatorialCircumference
+operator""_Ceq(unsigned long long value) {
   return EarthEquatorialCircumference(static_cast<double>(value));
 }
 
@@ -1455,14 +1461,17 @@ constexpr Rankine operator""_degR(unsigned long long value) {
 constexpr WattPerSquareMeterSteradian operator""_Wmsr(long double value) {
   return WattPerSquareMeterSteradian(static_cast<double>(value));
 }
-constexpr WattPerSquareMeterSteradian operator""_Wmsr(unsigned long long value) {
+constexpr WattPerSquareMeterSteradian
+operator""_Wmsr(unsigned long long value) {
   return WattPerSquareMeterSteradian(static_cast<double>(value));
 }
 
-constexpr ErgPerSecondSquareCentimeterSteradian operator""_ergscmsr(long double value) {
+constexpr ErgPerSecondSquareCentimeterSteradian
+operator""_ergscmsr(long double value) {
   return ErgPerSecondSquareCentimeterSteradian(static_cast<double>(value));
 }
-constexpr ErgPerSecondSquareCentimeterSteradian operator""_ergscmsr(unsigned long long value) {
+constexpr ErgPerSecondSquareCentimeterSteradian
+operator""_ergscmsr(unsigned long long value) {
   return ErgPerSecondSquareCentimeterSteradian(static_cast<double>(value));
 }
 
@@ -1473,14 +1482,17 @@ constexpr ErgPerSecondSquareCentimeterSteradian operator""_ergscmsr(unsigned lon
 constexpr WattPerSquareMeterSteradianMeter operator""_Wmsrm(long double value) {
   return WattPerSquareMeterSteradianMeter(static_cast<double>(value));
 }
-constexpr WattPerSquareMeterSteradianMeter operator""_Wmsrm(unsigned long long value) {
+constexpr WattPerSquareMeterSteradianMeter
+operator""_Wmsrm(unsigned long long value) {
   return WattPerSquareMeterSteradianMeter(static_cast<double>(value));
 }
 
-constexpr WattPerSquareMeterSteradianNanometer operator""_Wmsrnm(long double value) {
+constexpr WattPerSquareMeterSteradianNanometer
+operator""_Wmsrnm(long double value) {
   return WattPerSquareMeterSteradianNanometer(static_cast<double>(value));
 }
-constexpr WattPerSquareMeterSteradianNanometer operator""_Wmsrnm(unsigned long long value) {
+constexpr WattPerSquareMeterSteradianNanometer
+operator""_Wmsrnm(unsigned long long value) {
   return WattPerSquareMeterSteradianNanometer(static_cast<double>(value));
 }
 
@@ -1488,50 +1500,68 @@ constexpr WattPerSquareMeterSteradianNanometer operator""_Wmsrnm(unsigned long l
 // PhotonRadiance literals
 // ====================
 
-constexpr PhotonPerSquareMeterSecondSteradian operator""_phmssr(long double value) {
+constexpr PhotonPerSquareMeterSecondSteradian
+operator""_phmssr(long double value) {
   return PhotonPerSquareMeterSecondSteradian(static_cast<double>(value));
 }
-constexpr PhotonPerSquareMeterSecondSteradian operator""_phmssr(unsigned long long value) {
+constexpr PhotonPerSquareMeterSecondSteradian
+operator""_phmssr(unsigned long long value) {
   return PhotonPerSquareMeterSecondSteradian(static_cast<double>(value));
 }
 
-constexpr PhotonPerSquareCentimeterSecondSteradian operator""_phcmssr(long double value) {
+constexpr PhotonPerSquareCentimeterSecondSteradian
+operator""_phcmssr(long double value) {
   return PhotonPerSquareCentimeterSecondSteradian(static_cast<double>(value));
 }
-constexpr PhotonPerSquareCentimeterSecondSteradian operator""_phcmssr(unsigned long long value) {
+constexpr PhotonPerSquareCentimeterSecondSteradian
+operator""_phcmssr(unsigned long long value) {
   return PhotonPerSquareCentimeterSecondSteradian(static_cast<double>(value));
 }
 
-constexpr PhotonPerSquareCentimeterNanosecondSteradian operator""_phcmnssr(long double value) {
-  return PhotonPerSquareCentimeterNanosecondSteradian(static_cast<double>(value));
+constexpr PhotonPerSquareCentimeterNanosecondSteradian
+operator""_phcmnssr(long double value) {
+  return PhotonPerSquareCentimeterNanosecondSteradian(
+      static_cast<double>(value));
 }
-constexpr PhotonPerSquareCentimeterNanosecondSteradian operator""_phcmnssr(unsigned long long value) {
-  return PhotonPerSquareCentimeterNanosecondSteradian(static_cast<double>(value));
+constexpr PhotonPerSquareCentimeterNanosecondSteradian
+operator""_phcmnssr(unsigned long long value) {
+  return PhotonPerSquareCentimeterNanosecondSteradian(
+      static_cast<double>(value));
 }
 
 // ====================
 // SpectralPhotonRadiance literals
 // ====================
 
-constexpr PhotonPerSquareMeterSecondSteradianMeter operator""_phmssrm(long double value) {
+constexpr PhotonPerSquareMeterSecondSteradianMeter
+operator""_phmssrm(long double value) {
   return PhotonPerSquareMeterSecondSteradianMeter(static_cast<double>(value));
 }
-constexpr PhotonPerSquareMeterSecondSteradianMeter operator""_phmssrm(unsigned long long value) {
+constexpr PhotonPerSquareMeterSecondSteradianMeter
+operator""_phmssrm(unsigned long long value) {
   return PhotonPerSquareMeterSecondSteradianMeter(static_cast<double>(value));
 }
 
-constexpr PhotonPerSquareCentimeterSecondSteradianNanometer operator""_phcmssrnm(long double value) {
-  return PhotonPerSquareCentimeterSecondSteradianNanometer(static_cast<double>(value));
+constexpr PhotonPerSquareCentimeterSecondSteradianNanometer
+operator""_phcmssrnm(long double value) {
+  return PhotonPerSquareCentimeterSecondSteradianNanometer(
+      static_cast<double>(value));
 }
-constexpr PhotonPerSquareCentimeterSecondSteradianNanometer operator""_phcmssrnm(unsigned long long value) {
-  return PhotonPerSquareCentimeterSecondSteradianNanometer(static_cast<double>(value));
+constexpr PhotonPerSquareCentimeterSecondSteradianNanometer
+operator""_phcmssrnm(unsigned long long value) {
+  return PhotonPerSquareCentimeterSecondSteradianNanometer(
+      static_cast<double>(value));
 }
 
-constexpr PhotonPerSquareCentimeterNanosecondSteradianNanometer operator""_phcmnssrnm(long double value) {
-  return PhotonPerSquareCentimeterNanosecondSteradianNanometer(static_cast<double>(value));
+constexpr PhotonPerSquareCentimeterNanosecondSteradianNanometer
+operator""_phcmnssrnm(long double value) {
+  return PhotonPerSquareCentimeterNanosecondSteradianNanometer(
+      static_cast<double>(value));
 }
-constexpr PhotonPerSquareCentimeterNanosecondSteradianNanometer operator""_phcmnssrnm(unsigned long long value) {
-  return PhotonPerSquareCentimeterNanosecondSteradianNanometer(static_cast<double>(value));
+constexpr PhotonPerSquareCentimeterNanosecondSteradianNanometer
+operator""_phcmnssrnm(unsigned long long value) {
+  return PhotonPerSquareCentimeterNanosecondSteradianNanometer(
+      static_cast<double>(value));
 }
 
 // ====================

@@ -17,7 +17,9 @@ template <> struct UnitTraits<KilogramPerCubicMeterTag> {
   static constexpr std::string_view symbol() { return "kg/m³"; }
 };
 template <> struct UnitTraits<GramPerCubicCentimeterTag> {
-  static constexpr UnitId unit_id() { return UNIT_ID_GRAM_PER_CUBIC_CENTIMETER; }
+  static constexpr UnitId unit_id() {
+    return UNIT_ID_GRAM_PER_CUBIC_CENTIMETER;
+  }
   static constexpr std::string_view symbol() { return "g/cm³"; }
 };
 template <> struct UnitTraits<GramPerMilliliterTag> {

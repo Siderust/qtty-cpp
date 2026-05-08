@@ -67,7 +67,8 @@ TEST_F(QttyTest, DimensionlessUnits) {
   Refractivity n(2.7e-4);
   EXPECT_NEAR(n.value(), 2.7e-4, 1e-18);
 
-  // Conversion between dimensionless units is identity (same dimension, ratio 1).
+  // Conversion between dimensionless units is identity (same dimension, ratio
+  // 1).
   Airmass from_tau = tau.to<Airmass>();
   EXPECT_NEAR(from_tau.value(), 0.5, 1e-15);
 
