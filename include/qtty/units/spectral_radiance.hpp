@@ -20,12 +20,15 @@ template <> struct UnitTraits<WattPerSquareMeterSteradianNanometerTag> {
   static constexpr std::string_view symbol() { return "W·m⁻²·sr⁻¹·nm⁻¹"; }
 };
 template <> struct UnitTraits<ErgPerSecondSquareCentimeterSteradianAngstromTag> {
-  static constexpr UnitId unit_id() { return UNIT_ID_ERG_PER_SECOND_SQUARE_CENTIMETER_STERADIAN_ANGSTROM; }
+  static constexpr UnitId unit_id() {
+    return UNIT_ID_ERG_PER_SECOND_SQUARE_CENTIMETER_STERADIAN_ANGSTROM;
+  }
   static constexpr std::string_view symbol() { return "erg·s⁻¹·cm⁻²·sr⁻¹·Å⁻¹"; }
 };
 
 using WattPerSquareMeterSteradianMeter = Quantity<WattPerSquareMeterSteradianMeterTag>;
 using WattPerSquareMeterSteradianNanometer = Quantity<WattPerSquareMeterSteradianNanometerTag>;
-using ErgPerSecondSquareCentimeterSteradianAngstrom = Quantity<ErgPerSecondSquareCentimeterSteradianAngstromTag>;
+using ErgPerSecondSquareCentimeterSteradianAngstrom =
+    Quantity<ErgPerSecondSquareCentimeterSteradianAngstromTag>;
 
 } // namespace qtty
