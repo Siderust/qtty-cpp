@@ -5,6 +5,20 @@ All notable changes to `qtty-cpp` are documented in this file.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.2] - 2026-07-15
+
+### Changed
+- Reformatted spectral and photon radiance unit headers
+  (`photon_radiance.hpp`, `spectral_photon_radiance.hpp`,
+  `spectral_radiance.hpp`) for code consistency: collapsed single-expression
+  `unit_id()` definitions to one line and consolidated multi-line `using`
+  type aliases to single lines.
+- Reordered `#include` directives in `literals.hpp` from alphabetical to a
+  logical physical-dimension grouping (length → time → angular → mass → …),
+  and reformatted some operator bodies to the multi-line brace style used
+  elsewhere.
+- Updated `gen_cpp_units/Cargo.lock` with a minor dependency refresh.
+
 ## [0.4.1] - 2026-05-08
 
 ### Added
