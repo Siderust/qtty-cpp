@@ -53,7 +53,8 @@ jobs:
           set -euo pipefail
           cmake -S . -B build -G Ninja \
             -DCMAKE_BUILD_TYPE=Release \
-            -DQTTY_BUILD_DOCS=OFF
+            -DQTTY_BUILD_DOCS=OFF \
+            -DINSTALL_GTEST=OFF
 
       - name: Build (full)
         shell: bash
