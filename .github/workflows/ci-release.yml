@@ -5,6 +5,8 @@ on:
     secrets:
       GITHUB_TOKEN:
         required: false
+      PAGES_DEPLOY_TOKEN:
+        required: true
 
 jobs:
   release:
@@ -64,16 +66,16 @@ jobs:
           createrepo_c site/rpm
 
       - name: Add custom domain
-        if: ${{ vars.PAGES_DOMAIN != '' }}
         shell: bash
         run: |
-          echo "${{ vars.PAGES_DOMAIN }}" > site/CNAME
+          echo "siderust.org" > site/CNAME
 
-      - name: Publish APT/RPM repositories to GitHub Pages
+      - name: Publish repositories to siderust.github.io
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          personal_token: ${{ secrets.PAGES_DEPLOY_TOKEN }}
+          external_repository: Siderust/siderust.github.io
           publish_branch: gh-pages
           publish_dir: ./site
           keep_files: true
-          cname: ${{ vars.PAGES_DOMAIN }}
+          cname: siderust.org
