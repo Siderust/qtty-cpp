@@ -261,19 +261,22 @@ gtest_discover_tests(test_ffi
 )
 
 # Installation rules
-install(DIRECTORY include/qtty 
+install(DIRECTORY include/qtty
     DESTINATION include
+    COMPONENT qtty-cpp
     FILES_MATCHING PATTERN "*.hpp"
 )
 
 install(DIRECTORY ${QTTY_FFI_INCLUDE_DIR}/
     DESTINATION include
+    COMPONENT qtty-cpp
     FILES_MATCHING PATTERN "*.h"
 )
 
 # Install the qtty_ffi shared library
 install(FILES ${QTTY_LIBRARY_PATH}
     DESTINATION lib
+    COMPONENT qtty-cpp
 )
 
 # Install CMake config files for find_package support
@@ -298,6 +301,7 @@ install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/qtty_cppConfig.cmake
     ${CMAKE_CURRENT_BINARY_DIR}/qtty_cppConfigVersion.cmake
     DESTINATION lib/cmake/qtty_cpp
+    COMPONENT qtty-cpp
 )
 
 # Export targets
@@ -310,6 +314,7 @@ install(EXPORT qtty_cppTargets
     FILE qtty_cppTargets.cmake
     NAMESPACE qtty::
     DESTINATION lib/cmake/qtty_cpp
+    COMPONENT qtty-cpp
 )
 
 # ---------------------------------------------------------------------------
@@ -330,6 +335,8 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
         "package config.")
     set(CPACK_RESOURCE_FILE_LICENSE    "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
     set(CPACK_PACKAGE_HOMEPAGE_URL     "https://github.com/Siderust/qtty-cpp")
+
+    set(CPACK_COMPONENTS_ALL "qtty-cpp")
 
     # -- DEB -------------------------------------------------------------------
     set(CPACK_DEBIAN_PACKAGE_MAINTAINER "VPRamon <vallespuigramon@gmail.com>")
