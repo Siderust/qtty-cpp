@@ -16,6 +16,16 @@ and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   longer registered as install rules, preventing file-conflict errors such as
   `trying to overwrite '/usr/include/qtty/ffi_core.hpp'` when multiple packages
   are installed simultaneously.
+- Added a `scripts/fmt.sh` compatibility wrapper so `scripts/ci.sh fmt` / `all`
+  delegates to the same clang-format and clang-tidy pipeline as `scripts/lint.sh`.
+- CI lint now runs `scripts/lint.sh --check` directly so the GitHub Actions
+  lint rules stay aligned with the local developer script entrypoint.
+- Documentation targets are now project-specific: `qtty-cpp` builds `qtty_docs`
+  internally and only exposes `docs` as the top-level alias, preventing nested
+  consumers from colliding on a generic `docs` target name.
+- `docs/Doxyfile.in` no longer points `PROJECT_LOGO` at a missing
+  `../../public/logo.png`, eliminating a Doxygen configuration error from the
+  docs build.
 
 ## [0.4.2] - 2026-07-15
 

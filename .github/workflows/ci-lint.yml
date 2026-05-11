@@ -41,33 +41,8 @@ jobs:
         with:
           toolchain: stable
 
-      - name: Configure (CMake, compile commands)
+      - name: Run lint pipeline
         shell: bash
         run: |
           set -euo pipefail
-          cmake -S . -B build -G Ninja -DQTTY_BUILD_DOCS=OFF -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
-
-      - name: clang-format check
-        shell: bash
-        run: |
-          set -euo pipefail
-          mapfile -t files < <(git ls-files '*.hpp' '*.cpp')
-          if [ ${#files[@]} -eq 0 ]; then
-            echo "No C++ files found."
-            exit 0
-          fi
-          clang-format --dry-run --Werror "${files[@]}"
-
-      - name: clang-tidy check
-        shell: bash
-        run: |
-          set -euo pipefail
-          mapfile -t cpp_files < <(git ls-files '*.cpp')
-          if [ ${#cpp_files[@]} -eq 0 ]; then
-            echo "No C++ source files found."
-            exit 0
-          fi
-          for file in "${cpp_files[@]}"; do
-            echo "Running clang-tidy on ${file}"
-            clang-tidy -p build --warnings-as-errors='*' "${file}"
-          done
+          ./scripts/lint.sh --check

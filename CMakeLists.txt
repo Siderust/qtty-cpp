@@ -147,13 +147,21 @@ if(QTTY_BUILD_DOCS)
         set(QTTY_DOXYFILE_OUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile.qtty_cpp)
         configure_file(${QTTY_DOXYFILE_IN} ${QTTY_DOXYFILE_OUT} @ONLY)
 
-        add_custom_target(docs
+        add_custom_target(qtty_docs
             COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/docs/doxygen
             COMMAND ${DOXYGEN_EXECUTABLE} ${QTTY_DOXYFILE_OUT}
             WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
             COMMENT "Generating API documentation with Doxygen"
             VERBATIM
         )
+
+        if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+            if(NOT TARGET docs)
+                add_custom_target(docs DEPENDS qtty_docs)
+            else()
+                message(STATUS "Top-level 'docs' target already exists; skipping creation to avoid conflict with subprojects")
+            endif()
+        endif()
     else()
         message(STATUS "Doxygen not found; 'docs' target will not be available")
     endif()
