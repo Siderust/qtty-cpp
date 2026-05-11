@@ -5,6 +5,18 @@ All notable changes to `qtty-cpp` are documented in this file.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.3] - 2026-05-11
+
+### Fixed
+
+- `CMakeLists.txt`: guarded all `install()` rules, `CMakePackageConfigHelpers`
+  calls, tests, examples, and GoogleTest integration inside
+  `if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)`.  When qtty-cpp is
+  used as a subdirectory by tempoch-cpp or siderust-cpp, its artifacts are no
+  longer registered as install rules, preventing file-conflict errors such as
+  `trying to overwrite '/usr/include/qtty/ffi_core.hpp'` when multiple packages
+  are installed simultaneously.
+
 ## [0.4.2] - 2026-07-15
 
 ### Changed

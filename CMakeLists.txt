@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(qtty_cpp VERSION 0.4.2 LANGUAGES CXX)
+project(qtty_cpp VERSION 0.4.3 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -174,7 +174,13 @@ elseif(UNIX)
     endif()
 endif()
 
-# Google Test integration
+# ---------------------------------------------------------------------------
+# Tests, examples and Google Test — only when qtty-cpp is the top-level project.
+# Skipped when used as a subdirectory (tempoch-cpp, siderust-cpp) to avoid
+# building unnecessary artifacts and pulling in a second GTest instance.
+# ---------------------------------------------------------------------------
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+
 include(FetchContent)
 FetchContent_Declare(
     googletest
@@ -183,8 +189,8 @@ FetchContent_Declare(
 )
 # For Windows: Prevent overriding the parent project's compiler/linker settings
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-# Disable googletest installation rules in downstream projects —
-# we don't want GTest/GMock files installed when packaging qtty-cpp.
+# Disable googletest installation rules — we don't want GTest/GMock files installed
+# when packaging qtty-cpp.
 set(INSTALL_GTEST OFF CACHE BOOL "Disable installing googletest components" FORCE)
 FetchContent_MakeAvailable(googletest)
 
@@ -260,68 +266,67 @@ gtest_discover_tests(test_ffi
     PROPERTIES LABELS "qtty_cpp"
 )
 
-# Installation rules
-install(DIRECTORY include/qtty
-    DESTINATION include
-    COMPONENT qtty-cpp
-    FILES_MATCHING PATTERN "*.hpp"
-)
-
-install(DIRECTORY ${QTTY_FFI_INCLUDE_DIR}/
-    DESTINATION include
-    COMPONENT qtty-cpp
-    FILES_MATCHING PATTERN "*.h"
-)
-
-# Install the qtty_ffi shared library
-install(FILES ${QTTY_LIBRARY_PATH}
-    DESTINATION lib
-    COMPONENT qtty-cpp
-)
-
-# Install CMake config files for find_package support
-include(CMakePackageConfigHelpers)
-
-# Create the config file
-configure_package_config_file(
-    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/qtty_cppConfig.cmake.in
-    ${CMAKE_CURRENT_BINARY_DIR}/qtty_cppConfig.cmake
-    INSTALL_DESTINATION lib/cmake/qtty_cpp
-)
-
-# Create the version file
-write_basic_package_version_file(
-    ${CMAKE_CURRENT_BINARY_DIR}/qtty_cppConfigVersion.cmake
-    VERSION ${PROJECT_VERSION}
-    COMPATIBILITY SameMajorVersion
-)
-
-# Install the config and version files
-install(FILES
-    ${CMAKE_CURRENT_BINARY_DIR}/qtty_cppConfig.cmake
-    ${CMAKE_CURRENT_BINARY_DIR}/qtty_cppConfigVersion.cmake
-    DESTINATION lib/cmake/qtty_cpp
-    COMPONENT qtty-cpp
-)
-
-# Export targets
-install(TARGETS qtty_cpp
-    EXPORT qtty_cppTargets
-    INCLUDES DESTINATION include
-)
-
-install(EXPORT qtty_cppTargets
-    FILE qtty_cppTargets.cmake
-    NAMESPACE qtty::
-    DESTINATION lib/cmake/qtty_cpp
-    COMPONENT qtty-cpp
-)
+endif() # CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR
 
 # ---------------------------------------------------------------------------
-# Packaging (CPack — DEB and RPM)
-# Only define package metadata when qtty-cpp is the top-level project.
+# Installation and Packaging (CPack — DEB and RPM)
+# Only active when qtty-cpp is the top-level project.  When used as a
+# subdirectory the install rules are intentionally suppressed so that
+# parent packages (tempoch-cpp, siderust-cpp) do not accidentally include
+# qtty-cpp artifacts and create file conflicts on the target system.
 # ---------------------------------------------------------------------------
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+
+    install(DIRECTORY include/qtty
+        DESTINATION include
+        COMPONENT qtty-cpp
+        FILES_MATCHING PATTERN "*.hpp"
+    )
+
+    install(DIRECTORY ${QTTY_FFI_INCLUDE_DIR}/
+        DESTINATION include
+        COMPONENT qtty-cpp
+        FILES_MATCHING PATTERN "*.h"
+    )
+
+    install(FILES ${QTTY_LIBRARY_PATH}
+        DESTINATION lib
+        COMPONENT qtty-cpp
+    )
+
+    include(CMakePackageConfigHelpers)
+
+    configure_package_config_file(
+        ${CMAKE_CURRENT_SOURCE_DIR}/cmake/qtty_cppConfig.cmake.in
+        ${CMAKE_CURRENT_BINARY_DIR}/qtty_cppConfig.cmake
+        INSTALL_DESTINATION lib/cmake/qtty_cpp
+    )
+
+    write_basic_package_version_file(
+        ${CMAKE_CURRENT_BINARY_DIR}/qtty_cppConfigVersion.cmake
+        VERSION ${PROJECT_VERSION}
+        COMPATIBILITY SameMajorVersion
+    )
+
+    install(FILES
+        ${CMAKE_CURRENT_BINARY_DIR}/qtty_cppConfig.cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/qtty_cppConfigVersion.cmake
+        DESTINATION lib/cmake/qtty_cpp
+        COMPONENT qtty-cpp
+    )
+
+    install(TARGETS qtty_cpp
+        EXPORT qtty_cppTargets
+        INCLUDES DESTINATION include
+    )
+
+    install(EXPORT qtty_cppTargets
+        FILE qtty_cppTargets.cmake
+        NAMESPACE qtty::
+        DESTINATION lib/cmake/qtty_cpp
+        COMPONENT qtty-cpp
+    )
+
     set(CPACK_PACKAGE_NAME             "qtty-cpp")
     set(CPACK_PACKAGE_VERSION          "${PROJECT_VERSION}")
     set(CPACK_PACKAGE_VENDOR           "Siderust")
@@ -353,7 +358,8 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     set(CPACK_GENERATOR "DEB;RPM")
 
     include(CPack)
-endif()
+
+endif() # CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR
 
 # Generate unit files (if needed)
 add_custom_target(
