@@ -26,6 +26,9 @@ and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - `docs/Doxyfile.in` no longer points `PROJECT_LOGO` at a missing
   `../../public/logo.png`, eliminating a Doxygen configuration error from the
   docs build.
+- `gen_cpp_units` now emits headers and literal overloads in the same shape
+  required by the repository's active `.clang-format` rules, so regenerated
+  files no longer fail the `clang-format --dry-run --Werror` CI check.
 
 ## [0.4.2] - 2026-07-15
 

@@ -32,6 +32,7 @@ use std::path::{Path, PathBuf};
 
 const LICENSE: &str = "// SPDX-License-Identifier: BSD-3-Clause\n\
                         // Copyright (C) 2026 Vallés Puig, Ramon\n";
+const COLUMN_LIMIT: usize = 100;
 
 /// Dimension name → (output file name, discriminant leading code).
 const DIMENSIONS: &[(&str, &str, u32)] = &[
@@ -313,12 +314,12 @@ fn generate_dimension_header(_dimension: &str, units: &[&UnitDef]) -> String {
     // UnitTraits specializations
     for unit in units {
         writeln!(s, "template <> struct UnitTraits<{}Tag> {{", unit.name).unwrap();
-        writeln!(
-            s,
-            "  static constexpr UnitId unit_id() {{ return UNIT_ID_{}; }}",
-            unit.const_suffix
-        )
-        .unwrap();
+        write_wrapped_member_return(
+            &mut s,
+            "UnitId",
+            "unit_id()",
+            &format!("UNIT_ID_{}", unit.const_suffix),
+        );
         writeln!(
             s,
             "  static constexpr std::string_view symbol() {{ return \"{}\"; }}",
@@ -331,7 +332,7 @@ fn generate_dimension_header(_dimension: &str, units: &[&UnitDef]) -> String {
 
     // Type aliases
     for unit in units {
-        writeln!(s, "using {name} = Quantity<{name}Tag>;", name = unit.name).unwrap();
+        write_wrapped_using_alias(&mut s, &unit.name, &format!("Quantity<{}Tag>", unit.name));
     }
     writeln!(s).unwrap();
 
@@ -351,39 +352,45 @@ fn generate_literals(by_dim: &HashMap<&str, Vec<&UnitDef>>, _order: &[&str]) -> 
     writeln!(s, "{LICENSE}").unwrap();
     writeln!(s, "#pragma once").unwrap();
     writeln!(s).unwrap();
-    writeln!(s, "#include \"units/length.hpp\"").unwrap();
-    writeln!(s, "#include \"units/time.hpp\"").unwrap();
-    writeln!(s, "#include \"units/angular.hpp\"").unwrap();
-    writeln!(s, "#include \"units/mass.hpp\"").unwrap();
-    writeln!(s, "#include \"units/power.hpp\"").unwrap();
-    writeln!(s, "#include \"units/area.hpp\"").unwrap();
-    writeln!(s, "#include \"units/volume.hpp\"").unwrap();
-    writeln!(s, "#include \"units/acceleration.hpp\"").unwrap();
-    writeln!(s, "#include \"units/force.hpp\"").unwrap();
-    writeln!(s, "#include \"units/energy.hpp\"").unwrap();
-    writeln!(s, "#include \"units/pressure.hpp\"").unwrap();
-    writeln!(s, "#include \"units/solid_angle.hpp\"").unwrap();
-    writeln!(s, "#include \"units/temperature.hpp\"").unwrap();
-    writeln!(s, "#include \"units/radiance.hpp\"").unwrap();
-    writeln!(s, "#include \"units/spectral_radiance.hpp\"").unwrap();
-    writeln!(s, "#include \"units/photon_radiance.hpp\"").unwrap();
-    writeln!(s, "#include \"units/spectral_photon_radiance.hpp\"").unwrap();
-    writeln!(s, "#include \"units/inverse_solid_angle.hpp\"").unwrap();
-    writeln!(s, "#include \"units/luminous_intensity.hpp\"").unwrap();
-    writeln!(s, "#include \"units/luminous_flux.hpp\"").unwrap();
-    writeln!(s, "#include \"units/illuminance.hpp\"").unwrap();
-    writeln!(s, "#include \"units/frequency.hpp\"").unwrap();
-    writeln!(s, "#include \"units/amount.hpp\"").unwrap();
-    writeln!(s, "#include \"units/current.hpp\"").unwrap();
-    writeln!(s, "#include \"units/charge.hpp\"").unwrap();
-    writeln!(s, "#include \"units/voltage.hpp\"").unwrap();
-    writeln!(s, "#include \"units/resistance.hpp\"").unwrap();
-    writeln!(s, "#include \"units/capacitance.hpp\"").unwrap();
-    writeln!(s, "#include \"units/inductance.hpp\"").unwrap();
-    writeln!(s, "#include \"units/magnetic_flux.hpp\"").unwrap();
-    writeln!(s, "#include \"units/magnetic_flux_density.hpp\"").unwrap();
-    writeln!(s, "#include \"units/density.hpp\"").unwrap();
-    writeln!(s, "#include \"units/dimensionless.hpp\"").unwrap();
+    let mut includes = vec![
+        "units/length.hpp",
+        "units/time.hpp",
+        "units/angular.hpp",
+        "units/mass.hpp",
+        "units/power.hpp",
+        "units/area.hpp",
+        "units/volume.hpp",
+        "units/acceleration.hpp",
+        "units/force.hpp",
+        "units/energy.hpp",
+        "units/pressure.hpp",
+        "units/solid_angle.hpp",
+        "units/temperature.hpp",
+        "units/radiance.hpp",
+        "units/spectral_radiance.hpp",
+        "units/photon_radiance.hpp",
+        "units/spectral_photon_radiance.hpp",
+        "units/inverse_solid_angle.hpp",
+        "units/luminous_intensity.hpp",
+        "units/luminous_flux.hpp",
+        "units/illuminance.hpp",
+        "units/frequency.hpp",
+        "units/amount.hpp",
+        "units/current.hpp",
+        "units/charge.hpp",
+        "units/voltage.hpp",
+        "units/resistance.hpp",
+        "units/capacitance.hpp",
+        "units/inductance.hpp",
+        "units/magnetic_flux.hpp",
+        "units/magnetic_flux_density.hpp",
+        "units/density.hpp",
+        "units/dimensionless.hpp",
+    ];
+    includes.sort_unstable();
+    for include in includes {
+        writeln!(s, "#include \"{include}\"").unwrap();
+    }
     writeln!(s).unwrap();
     writeln!(s, "namespace qtty {{").unwrap();
     writeln!(s).unwrap();
@@ -416,32 +423,8 @@ fn generate_literals(by_dim: &HashMap<&str, Vec<&UnitDef>>, _order: &[&str]) -> 
             used_suffixes.insert(suffix.clone(), unit.name.clone());
 
             writeln!(section).unwrap();
-            writeln!(
-                section,
-                "constexpr {name} operator\"\"_{suffix}(long double value) {{",
-                name = unit.name
-            )
-            .unwrap();
-            writeln!(
-                section,
-                "  return {name}(static_cast<double>(value));",
-                name = unit.name
-            )
-            .unwrap();
-            writeln!(section, "}}").unwrap();
-            writeln!(
-                section,
-                "constexpr {name} operator\"\"_{suffix}(unsigned long long value) {{",
-                name = unit.name
-            )
-            .unwrap();
-            writeln!(
-                section,
-                "  return {name}(static_cast<double>(value));",
-                name = unit.name
-            )
-            .unwrap();
-            writeln!(section, "}}").unwrap();
+            write_wrapped_literal(&mut section, &unit.name, &suffix, "long double");
+            write_wrapped_literal(&mut section, &unit.name, &suffix, "unsigned long long");
             has_any = true;
         }
 
@@ -515,6 +498,46 @@ fn make_literal_suffix(symbol: &str) -> Option<String> {
 /// which is valid in C++11 and later string literals.
 fn escape_cpp_string(s: &str) -> String {
     s.replace('\\', "\\\\").replace('"', "\\\"")
+}
+
+fn write_wrapped_member_return(out: &mut String, return_type: &str, signature: &str, expr: &str) {
+    let one_line = format!("  static constexpr {return_type} {signature} {{ return {expr}; }}");
+    if one_line.len() <= COLUMN_LIMIT {
+        writeln!(out, "{one_line}").unwrap();
+    } else {
+        writeln!(out, "  static constexpr {return_type} {signature} {{").unwrap();
+        writeln!(out, "    return {expr};").unwrap();
+        writeln!(out, "  }}").unwrap();
+    }
+}
+
+fn write_wrapped_using_alias(out: &mut String, name: &str, alias: &str) {
+    let one_line = format!("using {name} = {alias};");
+    if one_line.len() <= COLUMN_LIMIT {
+        writeln!(out, "{one_line}").unwrap();
+    } else {
+        writeln!(out, "using {name} =").unwrap();
+        writeln!(out, "    {alias};").unwrap();
+    }
+}
+
+fn write_wrapped_literal(out: &mut String, name: &str, suffix: &str, param_type: &str) {
+    let signature = format!("constexpr {name} operator\"\"_{suffix}({param_type} value) {{");
+    let one_line = format!(
+        "constexpr {name} operator\"\"_{suffix}({param_type} value) {{ return {name}(static_cast<double>(value)); }}"
+    );
+    if one_line.len() <= COLUMN_LIMIT {
+        writeln!(out, "{one_line}").unwrap();
+    } else if signature.len() <= COLUMN_LIMIT {
+        writeln!(out, "{signature}").unwrap();
+    } else {
+        writeln!(out, "constexpr {name}").unwrap();
+        writeln!(out, "operator\"\"_{suffix}({param_type} value) {{").unwrap();
+    }
+    if one_line.len() > COLUMN_LIMIT {
+        writeln!(out, "  return {name}(static_cast<double>(value));").unwrap();
+        writeln!(out, "}}").unwrap();
+    }
 }
 
 // ---------------------------------------------------------------------------
