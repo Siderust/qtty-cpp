@@ -5,6 +5,12 @@ All notable changes to `qtty-cpp` are documented in this file.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.4] - 2026-05-15
+
+### Changed
+
+- Update qtty crate
+
 ## [0.4.3] - 2026-05-11
 
 ### Fixed
