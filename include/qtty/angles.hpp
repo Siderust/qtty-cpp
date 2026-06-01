@@ -28,9 +28,9 @@ template <class Tag> struct AngularTraits {
   static constexpr bool is_angular = false;
 };
 
-#define QTTY_MARK_ANGULAR(Tag)                                                  \
-  template <> struct AngularTraits<Tag> {                                       \
-    static constexpr bool is_angular = true;                                    \
+#define QTTY_MARK_ANGULAR(Tag)                                                                     \
+  template <> struct AngularTraits<Tag> {                                                          \
+    static constexpr bool is_angular = true;                                                       \
   }
 
 QTTY_MARK_ANGULAR(MilliradianTag);
@@ -46,8 +46,22 @@ QTTY_MARK_ANGULAR(HourAngleTag);
 
 #undef QTTY_MARK_ANGULAR
 
-template <class Tag>
-inline constexpr bool is_angular_v = AngularTraits<Tag>::is_angular;
+template <class Tag> inline constexpr bool is_angular_v = AngularTraits<Tag>::is_angular;
+
+template <class Tag> inline auto sin(Quantity<Tag> a) {
+  static_assert(is_angular_v<Tag>, "sin requires an angular quantity");
+  return std::sin(a.template to<RadianTag>().value());
+}
+
+template <class Tag> inline auto cos(Quantity<Tag> a) {
+  static_assert(is_angular_v<Tag>, "cos requires an angular quantity");
+  return std::cos(a.template to<RadianTag>().value());
+}
+
+template <class Tag> inline auto tan(Quantity<Tag> a) {
+  static_assert(is_angular_v<Tag>, "tan requires an angular quantity");
+  return std::tan(a.template to<RadianTag>().value());
+}
 
 namespace detail {
 

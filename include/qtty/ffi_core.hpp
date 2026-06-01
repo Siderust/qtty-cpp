@@ -8,8 +8,8 @@
  * @brief Core quantity template and error translation utilities.
  */
 
-#include <cmath>
 #include <algorithm>
+#include <cmath>
 #include <iomanip>
 #include <iostream>
 #include <limits>
@@ -345,22 +345,16 @@ public:
   // Scalar Reductions (same unit) — mirror Rust `min`/`max`/`clamp`/`mean`
   // ========================================================================
 
-  Quantity min(const Quantity &other) const {
-    return Quantity(std::min(m_value, other.m_value));
-  }
+  Quantity min(const Quantity &other) const { return Quantity(std::min(m_value, other.m_value)); }
 
-  Quantity max(const Quantity &other) const {
-    return Quantity(std::max(m_value, other.m_value));
-  }
+  Quantity max(const Quantity &other) const { return Quantity(std::max(m_value, other.m_value)); }
 
   Quantity clamp(const Quantity &min_val, const Quantity &max_val) const {
     return Quantity(std::max(min_val.m_value, std::min(m_value, max_val.m_value)));
   }
 
   // Arithmetic mean of two same-unit quantities.
-  Quantity mean(const Quantity &other) const {
-    return Quantity((m_value + other.m_value) * 0.5);
-  }
+  Quantity mean(const Quantity &other) const { return Quantity((m_value + other.m_value) * 0.5); }
 
   // ========================================================================
   // Floating-point Predicates — mirror Rust `is_nan`/`is_infinite`/`is_finite`
