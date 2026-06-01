@@ -16,22 +16,27 @@ struct SquareArcsecondTag {};
 template <> struct UnitTraits<SquareDegreeTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_SQUARE_DEGREE; }
   static constexpr std::string_view symbol() { return ""; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_SOLID_ANGLE; }
 };
 template <> struct UnitTraits<SteradianTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_STERADIAN; }
   static constexpr std::string_view symbol() { return ""; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_SOLID_ANGLE; }
 };
 template <> struct UnitTraits<SquareMilliradianTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_SQUARE_MILLIRADIAN; }
   static constexpr std::string_view symbol() { return ""; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_SOLID_ANGLE; }
 };
 template <> struct UnitTraits<SquareArcminuteTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_SQUARE_ARCMINUTE; }
   static constexpr std::string_view symbol() { return ""; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_SOLID_ANGLE; }
 };
 template <> struct UnitTraits<SquareArcsecondTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_SQUARE_ARCSECOND; }
   static constexpr std::string_view symbol() { return ""; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_SOLID_ANGLE; }
 };
 
 using SquareDegree = Quantity<SquareDegreeTag>;

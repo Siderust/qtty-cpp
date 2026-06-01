@@ -17,26 +17,32 @@ struct TerahertzTag {};
 template <> struct UnitTraits<HertzTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_HERTZ; }
   static constexpr std::string_view symbol() { return "Hz"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_FREQUENCY; }
 };
 template <> struct UnitTraits<MillihertzTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_MILLIHERTZ; }
   static constexpr std::string_view symbol() { return "mHz"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_FREQUENCY; }
 };
 template <> struct UnitTraits<KilohertzTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_KILOHERTZ; }
   static constexpr std::string_view symbol() { return "kHz"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_FREQUENCY; }
 };
 template <> struct UnitTraits<MegahertzTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_MEGAHERTZ; }
   static constexpr std::string_view symbol() { return "MHz"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_FREQUENCY; }
 };
 template <> struct UnitTraits<GigahertzTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_GIGAHERTZ; }
   static constexpr std::string_view symbol() { return "GHz"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_FREQUENCY; }
 };
 template <> struct UnitTraits<TerahertzTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_TERAHERTZ; }
   static constexpr std::string_view symbol() { return "THz"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_FREQUENCY; }
 };
 
 using Hertz = Quantity<HertzTag>;

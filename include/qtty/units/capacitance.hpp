@@ -16,22 +16,27 @@ struct MillifaradTag {};
 template <> struct UnitTraits<FaradTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_FARAD; }
   static constexpr std::string_view symbol() { return "F"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_CAPACITANCE; }
 };
 template <> struct UnitTraits<PicofaradTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_PICOFARAD; }
   static constexpr std::string_view symbol() { return "pF"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_CAPACITANCE; }
 };
 template <> struct UnitTraits<NanofaradTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_NANOFARAD; }
   static constexpr std::string_view symbol() { return "nF"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_CAPACITANCE; }
 };
 template <> struct UnitTraits<MicrofaradTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_MICROFARAD; }
   static constexpr std::string_view symbol() { return "µF"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_CAPACITANCE; }
 };
 template <> struct UnitTraits<MillifaradTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_MILLIFARAD; }
   static constexpr std::string_view symbol() { return "mF"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_CAPACITANCE; }
 };
 
 using Farad = Quantity<FaradTag>;

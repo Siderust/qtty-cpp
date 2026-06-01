@@ -12,6 +12,7 @@ struct CandelaTag {};
 template <> struct UnitTraits<CandelaTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_CANDELA; }
   static constexpr std::string_view symbol() { return "cd"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_LUMINOUS_INTENSITY; }
 };
 
 using Candela = Quantity<CandelaTag>;

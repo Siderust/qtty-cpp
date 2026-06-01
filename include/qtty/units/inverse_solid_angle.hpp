@@ -12,6 +12,7 @@ struct S10Tag {};
 template <> struct UnitTraits<S10Tag> {
   static constexpr UnitId unit_id() { return UNIT_ID_S10; }
   static constexpr std::string_view symbol() { return "S10"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_INVERSE_SOLID_ANGLE; }
 };
 
 using S10 = Quantity<S10Tag>;

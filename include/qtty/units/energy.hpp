@@ -30,78 +30,97 @@ struct ThermTag {};
 template <> struct UnitTraits<JouleTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_JOULE; }
   static constexpr std::string_view symbol() { return "J"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ENERGY; }
 };
 template <> struct UnitTraits<PicojouleTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_PICOJOULE; }
   static constexpr std::string_view symbol() { return "pJ"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ENERGY; }
 };
 template <> struct UnitTraits<NanojouleTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_NANOJOULE; }
   static constexpr std::string_view symbol() { return "nJ"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ENERGY; }
 };
 template <> struct UnitTraits<MicrojouleTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_MICROJOULE; }
   static constexpr std::string_view symbol() { return "µJ"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ENERGY; }
 };
 template <> struct UnitTraits<MillijouleTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_MILLIJOULE; }
   static constexpr std::string_view symbol() { return "mJ"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ENERGY; }
 };
 template <> struct UnitTraits<KilojouleTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_KILOJOULE; }
   static constexpr std::string_view symbol() { return "kJ"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ENERGY; }
 };
 template <> struct UnitTraits<MegajouleTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_MEGAJOULE; }
   static constexpr std::string_view symbol() { return "MJ"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ENERGY; }
 };
 template <> struct UnitTraits<GigajouleTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_GIGAJOULE; }
   static constexpr std::string_view symbol() { return "GJ"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ENERGY; }
 };
 template <> struct UnitTraits<TerajouleTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_TERAJOULE; }
   static constexpr std::string_view symbol() { return "TJ"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ENERGY; }
 };
 template <> struct UnitTraits<WattHourTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_WATT_HOUR; }
   static constexpr std::string_view symbol() { return "Wh"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ENERGY; }
 };
 template <> struct UnitTraits<KilowattHourTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_KILOWATT_HOUR; }
   static constexpr std::string_view symbol() { return "kWh"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ENERGY; }
 };
 template <> struct UnitTraits<ErgTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_ERG; }
   static constexpr std::string_view symbol() { return "erg"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ENERGY; }
 };
 template <> struct UnitTraits<ElectronvoltTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_ELECTRONVOLT; }
   static constexpr std::string_view symbol() { return "eV"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ENERGY; }
 };
 template <> struct UnitTraits<KiloelectronvoltTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_KILOELECTRONVOLT; }
   static constexpr std::string_view symbol() { return "keV"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ENERGY; }
 };
 template <> struct UnitTraits<MegaelectronvoltTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_MEGAELECTRONVOLT; }
   static constexpr std::string_view symbol() { return "MeV"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ENERGY; }
 };
 template <> struct UnitTraits<CalorieTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_CALORIE; }
   static constexpr std::string_view symbol() { return "cal"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ENERGY; }
 };
 template <> struct UnitTraits<KilocalorieTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_KILOCALORIE; }
   static constexpr std::string_view symbol() { return "kcal"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ENERGY; }
 };
 template <> struct UnitTraits<BritishThermalUnitTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_BRITISH_THERMAL_UNIT; }
   static constexpr std::string_view symbol() { return "BTU"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ENERGY; }
 };
 template <> struct UnitTraits<ThermTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_THERM; }
   static constexpr std::string_view symbol() { return "therm"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ENERGY; }
 };
 
 using Joule = Quantity<JouleTag>;

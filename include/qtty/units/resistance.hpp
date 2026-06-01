@@ -15,18 +15,22 @@ struct MegaohmTag {};
 template <> struct UnitTraits<OhmTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_OHM; }
   static constexpr std::string_view symbol() { return "Ω"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_RESISTANCE; }
 };
 template <> struct UnitTraits<MilliohmTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_MILLIOHM; }
   static constexpr std::string_view symbol() { return "mΩ"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_RESISTANCE; }
 };
 template <> struct UnitTraits<KilohmTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_KILOHM; }
   static constexpr std::string_view symbol() { return "kΩ"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_RESISTANCE; }
 };
 template <> struct UnitTraits<MegaohmTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_MEGAOHM; }
   static constexpr std::string_view symbol() { return "MΩ"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_RESISTANCE; }
 };
 
 using Ohm = Quantity<OhmTag>;

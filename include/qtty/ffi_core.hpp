@@ -9,8 +9,11 @@
  */
 
 #include <cmath>
+#include <algorithm>
 #include <iomanip>
 #include <iostream>
+#include <limits>
+#include <optional>
 #include <ostream>
 #include <sstream>
 #include <stdexcept>
@@ -131,6 +134,22 @@ template <typename UnitTag> struct UnitTraits {
   static constexpr std::string_view symbol() { return ""; }
 };
 
+// Detect whether a unit tag's UnitTraits specialization exposes dimension().
+template <typename Tag, typename = void> struct has_dimension : std::false_type {};
+template <typename Tag>
+struct has_dimension<Tag, std::void_t<decltype(UnitTraits<Tag>::dimension())>> : std::true_type {};
+
+// True for simple unit tags whose dimension is Dimensionless. Compound tags and
+// tags without a generated dimension() are treated as non-dimensionless.
+template <typename Tag> constexpr bool is_dimensionless_tag() {
+  if constexpr (has_dimension<Tag>::value) {
+    return UnitTraits<Tag>::dimension() == DIMENSION_ID_DIMENSIONLESS;
+  } else {
+    return false;
+  }
+}
+template <typename Tag> inline constexpr bool is_dimensionless_v = is_dimensionless_tag<Tag>();
+
 // Helper to extract tag from either a tag or Quantity<Tag>
 // This allows .to<>() to accept both Quantity<KilometerTag> and KilometerTag,
 // making the API more flexible and user-friendly.
@@ -172,6 +191,27 @@ public:
 
   // Get the raw value
   constexpr double value() const { return m_value; }
+
+  // Get a reference to the raw value (mirrors Rust `value_ref`).
+  constexpr const double &value_ref() const { return m_value; }
+
+  // Strip the unit and return the underlying scalar (mirrors Rust
+  // `erase_unit_raw`). Semantically identical to `value()` but named to make
+  // the intent of discarding dimensional information explicit.
+  constexpr double erase_unit_raw() const { return m_value; }
+
+  // ========================================================================
+  // Scalar Constructors / Constants (mirror Rust associated constants)
+  // ========================================================================
+
+  // Additive / multiplicative identities.
+  static constexpr Quantity zero() { return Quantity(0.0); }
+  static constexpr Quantity one() { return Quantity(1.0); }
+
+  // IEEE-754 special values (mirror Rust `NAN`, `INFINITY`, `NEG_INFINITY`).
+  static Quantity nan() { return Quantity(std::numeric_limits<double>::quiet_NaN()); }
+  static Quantity infinity() { return Quantity(std::numeric_limits<double>::infinity()); }
+  static Quantity neg_infinity() { return Quantity(-std::numeric_limits<double>::infinity()); }
 
   // ========================================================================
   // Unit Conversion
@@ -300,6 +340,90 @@ public:
   Quantity operator-() const { return Quantity(-m_value); }
 
   Quantity abs() const { return Quantity(std::abs(m_value)); }
+
+  // ========================================================================
+  // Scalar Reductions (same unit) — mirror Rust `min`/`max`/`clamp`/`mean`
+  // ========================================================================
+
+  Quantity min(const Quantity &other) const {
+    return Quantity(std::min(m_value, other.m_value));
+  }
+
+  Quantity max(const Quantity &other) const {
+    return Quantity(std::max(m_value, other.m_value));
+  }
+
+  Quantity clamp(const Quantity &min_val, const Quantity &max_val) const {
+    return Quantity(std::max(min_val.m_value, std::min(m_value, max_val.m_value)));
+  }
+
+  // Arithmetic mean of two same-unit quantities.
+  Quantity mean(const Quantity &other) const {
+    return Quantity((m_value + other.m_value) * 0.5);
+  }
+
+  // ========================================================================
+  // Floating-point Predicates — mirror Rust `is_nan`/`is_infinite`/`is_finite`
+  // ========================================================================
+
+  bool is_nan() const { return std::isnan(m_value); }
+  bool is_infinite() const { return std::isinf(m_value); }
+  bool is_finite() const { return std::isfinite(m_value); }
+
+  // ========================================================================
+  // Scalar Math — mirror Rust `signum`/`scalar_sqrt`/rounding helpers
+  // ========================================================================
+
+  // Sign of the underlying scalar (raw, unitless). Mirrors Rust `signum`.
+  double signum() const { return std::copysign(1.0, m_value); }
+
+  // Square root of the underlying scalar, returned raw (unitless). Mirrors
+  // Rust `scalar_sqrt` (NOT the dimension-changing `sqrt`).
+  double scalar_sqrt() const { return std::sqrt(m_value); }
+
+  // Rounding helpers preserve the unit (mirror Rust).
+  Quantity floor() const { return Quantity(std::floor(m_value)); }
+  Quantity ceil() const { return Quantity(std::ceil(m_value)); }
+  Quantity round() const { return Quantity(std::round(m_value)); }
+  Quantity trunc() const { return Quantity(std::trunc(m_value)); }
+  Quantity fract() const { return Quantity(m_value - std::trunc(m_value)); }
+
+  // Euclidean remainder by a scalar (mirrors Rust `rem_euclid`).
+  Quantity rem_euclid(double rhs) const {
+    double r = std::fmod(m_value, rhs);
+    if (r < 0.0) {
+      r += std::abs(rhs);
+    }
+    return Quantity(r);
+  }
+
+  // ========================================================================
+  // Unit-aware Comparison — mirror Rust `eq_unit`/`cmp_unit`
+  // ========================================================================
+  // Compare against a quantity expressed in a different unit of the same
+  // dimension. The other quantity is converted into this unit (through the
+  // Rust FFI) before comparison, so the comparison is value-correct across
+  // units. Throws IncompatibleDimensionsError if the dimensions differ.
+
+  template <typename V> bool eq_unit(const Quantity<V> &other) const {
+    return m_value == other.template to<UnitTag>().value();
+  }
+
+  // Returns -1, 0 or 1 when ordered, or std::nullopt when either operand is
+  // NaN (mirrors Rust `cmp_unit` returning `Option<Ordering>`).
+  template <typename V> std::optional<int> cmp_unit(const Quantity<V> &other) const {
+    double rhs = other.template to<UnitTag>().value();
+    if (std::isnan(m_value) || std::isnan(rhs)) {
+      return std::nullopt;
+    }
+    if (m_value < rhs) {
+      return -1;
+    }
+    if (m_value > rhs) {
+      return 1;
+    }
+    return 0;
+  }
 
   // ========================================================================
   // String Formatting

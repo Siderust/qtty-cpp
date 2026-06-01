@@ -22,46 +22,57 @@ struct AcreTag {};
 template <> struct UnitTraits<SquareMeterTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_SQUARE_METER; }
   static constexpr std::string_view symbol() { return ""; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_AREA; }
 };
 template <> struct UnitTraits<SquareKilometerTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_SQUARE_KILOMETER; }
   static constexpr std::string_view symbol() { return ""; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_AREA; }
 };
 template <> struct UnitTraits<SquareCentimeterTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_SQUARE_CENTIMETER; }
   static constexpr std::string_view symbol() { return ""; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_AREA; }
 };
 template <> struct UnitTraits<SquareMillimeterTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_SQUARE_MILLIMETER; }
   static constexpr std::string_view symbol() { return ""; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_AREA; }
 };
 template <> struct UnitTraits<HectareTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_HECTARE; }
   static constexpr std::string_view symbol() { return "ha"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_AREA; }
 };
 template <> struct UnitTraits<AreTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_ARE; }
   static constexpr std::string_view symbol() { return "a"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_AREA; }
 };
 template <> struct UnitTraits<SquareInchTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_SQUARE_INCH; }
   static constexpr std::string_view symbol() { return "in²"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_AREA; }
 };
 template <> struct UnitTraits<SquareFootTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_SQUARE_FOOT; }
   static constexpr std::string_view symbol() { return "ft²"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_AREA; }
 };
 template <> struct UnitTraits<SquareYardTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_SQUARE_YARD; }
   static constexpr std::string_view symbol() { return "yd²"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_AREA; }
 };
 template <> struct UnitTraits<SquareMileTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_SQUARE_MILE; }
   static constexpr std::string_view symbol() { return "mi²"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_AREA; }
 };
 template <> struct UnitTraits<AcreTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_ACRE; }
   static constexpr std::string_view symbol() { return "ac"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_AREA; }
 };
 
 using SquareMeter = Quantity<SquareMeterTag>;

@@ -40,118 +40,147 @@ struct SiderealYearTag {};
 template <> struct UnitTraits<AttosecondTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_ATTOSECOND; }
   static constexpr std::string_view symbol() { return "as"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TIME; }
 };
 template <> struct UnitTraits<FemtosecondTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_FEMTOSECOND; }
   static constexpr std::string_view symbol() { return "fs"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TIME; }
 };
 template <> struct UnitTraits<PicosecondTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_PICOSECOND; }
   static constexpr std::string_view symbol() { return "ps"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TIME; }
 };
 template <> struct UnitTraits<NanosecondTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_NANOSECOND; }
   static constexpr std::string_view symbol() { return "ns"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TIME; }
 };
 template <> struct UnitTraits<MicrosecondTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_MICROSECOND; }
   static constexpr std::string_view symbol() { return "µs"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TIME; }
 };
 template <> struct UnitTraits<MillisecondTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_MILLISECOND; }
   static constexpr std::string_view symbol() { return "ms"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TIME; }
 };
 template <> struct UnitTraits<CentisecondTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_CENTISECOND; }
   static constexpr std::string_view symbol() { return "cs"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TIME; }
 };
 template <> struct UnitTraits<DecisecondTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_DECISECOND; }
   static constexpr std::string_view symbol() { return "ds"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TIME; }
 };
 template <> struct UnitTraits<SecondTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_SECOND; }
   static constexpr std::string_view symbol() { return "s"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TIME; }
 };
 template <> struct UnitTraits<DecasecondTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_DECASECOND; }
   static constexpr std::string_view symbol() { return "das"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TIME; }
 };
 template <> struct UnitTraits<HectosecondTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_HECTOSECOND; }
   static constexpr std::string_view symbol() { return "hs"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TIME; }
 };
 template <> struct UnitTraits<KilosecondTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_KILOSECOND; }
   static constexpr std::string_view symbol() { return "ks"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TIME; }
 };
 template <> struct UnitTraits<MegasecondTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_MEGASECOND; }
   static constexpr std::string_view symbol() { return "Ms"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TIME; }
 };
 template <> struct UnitTraits<GigasecondTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_GIGASECOND; }
   static constexpr std::string_view symbol() { return "Gs"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TIME; }
 };
 template <> struct UnitTraits<TerasecondTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_TERASECOND; }
   static constexpr std::string_view symbol() { return "Ts"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TIME; }
 };
 template <> struct UnitTraits<MinuteTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_MINUTE; }
   static constexpr std::string_view symbol() { return "min"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TIME; }
 };
 template <> struct UnitTraits<HourTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_HOUR; }
   static constexpr std::string_view symbol() { return "h"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TIME; }
 };
 template <> struct UnitTraits<DayTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_DAY; }
   static constexpr std::string_view symbol() { return "d"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TIME; }
 };
 template <> struct UnitTraits<WeekTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_WEEK; }
   static constexpr std::string_view symbol() { return "wk"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TIME; }
 };
 template <> struct UnitTraits<FortnightTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_FORTNIGHT; }
   static constexpr std::string_view symbol() { return "fn"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TIME; }
 };
 template <> struct UnitTraits<YearTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_YEAR; }
   static constexpr std::string_view symbol() { return "yr"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TIME; }
 };
 template <> struct UnitTraits<DecadeTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_DECADE; }
   static constexpr std::string_view symbol() { return "dec"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TIME; }
 };
 template <> struct UnitTraits<CenturyTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_CENTURY; }
   static constexpr std::string_view symbol() { return "c"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TIME; }
 };
 template <> struct UnitTraits<MillenniumTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_MILLENNIUM; }
   static constexpr std::string_view symbol() { return "mill"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TIME; }
 };
 template <> struct UnitTraits<JulianYearTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_JULIAN_YEAR; }
   static constexpr std::string_view symbol() { return "a"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TIME; }
 };
 template <> struct UnitTraits<JulianCenturyTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_JULIAN_CENTURY; }
   static constexpr std::string_view symbol() { return "JC"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TIME; }
 };
 template <> struct UnitTraits<SiderealDayTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_SIDEREAL_DAY; }
   static constexpr std::string_view symbol() { return "sd"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TIME; }
 };
 template <> struct UnitTraits<SynodicMonthTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_SYNODIC_MONTH; }
   static constexpr std::string_view symbol() { return "synmo"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TIME; }
 };
 template <> struct UnitTraits<SiderealYearTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_SIDEREAL_YEAR; }
   static constexpr std::string_view symbol() { return "syr"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TIME; }
 };
 
 using Attosecond = Quantity<AttosecondTag>;

@@ -326,6 +326,12 @@ fn generate_dimension_header(_dimension: &str, units: &[&UnitDef]) -> String {
             escape_cpp_string(&unit.symbol)
         )
         .unwrap();
+        writeln!(
+            s,
+            "  static constexpr DimensionId dimension() {{ return DIMENSION_ID_{}; }}",
+            pascal_to_upper_snake(&unit.dimension)
+        )
+        .unwrap();
         writeln!(s, "}};").unwrap();
     }
     writeln!(s).unwrap();

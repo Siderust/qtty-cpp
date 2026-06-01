@@ -21,42 +21,52 @@ struct HourAngleTag {};
 template <> struct UnitTraits<MilliradianTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_MILLIRADIAN; }
   static constexpr std::string_view symbol() { return "mrad"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ANGLE; }
 };
 template <> struct UnitTraits<RadianTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_RADIAN; }
   static constexpr std::string_view symbol() { return "rad"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ANGLE; }
 };
 template <> struct UnitTraits<MicroArcsecondTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_MICRO_ARCSECOND; }
   static constexpr std::string_view symbol() { return "μas"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ANGLE; }
 };
 template <> struct UnitTraits<MilliArcsecondTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_MILLI_ARCSECOND; }
   static constexpr std::string_view symbol() { return "mas"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ANGLE; }
 };
 template <> struct UnitTraits<ArcsecondTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_ARCSECOND; }
   static constexpr std::string_view symbol() { return "″"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ANGLE; }
 };
 template <> struct UnitTraits<ArcminuteTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_ARCMINUTE; }
   static constexpr std::string_view symbol() { return "′"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ANGLE; }
 };
 template <> struct UnitTraits<DegreeTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_DEGREE; }
   static constexpr std::string_view symbol() { return "°"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ANGLE; }
 };
 template <> struct UnitTraits<GradianTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_GRADIAN; }
   static constexpr std::string_view symbol() { return "gon"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ANGLE; }
 };
 template <> struct UnitTraits<TurnTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_TURN; }
   static constexpr std::string_view symbol() { return "tr"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ANGLE; }
 };
 template <> struct UnitTraits<HourAngleTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_HOUR_ANGLE; }
   static constexpr std::string_view symbol() { return "h"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ANGLE; }
 };
 
 using Milliradian = Quantity<MilliradianTag>;

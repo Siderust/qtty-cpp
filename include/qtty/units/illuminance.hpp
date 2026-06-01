@@ -14,14 +14,17 @@ struct KiloluxTag {};
 template <> struct UnitTraits<LuxTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_LUX; }
   static constexpr std::string_view symbol() { return "lx"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ILLUMINANCE; }
 };
 template <> struct UnitTraits<MilliluxTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_MILLILUX; }
   static constexpr std::string_view symbol() { return "mlx"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ILLUMINANCE; }
 };
 template <> struct UnitTraits<KiloluxTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_KILOLUX; }
   static constexpr std::string_view symbol() { return "klx"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ILLUMINANCE; }
 };
 
 using Lux = Quantity<LuxTag>;

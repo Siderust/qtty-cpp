@@ -13,10 +13,12 @@ struct RankineTag {};
 template <> struct UnitTraits<KelvinTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_KELVIN; }
   static constexpr std::string_view symbol() { return "K"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TEMPERATURE; }
 };
 template <> struct UnitTraits<RankineTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_RANKINE; }
   static constexpr std::string_view symbol() { return "°R"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_TEMPERATURE; }
 };
 
 using Kelvin = Quantity<KelvinTag>;

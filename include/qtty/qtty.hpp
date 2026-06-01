@@ -83,6 +83,15 @@
 // User-defined literals
 #include "literals.hpp"
 
+// Dimension-aware math helpers (ratio_to, exp/ln/powi/powf, asin/acos/atan_angle)
+#include "math.hpp"
+
+// Angle wrapping / separation helpers (qtty_core angular methods)
+#include "angles.hpp"
+
+// Spacecraft astrodynamics quantities (qtty `satellite` feature)
+#include "satellite.hpp"
+
 namespace qtty {
 
 /**

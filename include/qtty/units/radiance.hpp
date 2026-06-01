@@ -13,10 +13,12 @@ struct ErgPerSecondSquareCentimeterSteradianTag {};
 template <> struct UnitTraits<WattPerSquareMeterSteradianTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_WATT_PER_SQUARE_METER_STERADIAN; }
   static constexpr std::string_view symbol() { return "W·m⁻²·sr⁻¹"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_RADIANCE; }
 };
 template <> struct UnitTraits<ErgPerSecondSquareCentimeterSteradianTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_ERG_PER_SECOND_SQUARE_CENTIMETER_STERADIAN; }
   static constexpr std::string_view symbol() { return "erg·s⁻¹·cm⁻²·sr⁻¹"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_RADIANCE; }
 };
 
 using WattPerSquareMeterSteradian = Quantity<WattPerSquareMeterSteradianTag>;

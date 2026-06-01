@@ -13,30 +13,42 @@ struct TransmittanceTag {};
 struct AlbedoTag {};
 struct IlluminationFractionTag {};
 struct RefractivityTag {};
+struct RatioTag {};
 
 template <> struct UnitTraits<OpticalDepthTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_OPTICAL_DEPTH; }
   static constexpr std::string_view symbol() { return ""; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_DIMENSIONLESS; }
 };
 template <> struct UnitTraits<AirmassTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_AIRMASS; }
   static constexpr std::string_view symbol() { return ""; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_DIMENSIONLESS; }
 };
 template <> struct UnitTraits<TransmittanceTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_TRANSMITTANCE; }
   static constexpr std::string_view symbol() { return ""; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_DIMENSIONLESS; }
 };
 template <> struct UnitTraits<AlbedoTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_ALBEDO; }
   static constexpr std::string_view symbol() { return ""; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_DIMENSIONLESS; }
 };
 template <> struct UnitTraits<IlluminationFractionTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_ILLUMINATION_FRACTION; }
   static constexpr std::string_view symbol() { return ""; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_DIMENSIONLESS; }
 };
 template <> struct UnitTraits<RefractivityTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_REFRACTIVITY; }
   static constexpr std::string_view symbol() { return ""; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_DIMENSIONLESS; }
+};
+template <> struct UnitTraits<RatioTag> {
+  static constexpr UnitId unit_id() { return UNIT_ID_RATIO; }
+  static constexpr std::string_view symbol() { return ""; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_DIMENSIONLESS; }
 };
 
 using OpticalDepth = Quantity<OpticalDepthTag>;
@@ -45,5 +57,6 @@ using Transmittance = Quantity<TransmittanceTag>;
 using Albedo = Quantity<AlbedoTag>;
 using IlluminationFraction = Quantity<IlluminationFractionTag>;
 using Refractivity = Quantity<RefractivityTag>;
+using Ratio = Quantity<RatioTag>;
 
 } // namespace qtty

@@ -15,18 +15,22 @@ struct KilocoulombTag {};
 template <> struct UnitTraits<CoulombTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_COULOMB; }
   static constexpr std::string_view symbol() { return "C"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_CHARGE; }
 };
 template <> struct UnitTraits<MillicoulombTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_MILLICOULOMB; }
   static constexpr std::string_view symbol() { return "mC"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_CHARGE; }
 };
 template <> struct UnitTraits<MicrocoulombTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_MICROCOULOMB; }
   static constexpr std::string_view symbol() { return "µC"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_CHARGE; }
 };
 template <> struct UnitTraits<KilocoulombTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_KILOCOULOMB; }
   static constexpr std::string_view symbol() { return "kC"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_CHARGE; }
 };
 
 using Coulomb = Quantity<CoulombTag>;

@@ -14,14 +14,17 @@ struct MillihenryTag {};
 template <> struct UnitTraits<HenryTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_HENRY; }
   static constexpr std::string_view symbol() { return "H"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_INDUCTANCE; }
 };
 template <> struct UnitTraits<MicrohenryTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_MICROHENRY; }
   static constexpr std::string_view symbol() { return "µH"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_INDUCTANCE; }
 };
 template <> struct UnitTraits<MillihenryTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_MILLIHENRY; }
   static constexpr std::string_view symbol() { return "mH"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_INDUCTANCE; }
 };
 
 using Henry = Quantity<HenryTag>;

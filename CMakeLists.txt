@@ -224,6 +224,18 @@ if(DEFINED _qtty_rpath)
     )
 endif()
 
+# Examples mirroring the Rust qtty examples (quickstart, angles, ratios, astronomy).
+foreach(_ex quickstart angles ratios astronomy)
+    add_executable(${_ex} examples/${_ex}.cpp)
+    target_link_libraries(${_ex} PRIVATE qtty_cpp)
+    if(DEFINED _qtty_rpath)
+        set_target_properties(${_ex} PROPERTIES
+            BUILD_RPATH ${_qtty_rpath}
+            INSTALL_RPATH ${_qtty_rpath}
+        )
+    endif()
+endforeach()
+
 # JSON serialization example — requires qtty-ffi built with the 'qtty_serde' feature:
 #   cmake -B build -DQTTY_FFI_FEATURES=qtty_serde && cmake --build build
 if(QTTY_FFI_HAS_SERDE)
@@ -250,6 +262,10 @@ set(TEST_FFI_SOURCES
     tests/test_power.cpp
     tests/test_derived.cpp
     tests/test_operations.cpp
+    tests/test_scalar_api.cpp
+    tests/test_math_helpers.cpp
+    tests/test_satellite.cpp
+    tests/test_angle_helpers.cpp
     tests/test_dimension_safety.cpp
     tests/test_precision.cpp
     tests/test_formatting.cpp

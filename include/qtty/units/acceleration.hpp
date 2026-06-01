@@ -13,10 +13,12 @@ struct StandardGravityTag {};
 template <> struct UnitTraits<MeterPerSecondSquaredTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_METER_PER_SECOND_SQUARED; }
   static constexpr std::string_view symbol() { return "m/s²"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ACCELERATION; }
 };
 template <> struct UnitTraits<StandardGravityTag> {
   static constexpr UnitId unit_id() { return UNIT_ID_STANDARD_GRAVITY; }
   static constexpr std::string_view symbol() { return "g₀"; }
+  static constexpr DimensionId dimension() { return DIMENSION_ID_ACCELERATION; }
 };
 
 using MeterPerSecondSquared = Quantity<MeterPerSecondSquaredTag>;
