@@ -50,17 +50,17 @@ template <class Tag> inline constexpr bool is_angular_v = AngularTraits<Tag>::is
 
 template <class Tag> inline auto sin(Quantity<Tag> a) {
   static_assert(is_angular_v<Tag>, "sin requires an angular quantity");
-  return std::sin(a.value());
+  return std::sin(a.template to<RadianTag>().value());
 }
 
 template <class Tag> inline auto cos(Quantity<Tag> a) {
   static_assert(is_angular_v<Tag>, "cos requires an angular quantity");
-  return std::cos(a.value());
+  return std::cos(a.template to<RadianTag>().value());
 }
 
 template <class Tag> inline auto tan(Quantity<Tag> a) {
   static_assert(is_angular_v<Tag>, "tan requires an angular quantity");
-  return std::tan(a.value());
+  return std::tan(a.template to<RadianTag>().value());
 }
 
 namespace detail {
