@@ -48,6 +48,21 @@ QTTY_MARK_ANGULAR(HourAngleTag);
 
 template <class Tag> inline constexpr bool is_angular_v = AngularTraits<Tag>::is_angular;
 
+template <class Tag> inline auto sin(Quantity<Tag> a) {
+  static_assert(is_angular_v<Tag>, "sin requires an angular quantity");
+  return std::sin(a.value());
+}
+
+template <class Tag> inline auto cos(Quantity<Tag> a) {
+  static_assert(is_angular_v<Tag>, "cos requires an angular quantity");
+  return std::cos(a.value());
+}
+
+template <class Tag> inline auto tan(Quantity<Tag> a) {
+  static_assert(is_angular_v<Tag>, "tan requires an angular quantity");
+  return std::tan(a.value());
+}
+
 namespace detail {
 
 inline double rem_euclid(double a, double b) {

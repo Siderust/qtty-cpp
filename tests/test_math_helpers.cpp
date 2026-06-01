@@ -45,6 +45,13 @@ TEST_F(MathHelpersTest, InverseTrigReturnsRadians) {
   EXPECT_NEAR(deg.value(), 30.0, 1e-9);
 }
 
+TEST_F(MathHelpersTest, TrigFunctionsOnAnglesReturnScalars) {
+  Degree angle(30.0);
+  EXPECT_NEAR(sin(angle), 0.5, 1e-12);
+  EXPECT_NEAR(cos(angle), std::sqrt(3.0) / 2.0, 1e-12);
+  EXPECT_NEAR(tan(angle), 1.0 / std::sqrt(3.0), 1e-12);
+}
+
 TEST_F(MathHelpersTest, DimensionlessTraitSelectivity) {
   static_assert(is_dimensionless_v<RatioTag>, "Ratio must be dimensionless");
   static_assert(is_dimensionless_v<AirmassTag>, "Airmass must be dimensionless");
