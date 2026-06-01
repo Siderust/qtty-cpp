@@ -83,7 +83,8 @@
 // User-defined literals
 #include "literals.hpp"
 
-// Dimension-aware math helpers (ratio_to, exp/ln/powi/powf, asin/acos/atan_angle)
+// Dimension-aware math helpers (ratio_to, exp/ln/powi/powf, sin/cos/tan,
+// asin/acos/atan_angle)
 #include "math.hpp"
 
 // Angle wrapping / separation helpers (qtty_core angular methods)

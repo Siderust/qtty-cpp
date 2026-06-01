@@ -13,6 +13,8 @@ and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   unit inventory and FFI fixes.
 - `qtty-ffi` discriminants: appended `Ratio` (`UNIT_ID_RATIO = 330006`) to the
   dimensionless family so ratios and fractions are available to C++ consumers.
+- Added `qtty::sin`, `qtty::cos`, and `qtty::tan` overloads for angular
+  quantities, matching the Rust trig helpers already exposed by `qtty-core`.
 - Bumped project version and headers to `0.4.5`.
 
 ## [0.4.4] - 2026-05-15
