@@ -100,7 +100,7 @@ namespace qtty {
 inline constexpr struct {
   int major = 0;
   int minor = 4;
-  int patch = 0;
+  int patch = 5;
 } version;
 
 /**

@@ -5,6 +5,16 @@ All notable changes to `qtty-cpp` are documented in this file.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.5] - 01-06-2026
+
+### Changed
+
+- Updated bundled `qtty` integration to `0.8.5` to pick up the latest
+  unit inventory and FFI fixes.
+- `qtty-ffi` discriminants: appended `Ratio` (`UNIT_ID_RATIO = 330006`) to the
+  dimensionless family so ratios and fractions are available to C++ consumers.
+- Bumped project version and headers to `0.4.5`.
+
 ## [0.4.4] - 2026-05-15
 
 ### Changed
